@@ -1,0 +1,1001 @@
+complaint_id,user_id,complaint_text,created_at,category,subcategory,location,department,severity,impact,status,incident_id,source,has_evidence,user_verified
+CMP-00218,USR-024,The furniture in Computer Lab 1 is broken and needs repair.,2026-01-01 14:12,Hostel,Laundry,Computer Lab 1,Hostel Administration,Medium,Small Group,Closed,,Web,False,True
+CMP-00636,USR-207,There is a power outage affecting Transport Bay.,2026-01-01 18:14,Electricity,Lighting,Transport Bay,Electrical Maintenance,High,Multiple Users,Resolved,,Web,False,False
+CMP-00169,USR-071,There is a power outage affecting Sports Ground.,2026-01-01 20:01,Electricity,Fan,Sports Ground,Electrical Maintenance,High,Large Group,Closed,INC-023,Mobile,True,True
+CMP-00756,USR-029,Water is leaking near Parking Area and the floor remains wet.,2026-01-01 21:59,Water & Sanitation,Water Supply,Parking Area,Facilities & Maintenance,Medium,Multiple Users,Investigating,INC-031,Mobile,True,False
+CMP-00637,USR-250,Several systems in Sports Ground cannot access the internet.,2026-01-02 13:00,Internet & Network,Wi-Fi,Sports Ground,IT Services,High,Multiple Users,Investigating,INC-024,Web,False,False
+CMP-00948,USR-032,Water is leaking near Block C - Hostel and the floor remains wet.,2026-01-02 13:59,Water & Sanitation,Water Supply,Block C - Hostel,Facilities & Maintenance,Medium,Large Group,Resolved,,Web,True,False
+CMP-00454,USR-146,The door lock in Seminar Hall is damaged.,2026-01-02 17:31,Hostel,Room Maintenance,Seminar Hall,Hostel Administration,High,Large Group,Open,,Web,False,False
+CMP-00885,USR-242,The network keeps disconnecting in Transport Bay.,2026-01-02 17:37,Internet & Network,Network Availability,Transport Bay,IT Services,High,Large Group,Resolved,,Web,False,False
+CMP-00321,USR-202,The Wi-Fi connection in Computer Lab 2 becomes very slow during 6 PM–10 PM.,2026-01-02 18:46,Internet & Network,Network Availability,Computer Lab 2,IT Services,Medium,Individual,Assigned,,Web,True,False
+CMP-00222,USR-236,The queue at Seminar Hall is unusually long during lunch.,2026-01-03 17:41,Canteen,Queue,Seminar Hall,Food Services,Low,Multiple Users,Closed,,Web,True,True
+CMP-00619,USR-138,"Water pressure has been very low in Transport Bay, especially during evening.",2026-01-03 18:11,Water & Sanitation,Water Supply,Transport Bay,Facilities & Maintenance,High,Multiple Users,Closed,,Web,True,True
+CMP-00772,USR-018,The Wi-Fi connection in Parking Area becomes very slow during afternoon.,2026-01-04 10:49,Internet & Network,Internet Speed,Parking Area,IT Services,Medium,Large Group,Open,INC-019,Web,False,False
+CMP-00668,USR-017,Waste bins near Block C - Hostel are overflowing.,2026-01-04 14:41,Cleaning,Washroom Cleaning,Block C - Hostel,Housekeeping,Medium,Large Group,Investigating,,Web,False,False
+CMP-00807,USR-103,Waste bins near Canteen are overflowing.,2026-01-05 09:30,Cleaning,Waste Disposal,Canteen,Housekeeping,Medium,Multiple Users,Investigating,,Web,False,False
+CMP-00747,USR-149,Several systems in CSE Block cannot access the internet.,2026-01-05 16:42,Internet & Network,Internet Speed,CSE Block,IT Services,High,Multiple Users,Closed,INC-018,Web,False,False
+CMP-00732,USR-250,The Wi-Fi connection in Parking Area becomes very slow during afternoon.,2026-01-06 10:09,Internet & Network,LAN,Parking Area,IT Services,Medium,Small Group,Open,,Mobile,True,False
+CMP-00501,USR-075,The queue at Canteen is unusually long during lunch.,2026-01-06 12:26,Canteen,Food Quality,Canteen,Food Services,Low,Multiple Users,Resolved,,Mobile,True,True
+CMP-00864,USR-212,The furniture in Block B - Hostel is broken and needs repair.,2026-01-06 15:53,Hostel,Laundry,Block B - Hostel,Hostel Administration,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00580,USR-049,The fan is not working in Sports Ground.,2026-01-07 11:30,Electricity,Socket,Sports Ground,Electrical Maintenance,Medium,Large Group,Closed,,Web,False,False
+CMP-00047,USR-027,The Wi-Fi connection in Seminar Hall becomes very slow during evening.,2026-01-07 12:36,Internet & Network,Internet Speed,Seminar Hall,IT Services,Medium,Small Group,Open,,Web,True,False
+CMP-00248,USR-092,The lights in Block C - Hostel are flickering repeatedly.,2026-01-07 13:38,Electricity,Socket,Block C - Hostel,Electrical Maintenance,Medium,Multiple Users,Open,,Mobile,False,False
+CMP-00998,USR-052,Several systems in Block B - Hostel cannot access the internet.,2026-01-07 16:38,Internet & Network,Internet Speed,Block B - Hostel,IT Services,High,Multiple Users,Assigned,INC-015,Web,False,False
+CMP-00850,USR-199,Water is leaking near Seminar Hall and the floor remains wet.,2026-01-07 18:42,Water & Sanitation,Leakage,Seminar Hall,Facilities & Maintenance,Medium,Individual,Closed,,Web,True,False
+CMP-00273,USR-089,The Wi-Fi connection in Canteen becomes very slow during evening.,2026-01-08 11:23,Internet & Network,Network Availability,Canteen,IT Services,Medium,Small Group,Reopened,,Mobile,False,True
+CMP-00440,USR-092,There has been no water supply in Block C - Hostel since since yesterday.,2026-01-08 15:57,Water & Sanitation,Washroom,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Open,INC-029,Web,False,False
+CMP-00067,USR-024,The campus bus has not arrived at Block B - Hostel on time.,2026-01-08 18:38,Transport,Driver,Block B - Hostel,Transport Services,Medium,Multiple Users,Resolved,,Mobile,True,False
+CMP-00976,USR-217,The projector in Canteen is not displaying properly.,2026-01-09 14:40,Classroom Equipment,Speaker,Canteen,Academic Infrastructure,Medium,Individual,Investigating,,Mobile,True,False
+CMP-00662,USR-018,The fan is not working in Central Library.,2026-01-10 08:16,Electricity,AC,Central Library,Electrical Maintenance,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00072,USR-105,The network keeps disconnecting in Computer Lab 1.,2026-01-10 10:32,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00301,USR-053,The computer systems in Central Library are extremely slow.,2026-01-10 16:35,Classroom Equipment,Speaker,Central Library,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00279,USR-233,The computer systems in Campus Entrance are extremely slow.,2026-01-10 17:45,Classroom Equipment,Computer,Campus Entrance,Academic Infrastructure,Medium,Small Group,Closed,,Web,False,True
+CMP-00431,USR-119,The campus bus has not arrived at Parking Area on time.,2026-01-10 18:08,Transport,Bus Condition,Parking Area,Transport Services,Medium,Large Group,Closed,,Web,True,False
+CMP-00048,USR-004,The pathway near Parking Area is damaged and difficult to use.,2026-01-11 13:34,Infrastructure,Building Damage,Parking Area,Facilities & Maintenance,Medium,Individual,Resolved,,Web,True,True
+CMP-00147,USR-036,The queue at Block A - Hostel is unusually long during lunch.,2026-01-12 08:08,Canteen,Hygiene,Block A - Hostel,Food Services,Low,Large Group,Investigating,,Web,False,False
+CMP-00337,USR-246,"Water pressure has been very low in Main Building, especially during morning.",2026-01-12 10:36,Water & Sanitation,Washroom,Main Building,Facilities & Maintenance,High,Multiple Users,Open,INC-012,Web,True,False
+CMP-00928,USR-088,Several systems in Computer Lab 1 cannot access the internet.,2026-01-12 12:38,Internet & Network,Wi-Fi,Computer Lab 1,IT Services,High,Multiple Users,Assigned,,Web,True,False
+CMP-00989,USR-151,The pathway near Computer Lab 1 is damaged and difficult to use.,2026-01-12 20:42,Infrastructure,Lift,Computer Lab 1,Facilities & Maintenance,Medium,Small Group,Assigned,,Web,True,False
+CMP-00245,USR-233,There has been no water supply in Computer Lab 1 since since this morning.,2026-01-13 10:59,Water & Sanitation,Water Pressure,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Assigned,INC-023,Mobile,False,False
+CMP-00808,USR-008,The campus bus has not arrived at Seminar Hall on time.,2026-01-13 14:19,Transport,Bus Delay,Seminar Hall,Transport Services,Medium,Individual,Closed,,Mobile,True,True
+CMP-00886,USR-245,The campus bus has not arrived at ECE Block on time.,2026-01-13 17:33,Transport,Bus Availability,ECE Block,Transport Services,Medium,Multiple Users,Assigned,,Mobile,True,False
+CMP-00818,USR-017,The Wi-Fi connection in Canteen becomes very slow during 6 PM–10 PM.,2026-01-13 18:15,Internet & Network,Internet Speed,Canteen,IT Services,Medium,Individual,Open,INC-018,Mobile,True,False
+CMP-00665,USR-108,The CCTV camera near Block A - Hostel appears to be offline.,2026-01-13 20:24,Safety,Security,Block A - Hostel,Security Services,High,Multiple Users,Investigating,,Web,True,False
+CMP-00320,USR-111,Water is leaking near Block B - Hostel and the floor remains wet.,2026-01-14 10:50,Water & Sanitation,Drainage,Block B - Hostel,Facilities & Maintenance,Medium,Small Group,Closed,INC-029,Web,True,False
+CMP-00794,USR-028,The lights in Canteen are flickering repeatedly.,2026-01-14 12:05,Electricity,Power Outage,Canteen,Electrical Maintenance,Medium,Individual,Open,,Mobile,False,False
+CMP-00418,USR-047,The CCTV camera near Transport Bay appears to be offline.,2026-01-14 19:33,Safety,Security,Transport Bay,Security Services,High,Multiple Users,Closed,,Mobile,False,False
+CMP-00860,USR-075,There has been no water supply in Block B - Hostel since for three days.,2026-01-15 10:28,Water & Sanitation,Water Pressure,Block B - Hostel,Facilities & Maintenance,High,Large Group,Assigned,,Mobile,True,False
+CMP-00251,USR-088,There has been no water supply in Block B - Hostel since since yesterday.,2026-01-15 11:38,Water & Sanitation,Water Pressure,Block B - Hostel,Facilities & Maintenance,High,Multiple Users,Assigned,,Mobile,False,False
+CMP-00854,USR-087,The computer systems in Seminar Hall are extremely slow.,2026-01-15 16:44,Classroom Equipment,Projector,Seminar Hall,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00535,USR-196,The washroom in ECE Block has not been cleaned properly.,2026-01-16 08:37,Cleaning,Room Cleaning,ECE Block,Housekeeping,Medium,Multiple Users,Assigned,,Web,True,False
+CMP-00813,USR-195,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-01-16 11:00,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,Medium,Large Group,Investigating,INC-014,Mobile,False,False
+CMP-00613,USR-069,The Wi-Fi connection in CSE Block becomes very slow during evening.,2026-01-16 13:29,Internet & Network,Wi-Fi,CSE Block,IT Services,Medium,Large Group,Open,,Mobile,True,False
+CMP-00616,USR-042,Several systems in Block A - Hostel cannot access the internet.,2026-01-16 15:17,Internet & Network,Wi-Fi,Block A - Hostel,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00014,USR-221,There is a power outage affecting Main Building.,2026-01-17 13:01,Electricity,Power Outage,Main Building,Electrical Maintenance,High,Multiple Users,Closed,INC-005,Web,True,True
+CMP-00804,USR-147,There is a power outage affecting Computer Lab 2.,2026-01-17 14:18,Electricity,Power Outage,Computer Lab 2,Electrical Maintenance,High,Large Group,Closed,,Web,True,False
+CMP-00443,USR-197,The campus bus has not arrived at Block A - Hostel on time.,2026-01-17 15:07,Transport,Bus Condition,Block A - Hostel,Transport Services,Medium,Large Group,Closed,,Web,False,True
+CMP-00216,USR-069,The projector in Sports Ground is not displaying properly.,2026-01-17 20:34,Classroom Equipment,Computer,Sports Ground,Academic Infrastructure,Medium,Large Group,Closed,,Web,False,False
+CMP-00130,USR-096,There has been no water supply in Block C - Hostel since for three days.,2026-01-18 11:49,Water & Sanitation,Leakage,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Resolved,,Web,True,True
+CMP-00020,USR-153,Water is leaking near Seminar Hall and the floor remains wet.,2026-01-18 18:55,Water & Sanitation,Washroom,Seminar Hall,Facilities & Maintenance,Medium,Individual,Reopened,,Web,True,False
+CMP-00226,USR-243,The campus bus has not arrived at Parking Area on time.,2026-01-19 08:37,Transport,Bus Delay,Parking Area,Transport Services,Medium,Multiple Users,Investigating,,Web,False,False
+CMP-00773,USR-167,The projector in Block B - Hostel is not displaying properly.,2026-01-19 10:45,Classroom Equipment,Computer,Block B - Hostel,Academic Infrastructure,Medium,Large Group,Reopened,,Mobile,True,False
+CMP-00077,USR-051,Food served at Block C - Hostel was cold today.,2026-01-19 15:22,Canteen,Seating,Block C - Hostel,Food Services,Medium,Multiple Users,Resolved,,Web,True,True
+CMP-00057,USR-022,The computer systems in Computer Lab 1 are extremely slow.,2026-01-19 17:40,Classroom Equipment,Microphone,Computer Lab 1,Academic Infrastructure,Medium,Small Group,Closed,,Mobile,True,False
+CMP-00220,USR-178,The fan is not working in Computer Lab 1.,2026-01-20 10:37,Electricity,AC,Computer Lab 1,Electrical Maintenance,Medium,Individual,Open,INC-008,Mobile,True,False
+CMP-00128,USR-043,Waste bins near Block B - Hostel are overflowing.,2026-01-21 13:42,Cleaning,Common Area,Block B - Hostel,Housekeeping,Medium,Large Group,Resolved,,Web,False,False
+CMP-00356,USR-230,The Wi-Fi connection in Transport Bay becomes very slow during evening.,2026-01-21 18:42,Internet & Network,LAN,Transport Bay,IT Services,Medium,Individual,Closed,INC-021,Mobile,False,False
+CMP-00168,USR-101,The computer systems in Central Library are extremely slow.,2026-01-21 18:42,Classroom Equipment,Speaker,Central Library,Academic Infrastructure,Medium,Individual,Investigating,,Mobile,False,False
+CMP-00891,USR-071,The projector in Parking Area is not displaying properly.,2026-01-21 19:50,Classroom Equipment,Microphone,Parking Area,Academic Infrastructure,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00574,USR-216,The furniture in Central Library is broken and needs repair.,2026-01-21 20:30,Hostel,Laundry,Central Library,Hostel Administration,Medium,Small Group,Closed,,Mobile,True,False
+CMP-00576,USR-022,The lights in Seminar Hall are flickering repeatedly.,2026-01-21 20:32,Electricity,Power Outage,Seminar Hall,Electrical Maintenance,Medium,Large Group,Investigating,INC-026,Web,False,False
+CMP-00708,USR-099,The Wi-Fi connection in Block B - Hostel becomes very slow during morning.,2026-01-22 09:31,Internet & Network,Internet Speed,Block B - Hostel,IT Services,Medium,Large Group,Investigating,,Web,True,False
+CMP-00592,USR-108,The queue at Block C - Hostel is unusually long during lunch.,2026-01-22 12:23,Canteen,Hygiene,Block C - Hostel,Food Services,Low,Small Group,Investigating,,Mobile,False,False
+CMP-00649,USR-219,Waste bins near Parking Area are overflowing.,2026-01-22 13:54,Cleaning,Common Area,Parking Area,Housekeeping,Medium,Large Group,Investigating,,Mobile,True,False
+CMP-00192,USR-078,The computer systems in Parking Area are extremely slow.,2026-01-22 19:57,Classroom Equipment,Microphone,Parking Area,Academic Infrastructure,Medium,Large Group,Investigating,,Web,True,False
+CMP-00382,USR-016,The projector in Parking Area is not displaying properly.,2026-01-23 11:10,Classroom Equipment,Projector,Parking Area,Academic Infrastructure,Medium,Multiple Users,Reopened,,Web,False,True
+CMP-00483,USR-050,The campus bus has not arrived at Seminar Hall on time.,2026-01-23 18:52,Transport,Bus Availability,Seminar Hall,Transport Services,Medium,Large Group,Open,,Web,True,False
+CMP-00792,USR-147,The fan is not working in Block B - Hostel.,2026-01-24 08:27,Electricity,Power Outage,Block B - Hostel,Electrical Maintenance,Medium,Individual,Resolved,,Web,True,True
+CMP-00768,USR-180,There has been no water supply in ECE Block since for three days.,2026-01-24 12:00,Water & Sanitation,Water Pressure,ECE Block,Facilities & Maintenance,High,Multiple Users,Assigned,INC-023,Web,False,False
+CMP-00757,USR-204,The lights in Block C - Hostel are flickering repeatedly.,2026-01-24 13:08,Electricity,Socket,Block C - Hostel,Electrical Maintenance,Medium,Multiple Users,Assigned,INC-027,Web,False,False
+CMP-00944,USR-173,The washroom in Central Library has not been cleaned properly.,2026-01-24 13:24,Cleaning,Common Area,Central Library,Housekeeping,Medium,Small Group,Assigned,,Web,True,False
+CMP-00978,USR-063,Food served at CSE Block was cold today.,2026-01-24 19:12,Canteen,Queue,CSE Block,Food Services,Medium,Multiple Users,Open,,Mobile,True,False
+CMP-00540,USR-110,The CCTV camera near Campus Entrance appears to be offline.,2026-01-24 19:54,Safety,Lighting,Campus Entrance,Security Services,High,Multiple Users,Resolved,,Mobile,False,True
+CMP-00142,USR-049,There is a power outage affecting Block C - Hostel.,2026-01-25 08:18,Electricity,Lighting,Block C - Hostel,Electrical Maintenance,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00390,USR-161,The fan is not working in Computer Lab 2.,2026-01-25 09:46,Electricity,Socket,Computer Lab 2,Electrical Maintenance,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00223,USR-071,Water is leaking near Transport Bay and the floor remains wet.,2026-01-26 10:48,Water & Sanitation,Water Pressure,Transport Bay,Facilities & Maintenance,Medium,Multiple Users,Reopened,INC-009,Web,False,False
+CMP-00464,USR-134,The lights in Parking Area are flickering repeatedly.,2026-01-26 12:41,Electricity,Fan,Parking Area,Electrical Maintenance,Medium,Small Group,Closed,,Web,False,False
+CMP-00832,USR-206,The computer systems in Transport Bay are extremely slow.,2026-01-26 12:58,Classroom Equipment,Microphone,Transport Bay,Academic Infrastructure,Medium,Small Group,Resolved,,Mobile,False,True
+CMP-00005,USR-156,There is a power outage affecting Sports Ground.,2026-01-26 14:17,Electricity,Power Outage,Sports Ground,Electrical Maintenance,High,Large Group,Assigned,,Mobile,False,False
+CMP-00984,USR-202,The queue at Computer Lab 1 is unusually long during lunch.,2026-01-27 18:19,Canteen,Payment,Computer Lab 1,Food Services,Low,Multiple Users,Investigating,,Mobile,False,False
+CMP-00935,USR-166,Waste bins near Campus Entrance are overflowing.,2026-01-27 18:22,Cleaning,Waste Disposal,Campus Entrance,Housekeeping,Medium,Large Group,Resolved,,Web,False,False
+CMP-00582,USR-010,Waste bins near Block A - Hostel are overflowing.,2026-01-27 18:54,Cleaning,Waste Disposal,Block A - Hostel,Housekeeping,Medium,Large Group,Closed,,Web,True,False
+CMP-00109,USR-134,There has been no water supply in Computer Lab 1 since since yesterday.,2026-01-27 20:57,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Investigating,INC-029,Mobile,False,False
+CMP-00727,USR-126,The washroom in ECE Block has not been cleaned properly.,2026-01-28 08:22,Cleaning,Common Area,ECE Block,Housekeeping,Medium,Multiple Users,Open,,Mobile,True,False
+CMP-00309,USR-175,"Water pressure has been very low in Computer Lab 2, especially during morning.",2026-01-28 08:24,Water & Sanitation,Leakage,Computer Lab 2,Facilities & Maintenance,High,Multiple Users,Investigating,,Web,False,False
+CMP-00277,USR-168,The washroom in Canteen has not been cleaned properly.,2026-01-28 15:04,Cleaning,Waste Disposal,Canteen,Housekeeping,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00470,USR-199,The CCTV camera near Canteen appears to be offline.,2026-01-28 15:45,Safety,CCTV,Canteen,Security Services,High,Multiple Users,Open,,Web,True,False
+CMP-00801,USR-116,Waste bins near Seminar Hall are overflowing.,2026-01-28 17:24,Cleaning,Room Cleaning,Seminar Hall,Housekeeping,Medium,Multiple Users,Assigned,,Mobile,True,False
+CMP-00100,USR-015,The projector in Central Library is not displaying properly.,2026-01-29 12:43,Classroom Equipment,Speaker,Central Library,Academic Infrastructure,Medium,Individual,Investigating,,Web,False,False
+CMP-00547,USR-214,The network keeps disconnecting in Main Building.,2026-01-29 17:47,Internet & Network,Network Availability,Main Building,IT Services,High,Multiple Users,Investigating,INC-021,Mobile,True,False
+CMP-00890,USR-222,The washroom in Transport Bay has not been cleaned properly.,2026-01-29 19:45,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Large Group,Resolved,,Mobile,False,True
+CMP-00848,USR-028,The CCTV camera near CSE Block appears to be offline.,2026-01-30 08:54,Safety,CCTV,CSE Block,Security Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00294,USR-245,The door lock in Campus Entrance is damaged.,2026-01-30 09:54,Hostel,Food,Campus Entrance,Hostel Administration,High,Multiple Users,Assigned,,Mobile,False,False
+CMP-00697,USR-219,There is a power outage affecting CSE Block.,2026-01-30 12:05,Electricity,Fan,CSE Block,Electrical Maintenance,High,Multiple Users,Closed,INC-024,Web,True,True
+CMP-00897,USR-154,Waste bins near Canteen are overflowing.,2026-01-30 13:44,Cleaning,Common Area,Canteen,Housekeeping,Medium,Large Group,Closed,,Web,False,True
+CMP-00103,USR-063,The door lock in CSE Block is damaged.,2026-01-30 14:01,Hostel,Room Maintenance,CSE Block,Hostel Administration,High,Large Group,Open,,Web,True,False
+CMP-00526,USR-075,Waste bins near Computer Lab 1 are overflowing.,2026-01-30 14:18,Cleaning,Common Area,Computer Lab 1,Housekeeping,Medium,Large Group,Investigating,,Web,False,False
+CMP-00811,USR-136,The pathway near Computer Lab 1 is damaged and difficult to use.,2026-01-31 10:20,Infrastructure,Lift,Computer Lab 1,Facilities & Maintenance,Medium,Large Group,Resolved,,Mobile,True,False
+CMP-00480,USR-063,Waste bins near Block B - Hostel are overflowing.,2026-01-31 12:09,Cleaning,Common Area,Block B - Hostel,Housekeeping,Medium,Multiple Users,Resolved,,Mobile,True,True
+CMP-00913,USR-206,"Water pressure has been very low in CSE Block, especially during afternoon.",2026-01-31 14:18,Water & Sanitation,Water Pressure,CSE Block,Facilities & Maintenance,High,Multiple Users,Investigating,,Mobile,False,False
+CMP-00839,USR-101,The CCTV camera near Transport Bay appears to be offline.,2026-01-31 16:06,Safety,Lighting,Transport Bay,Security Services,High,Large Group,Open,,Web,True,False
+CMP-00054,USR-186,The lights in Main Building are flickering repeatedly.,2026-01-31 19:12,Electricity,Lighting,Main Building,Electrical Maintenance,Medium,Small Group,Investigating,,Mobile,False,False
+CMP-00282,USR-052,The fan is not working in Computer Lab 2.,2026-01-31 21:43,Electricity,Fan,Computer Lab 2,Electrical Maintenance,Medium,Large Group,Open,,Web,True,False
+CMP-00380,USR-250,Food served at Computer Lab 2 was cold today.,2026-02-01 12:30,Canteen,Queue,Computer Lab 2,Food Services,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00530,USR-213,The furniture in Block B - Hostel is broken and needs repair.,2026-02-01 12:31,Hostel,Room Maintenance,Block B - Hostel,Hostel Administration,Medium,Small Group,Open,,Web,True,False
+CMP-00861,USR-230,The campus bus has not arrived at Canteen on time.,2026-02-01 18:04,Transport,Bus Condition,Canteen,Transport Services,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00426,USR-157,The campus bus has not arrived at Block C - Hostel on time.,2026-02-01 19:55,Transport,Bus Availability,Block C - Hostel,Transport Services,Medium,Large Group,Resolved,,Web,True,True
+CMP-00709,USR-101,The washroom in Seminar Hall has not been cleaned properly.,2026-02-02 09:20,Cleaning,Room Cleaning,Seminar Hall,Housekeeping,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00369,USR-222,The furniture in Canteen is broken and needs repair.,2026-02-02 10:33,Hostel,Laundry,Canteen,Hostel Administration,Medium,Individual,Resolved,,Web,True,False
+CMP-00482,USR-157,The campus bus has not arrived at Campus Entrance on time.,2026-02-02 11:09,Transport,Bus Availability,Campus Entrance,Transport Services,Medium,Large Group,Investigating,,Web,False,False
+CMP-00458,USR-220,The campus bus has not arrived at Block B - Hostel on time.,2026-02-02 16:04,Transport,Bus Condition,Block B - Hostel,Transport Services,Medium,Small Group,Resolved,,Web,True,True
+CMP-00326,USR-082,Waste bins near ECE Block are overflowing.,2026-02-02 18:41,Cleaning,Washroom Cleaning,ECE Block,Housekeeping,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00230,USR-183,Several systems in ECE Block cannot access the internet.,2026-02-02 19:49,Internet & Network,Network Availability,ECE Block,IT Services,High,Large Group,Closed,INC-005,Mobile,True,False
+CMP-00852,USR-154,The pathway near Block B - Hostel is damaged and difficult to use.,2026-02-02 20:33,Infrastructure,Road,Block B - Hostel,Facilities & Maintenance,Medium,Individual,Resolved,,Mobile,False,True
+CMP-00217,USR-005,Food served at Seminar Hall was cold today.,2026-02-03 17:54,Canteen,Payment,Seminar Hall,Food Services,Medium,Individual,Open,,Web,False,False
+CMP-00275,USR-183,The campus bus has not arrived at Transport Bay on time.,2026-02-03 18:11,Transport,Bus Condition,Transport Bay,Transport Services,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00253,USR-058,The washroom in ECE Block has not been cleaned properly.,2026-02-04 10:46,Cleaning,Waste Disposal,ECE Block,Housekeeping,Medium,Multiple Users,Investigating,,Mobile,False,False
+CMP-00194,USR-113,The furniture in Block B - Hostel is broken and needs repair.,2026-02-04 12:00,Hostel,Laundry,Block B - Hostel,Hostel Administration,Medium,Large Group,Closed,,Web,True,True
+CMP-00745,USR-249,The lights in Transport Bay are flickering repeatedly.,2026-02-04 12:55,Electricity,Socket,Transport Bay,Electrical Maintenance,Medium,Small Group,Resolved,INC-023,Web,False,True
+CMP-00679,USR-126,Water is leaking near ECE Block and the floor remains wet.,2026-02-04 19:30,Water & Sanitation,Leakage,ECE Block,Facilities & Maintenance,Medium,Small Group,Open,,Web,True,False
+CMP-00370,USR-080,Food served at Computer Lab 1 was cold today.,2026-02-04 19:34,Canteen,Hygiene,Computer Lab 1,Food Services,Medium,Large Group,Resolved,,Web,True,True
+CMP-00040,USR-085,Food served at Block B - Hostel was cold today.,2026-02-05 10:14,Canteen,Payment,Block B - Hostel,Food Services,Medium,Small Group,Open,,Mobile,True,False
+CMP-00834,USR-247,The door lock in Block B - Hostel is damaged.,2026-02-05 16:28,Hostel,Food,Block B - Hostel,Hostel Administration,High,Large Group,Resolved,,Web,True,True
+CMP-00495,USR-221,The furniture in Parking Area is broken and needs repair.,2026-02-05 21:45,Hostel,Room Maintenance,Parking Area,Hostel Administration,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00172,USR-161,The washroom in Transport Bay has not been cleaned properly.,2026-02-06 18:33,Cleaning,Washroom Cleaning,Transport Bay,Housekeeping,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00237,USR-180,The campus bus has not arrived at Block A - Hostel on time.,2026-02-06 19:17,Transport,Driver,Block A - Hostel,Transport Services,Medium,Small Group,Closed,,Web,True,True
+CMP-00082,USR-068,The furniture in Block B - Hostel is broken and needs repair.,2026-02-06 20:14,Hostel,Room Maintenance,Block B - Hostel,Hostel Administration,Medium,Individual,Closed,,Mobile,True,False
+CMP-00782,USR-128,The pathway near Seminar Hall is damaged and difficult to use.,2026-02-07 13:42,Infrastructure,Furniture,Seminar Hall,Facilities & Maintenance,Medium,Small Group,Closed,,Web,True,False
+CMP-00252,USR-151,There has been no water supply in Block A - Hostel since since yesterday.,2026-02-07 17:45,Water & Sanitation,Drainage,Block A - Hostel,Facilities & Maintenance,High,Multiple Users,Assigned,,Web,False,False
+CMP-00460,USR-170,Waste bins near Block B - Hostel are overflowing.,2026-02-07 17:59,Cleaning,Washroom Cleaning,Block B - Hostel,Housekeeping,Medium,Large Group,Closed,,Web,False,True
+CMP-00951,USR-011,The network keeps disconnecting in Campus Entrance.,2026-02-07 18:31,Internet & Network,LAN,Campus Entrance,IT Services,High,Large Group,Closed,INC-034,Web,False,False
+CMP-00214,USR-116,The network keeps disconnecting in Main Building.,2026-02-07 19:20,Internet & Network,LAN,Main Building,IT Services,High,Multiple Users,Resolved,INC-027,Web,True,False
+CMP-00969,USR-054,The Wi-Fi connection in Block B - Hostel becomes very slow during 6 PM–10 PM.,2026-02-07 21:16,Internet & Network,LAN,Block B - Hostel,IT Services,Medium,Multiple Users,Resolved,INC-016,Web,True,False
+CMP-00448,USR-146,The network keeps disconnecting in Canteen.,2026-02-08 15:34,Internet & Network,Network Availability,Canteen,IT Services,High,Multiple Users,Investigating,,Web,True,False
+CMP-00648,USR-151,The queue at Parking Area is unusually long during lunch.,2026-02-08 21:25,Canteen,Hygiene,Parking Area,Food Services,Low,Small Group,Resolved,,Mobile,True,False
+CMP-00003,USR-217,Waste bins near CSE Block are overflowing.,2026-02-09 11:48,Cleaning,Waste Disposal,CSE Block,Housekeeping,Medium,Individual,Assigned,,Web,False,False
+CMP-00314,USR-245,The network keeps disconnecting in Block A - Hostel.,2026-02-09 13:38,Internet & Network,Internet Speed,Block A - Hostel,IT Services,High,Large Group,Open,,Mobile,True,False
+CMP-00344,USR-071,The projector in Block B - Hostel is not displaying properly.,2026-02-09 14:41,Classroom Equipment,Speaker,Block B - Hostel,Academic Infrastructure,Medium,Large Group,Resolved,,Web,False,False
+CMP-00385,USR-188,Water is leaking near Computer Lab 2 and the floor remains wet.,2026-02-09 15:18,Water & Sanitation,Drainage,Computer Lab 2,Facilities & Maintenance,Medium,Large Group,Open,,Mobile,True,False
+CMP-00678,USR-097,The CCTV camera near Computer Lab 2 appears to be offline.,2026-02-09 16:46,Safety,CCTV,Computer Lab 2,Security Services,High,Large Group,Assigned,,Mobile,True,False
+CMP-00764,USR-101,The door lock in Transport Bay is damaged.,2026-02-10 12:05,Hostel,Furniture,Transport Bay,Hostel Administration,High,Large Group,Resolved,,Mobile,True,False
+CMP-00903,USR-209,The campus bus has not arrived at Block A - Hostel on time.,2026-02-10 12:19,Transport,Bus Delay,Block A - Hostel,Transport Services,Medium,Small Group,Open,,Web,True,False
+CMP-00411,USR-187,The pathway near Transport Bay is damaged and difficult to use.,2026-02-10 13:04,Infrastructure,Furniture,Transport Bay,Facilities & Maintenance,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00985,USR-240,The CCTV camera near Canteen appears to be offline.,2026-02-10 13:33,Safety,Lighting,Canteen,Security Services,High,Multiple Users,Reopened,,Web,False,True
+CMP-00336,USR-123,The network keeps disconnecting in Block C - Hostel.,2026-02-10 13:38,Internet & Network,LAN,Block C - Hostel,IT Services,High,Large Group,Closed,,Mobile,False,False
+CMP-00791,USR-216,Waste bins near Computer Lab 2 are overflowing.,2026-02-10 14:14,Cleaning,Common Area,Computer Lab 2,Housekeeping,Medium,Individual,Resolved,,Web,False,False
+CMP-00010,USR-216,The washroom in Central Library has not been cleaned properly.,2026-02-10 15:00,Cleaning,Waste Disposal,Central Library,Housekeeping,Medium,Individual,Closed,,Mobile,False,True
+CMP-00023,USR-241,The projector in CSE Block is not displaying properly.,2026-02-10 15:53,Classroom Equipment,Projector,CSE Block,Academic Infrastructure,Medium,Multiple Users,Reopened,,Mobile,False,True
+CMP-00485,USR-065,The campus bus has not arrived at Block C - Hostel on time.,2026-02-10 18:59,Transport,Driver,Block C - Hostel,Transport Services,Medium,Multiple Users,Assigned,,Web,True,False
+CMP-00099,USR-107,There has been no water supply in Block C - Hostel since since yesterday.,2026-02-10 20:39,Water & Sanitation,Drainage,Block C - Hostel,Facilities & Maintenance,High,Large Group,Resolved,,Web,False,True
+CMP-00902,USR-217,The washroom in Parking Area has not been cleaned properly.,2026-02-11 13:21,Cleaning,Room Cleaning,Parking Area,Housekeeping,Medium,Small Group,Reopened,,Web,True,False
+CMP-00011,USR-225,The projector in Parking Area is not displaying properly.,2026-02-11 16:49,Classroom Equipment,Microphone,Parking Area,Academic Infrastructure,Medium,Large Group,Open,,Web,False,False
+CMP-00704,USR-056,The furniture in Canteen is broken and needs repair.,2026-02-11 17:08,Hostel,Furniture,Canteen,Hostel Administration,Medium,Multiple Users,Closed,,Mobile,True,False
+CMP-00265,USR-052,The furniture in Block C - Hostel is broken and needs repair.,2026-02-12 11:51,Hostel,Food,Block C - Hostel,Hostel Administration,Medium,Individual,Resolved,,Mobile,False,False
+CMP-00193,USR-153,The network keeps disconnecting in Block B - Hostel.,2026-02-12 14:17,Internet & Network,LAN,Block B - Hostel,IT Services,High,Multiple Users,Assigned,,Mobile,False,False
+CMP-00240,USR-068,The network keeps disconnecting in Block B - Hostel.,2026-02-12 15:29,Internet & Network,LAN,Block B - Hostel,IT Services,High,Large Group,Reopened,INC-020,Web,True,True
+CMP-00722,USR-123,There is a power outage affecting Block B - Hostel.,2026-02-12 17:03,Electricity,Fan,Block B - Hostel,Electrical Maintenance,High,Multiple Users,Reopened,INC-033,Web,True,False
+CMP-00590,USR-196,The queue at Block B - Hostel is unusually long during lunch.,2026-02-12 18:07,Canteen,Payment,Block B - Hostel,Food Services,Low,Small Group,Closed,,Mobile,True,True
+CMP-00381,USR-149,Waste bins near Block A - Hostel are overflowing.,2026-02-12 20:17,Cleaning,Room Cleaning,Block A - Hostel,Housekeeping,Medium,Small Group,Open,,Web,False,False
+CMP-00043,USR-022,The computer systems in Campus Entrance are extremely slow.,2026-02-12 21:29,Classroom Equipment,Projector,Campus Entrance,Academic Infrastructure,Medium,Large Group,Resolved,,Web,False,False
+CMP-00537,USR-069,The Wi-Fi connection in ECE Block becomes very slow during afternoon.,2026-02-13 08:34,Internet & Network,LAN,ECE Block,IT Services,Medium,Large Group,Resolved,INC-033,Web,True,True
+CMP-00611,USR-082,The door lock in Canteen is damaged.,2026-02-13 08:39,Hostel,Room Maintenance,Canteen,Hostel Administration,High,Multiple Users,Assigned,,Mobile,True,False
+CMP-00138,USR-011,The queue at Canteen is unusually long during lunch.,2026-02-13 17:37,Canteen,Hygiene,Canteen,Food Services,Low,Multiple Users,Closed,,Web,True,True
+CMP-00210,USR-211,Food served at CSE Block was cold today.,2026-02-13 20:29,Canteen,Hygiene,CSE Block,Food Services,Medium,Individual,Investigating,,Web,True,False
+CMP-00638,USR-046,The fan is not working in CSE Block.,2026-02-14 11:56,Electricity,Power Outage,CSE Block,Electrical Maintenance,Medium,Multiple Users,Closed,INC-013,Web,True,True
+CMP-00763,USR-236,The CCTV camera near Parking Area appears to be offline.,2026-02-14 16:10,Safety,CCTV,Parking Area,Security Services,High,Large Group,Resolved,,Mobile,False,True
+CMP-00945,USR-206,The lights in Central Library are flickering repeatedly.,2026-02-15 10:25,Electricity,AC,Central Library,Electrical Maintenance,Medium,Individual,Assigned,,Web,False,False
+CMP-00500,USR-128,The computer systems in Transport Bay are extremely slow.,2026-02-15 12:04,Classroom Equipment,Smart Board,Transport Bay,Academic Infrastructure,Medium,Multiple Users,Open,,Mobile,False,False
+CMP-00795,USR-106,The lights in Transport Bay are flickering repeatedly.,2026-02-16 09:04,Electricity,Power Outage,Transport Bay,Electrical Maintenance,Medium,Small Group,Assigned,,Web,True,False
+CMP-00017,USR-249,The network keeps disconnecting in Central Library.,2026-02-16 12:29,Internet & Network,Wi-Fi,Central Library,IT Services,High,Multiple Users,Open,,Web,False,False
+CMP-00556,USR-161,The door lock in ECE Block is damaged.,2026-02-16 14:56,Hostel,Security,ECE Block,Hostel Administration,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00762,USR-029,The network keeps disconnecting in Parking Area.,2026-02-16 15:47,Internet & Network,Network Availability,Parking Area,IT Services,High,Large Group,Closed,INC-001,Mobile,True,True
+CMP-00686,USR-067,The fan is not working in Computer Lab 1.,2026-02-16 16:07,Electricity,Fan,Computer Lab 1,Electrical Maintenance,Medium,Small Group,Investigating,,Web,True,False
+CMP-00325,USR-186,The fan is not working in Block B - Hostel.,2026-02-16 18:51,Electricity,Fan,Block B - Hostel,Electrical Maintenance,Medium,Individual,Assigned,INC-007,Mobile,True,False
+CMP-00208,USR-035,The washroom in Block C - Hostel has not been cleaned properly.,2026-02-17 13:53,Cleaning,Common Area,Block C - Hostel,Housekeeping,Medium,Multiple Users,Reopened,,Mobile,True,False
+CMP-00542,USR-208,The queue at Sports Ground is unusually long during lunch.,2026-02-17 17:31,Canteen,Hygiene,Sports Ground,Food Services,Low,Multiple Users,Reopened,,Mobile,True,True
+CMP-00066,USR-238,The door lock in Block A - Hostel is damaged.,2026-02-18 16:23,Hostel,Furniture,Block A - Hostel,Hostel Administration,High,Multiple Users,Investigating,,Web,True,False
+CMP-00071,USR-181,Waste bins near Sports Ground are overflowing.,2026-02-18 19:15,Cleaning,Common Area,Sports Ground,Housekeeping,Medium,Large Group,Open,,Web,True,False
+CMP-00723,USR-176,"Water pressure has been very low in Seminar Hall, especially during 6 PM–10 PM.",2026-02-18 21:47,Water & Sanitation,Washroom,Seminar Hall,Facilities & Maintenance,High,Multiple Users,Reopened,,Mobile,True,False
+CMP-00388,USR-239,The Wi-Fi connection in Computer Lab 1 becomes very slow during evening.,2026-02-19 09:02,Internet & Network,Wi-Fi,Computer Lab 1,IT Services,Medium,Multiple Users,Open,INC-005,Mobile,True,False
+CMP-00735,USR-057,There has been no water supply in CSE Block since for two days.,2026-02-19 10:27,Water & Sanitation,Water Pressure,CSE Block,Facilities & Maintenance,High,Multiple Users,Assigned,,Web,True,False
+CMP-00152,USR-082,The CCTV camera near Computer Lab 1 appears to be offline.,2026-02-19 11:17,Safety,Lighting,Computer Lab 1,Security Services,High,Large Group,Closed,,Web,False,False
+CMP-00055,USR-012,The Wi-Fi connection in Sports Ground becomes very slow during afternoon.,2026-02-19 12:14,Internet & Network,Network Availability,Sports Ground,IT Services,Medium,Multiple Users,Open,,Web,False,False
+CMP-00508,USR-174,The CCTV camera near Canteen appears to be offline.,2026-02-19 17:33,Safety,Lighting,Canteen,Security Services,High,Multiple Users,Open,,Web,True,False
+CMP-00489,USR-016,The furniture in Campus Entrance is broken and needs repair.,2026-02-19 18:22,Hostel,Security,Campus Entrance,Hostel Administration,Medium,Multiple Users,Investigating,,Web,False,False
+CMP-00666,USR-186,Waste bins near Sports Ground are overflowing.,2026-02-19 18:42,Cleaning,Washroom Cleaning,Sports Ground,Housekeeping,Medium,Individual,Closed,,Mobile,True,False
+CMP-00693,USR-214,The washroom in Seminar Hall has not been cleaned properly.,2026-02-19 19:09,Cleaning,Waste Disposal,Seminar Hall,Housekeeping,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00805,USR-031,Waste bins near Main Building are overflowing.,2026-02-20 08:51,Cleaning,Common Area,Main Building,Housekeeping,Medium,Individual,Reopened,,Web,True,True
+CMP-00654,USR-015,"Water pressure has been very low in Block C - Hostel, especially during evening.",2026-02-20 09:58,Water & Sanitation,Drainage,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Assigned,,Web,True,False
+CMP-00036,USR-050,There is a power outage affecting Parking Area.,2026-02-20 10:01,Electricity,Socket,Parking Area,Electrical Maintenance,High,Multiple Users,Resolved,,Web,True,False
+CMP-00849,USR-112,The pathway near Computer Lab 2 is damaged and difficult to use.,2026-02-21 11:16,Infrastructure,Furniture,Computer Lab 2,Facilities & Maintenance,Medium,Multiple Users,Investigating,,Mobile,False,False
+CMP-00643,USR-066,There is a power outage affecting Transport Bay.,2026-02-21 15:55,Electricity,Lighting,Transport Bay,Electrical Maintenance,High,Large Group,Resolved,INC-011,Mobile,True,True
+CMP-00405,USR-222,There has been no water supply in CSE Block since since yesterday.,2026-02-21 20:44,Water & Sanitation,Leakage,CSE Block,Facilities & Maintenance,High,Multiple Users,Open,,Web,True,False
+CMP-00178,USR-067,Waste bins near Transport Bay are overflowing.,2026-02-22 13:20,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Small Group,Closed,,Mobile,True,False
+CMP-00410,USR-233,Food served at Block C - Hostel was cold today.,2026-02-22 18:08,Canteen,Hygiene,Block C - Hostel,Food Services,Medium,Multiple Users,Closed,,Mobile,True,True
+CMP-00041,USR-077,The door lock in Block A - Hostel is damaged.,2026-02-22 21:26,Hostel,Laundry,Block A - Hostel,Hostel Administration,High,Large Group,Open,,Web,True,False
+CMP-00587,USR-045,The washroom in Main Building has not been cleaned properly.,2026-02-23 16:03,Cleaning,Washroom Cleaning,Main Building,Housekeeping,Medium,Multiple Users,Assigned,,Mobile,True,False
+CMP-00921,USR-176,The CCTV camera near Sports Ground appears to be offline.,2026-02-24 10:40,Safety,CCTV,Sports Ground,Security Services,High,Large Group,Resolved,,Web,True,False
+CMP-00059,USR-116,The fan is not working in Canteen.,2026-02-24 12:42,Electricity,AC,Canteen,Electrical Maintenance,Medium,Small Group,Investigating,INC-001,Mobile,True,False
+CMP-00035,USR-086,The furniture in Canteen is broken and needs repair.,2026-02-24 16:30,Hostel,Security,Canteen,Hostel Administration,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00780,USR-088,The door lock in Computer Lab 2 is damaged.,2026-02-24 18:57,Hostel,Food,Computer Lab 2,Hostel Administration,High,Multiple Users,Closed,,Web,False,True
+CMP-00779,USR-104,The fan is not working in Block A - Hostel.,2026-02-24 21:01,Electricity,Lighting,Block A - Hostel,Electrical Maintenance,Medium,Multiple Users,Resolved,INC-005,Web,False,False
+CMP-00960,USR-141,The Wi-Fi connection in Central Library becomes very slow during afternoon.,2026-02-25 11:07,Internet & Network,LAN,Central Library,IT Services,Medium,Small Group,Closed,,Web,False,True
+CMP-00784,USR-129,The CCTV camera near Central Library appears to be offline.,2026-02-25 13:13,Safety,CCTV,Central Library,Security Services,High,Large Group,Open,,Web,True,False
+CMP-00211,USR-221,The furniture in Computer Lab 2 is broken and needs repair.,2026-02-25 14:06,Hostel,Laundry,Computer Lab 2,Hostel Administration,Medium,Individual,Resolved,,Web,True,True
+CMP-00338,USR-154,The washroom in Block B - Hostel has not been cleaned properly.,2026-02-25 15:38,Cleaning,Common Area,Block B - Hostel,Housekeeping,Medium,Small Group,Investigating,,Mobile,False,False
+CMP-00980,USR-185,Food served at Seminar Hall was cold today.,2026-02-25 17:31,Canteen,Food Quality,Seminar Hall,Food Services,Medium,Large Group,Closed,,Web,False,False
+CMP-00803,USR-055,There is a power outage affecting Block B - Hostel.,2026-02-25 18:23,Electricity,Lighting,Block B - Hostel,Electrical Maintenance,High,Multiple Users,Open,,Web,False,False
+CMP-00316,USR-062,The projector in CSE Block is not displaying properly.,2026-02-25 20:39,Classroom Equipment,Computer,CSE Block,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,False,True
+CMP-00171,USR-148,There is a power outage affecting Computer Lab 2.,2026-02-25 20:55,Electricity,Lighting,Computer Lab 2,Electrical Maintenance,High,Multiple Users,Closed,,Mobile,False,True
+CMP-00896,USR-030,The washroom in Block B - Hostel has not been cleaned properly.,2026-02-26 09:56,Cleaning,Common Area,Block B - Hostel,Housekeeping,Medium,Large Group,Assigned,,Mobile,True,False
+CMP-00163,USR-096,The projector in Seminar Hall is not displaying properly.,2026-02-26 11:08,Classroom Equipment,Speaker,Seminar Hall,Academic Infrastructure,Medium,Large Group,Closed,,Web,True,True
+CMP-00744,USR-075,The washroom in Sports Ground has not been cleaned properly.,2026-02-26 12:45,Cleaning,Washroom Cleaning,Sports Ground,Housekeeping,Medium,Small Group,Investigating,,Web,False,False
+CMP-00585,USR-204,There is a power outage affecting Computer Lab 2.,2026-02-26 17:58,Electricity,Lighting,Computer Lab 2,Electrical Maintenance,High,Large Group,Closed,INC-027,Web,False,True
+CMP-00621,USR-161,The furniture in Block A - Hostel is broken and needs repair.,2026-02-26 19:01,Hostel,Security,Block A - Hostel,Hostel Administration,Medium,Small Group,Open,,Web,False,False
+CMP-00332,USR-172,The projector in Block A - Hostel is not displaying properly.,2026-02-26 20:31,Classroom Equipment,Projector,Block A - Hostel,Academic Infrastructure,Medium,Multiple Users,Assigned,,Mobile,False,False
+CMP-00118,USR-099,Water is leaking near Transport Bay and the floor remains wet.,2026-02-26 21:28,Water & Sanitation,Water Pressure,Transport Bay,Facilities & Maintenance,Medium,Large Group,Open,,Web,False,False
+CMP-00975,USR-216,The washroom in Main Building has not been cleaned properly.,2026-02-27 10:17,Cleaning,Room Cleaning,Main Building,Housekeeping,Medium,Multiple Users,Resolved,,Mobile,False,True
+CMP-00916,USR-150,Food served at Transport Bay was cold today.,2026-02-27 13:40,Canteen,Payment,Transport Bay,Food Services,Medium,Multiple Users,Assigned,,Web,False,False
+CMP-00877,USR-113,Water is leaking near Transport Bay and the floor remains wet.,2026-02-27 17:32,Water & Sanitation,Washroom,Transport Bay,Facilities & Maintenance,Medium,Individual,Resolved,,Web,False,True
+CMP-00696,USR-168,Waste bins near Sports Ground are overflowing.,2026-02-27 17:49,Cleaning,Common Area,Sports Ground,Housekeeping,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00061,USR-113,The Wi-Fi connection in Computer Lab 2 becomes very slow during afternoon.,2026-02-27 18:09,Internet & Network,Network Availability,Computer Lab 2,IT Services,Medium,Individual,Open,,Web,True,False
+CMP-00302,USR-001,There has been no water supply in Sports Ground since since this morning.,2026-02-27 21:29,Water & Sanitation,Water Pressure,Sports Ground,Facilities & Maintenance,High,Large Group,Open,,Web,False,False
+CMP-00646,USR-078,The lights in Transport Bay are flickering repeatedly.,2026-02-28 09:07,Electricity,Lighting,Transport Bay,Electrical Maintenance,Medium,Individual,Resolved,INC-022,Web,False,True
+CMP-00366,USR-192,Several systems in ECE Block cannot access the internet.,2026-02-28 13:20,Internet & Network,Network Availability,ECE Block,IT Services,High,Large Group,Closed,,Mobile,True,False
+CMP-00525,USR-143,The fan is not working in Computer Lab 2.,2026-02-28 14:07,Electricity,Lighting,Computer Lab 2,Electrical Maintenance,Medium,Large Group,Open,INC-024,Web,True,False
+CMP-00093,USR-110,The furniture in Transport Bay is broken and needs repair.,2026-02-28 14:21,Hostel,Laundry,Transport Bay,Hostel Administration,Medium,Large Group,Closed,,Web,False,False
+CMP-00442,USR-202,The furniture in Computer Lab 1 is broken and needs repair.,2026-03-01 11:09,Hostel,Laundry,Computer Lab 1,Hostel Administration,Medium,Large Group,Investigating,,Web,True,False
+CMP-00999,USR-007,The door lock in CSE Block is damaged.,2026-03-01 11:49,Hostel,Food,CSE Block,Hostel Administration,High,Large Group,Investigating,,Web,False,False
+CMP-00060,USR-202,The washroom in Block A - Hostel has not been cleaned properly.,2026-03-01 12:45,Cleaning,Waste Disposal,Block A - Hostel,Housekeeping,Medium,Individual,Closed,,Mobile,False,False
+CMP-00383,USR-231,The network keeps disconnecting in Computer Lab 1.,2026-03-01 13:35,Internet & Network,Network Availability,Computer Lab 1,IT Services,High,Multiple Users,Closed,INC-009,Web,True,False
+CMP-00002,USR-195,Water is leaking near Main Building and the floor remains wet.,2026-03-01 16:38,Water & Sanitation,Water Supply,Main Building,Facilities & Maintenance,Medium,Large Group,Investigating,,Mobile,True,False
+CMP-00292,USR-200,The campus bus has not arrived at ECE Block on time.,2026-03-02 08:00,Transport,Bus Delay,ECE Block,Transport Services,Medium,Large Group,Investigating,,Mobile,True,False
+CMP-00599,USR-173,The furniture in ECE Block is broken and needs repair.,2026-03-02 20:47,Hostel,Security,ECE Block,Hostel Administration,Medium,Multiple Users,Assigned,,Mobile,True,False
+CMP-00940,USR-002,Water is leaking near Block C - Hostel and the floor remains wet.,2026-03-02 21:13,Water & Sanitation,Leakage,Block C - Hostel,Facilities & Maintenance,Medium,Small Group,Investigating,,Web,False,False
+CMP-00278,USR-076,The queue at Parking Area is unusually long during lunch.,2026-03-03 08:51,Canteen,Payment,Parking Area,Food Services,Low,Small Group,Closed,,Web,True,False
+CMP-00187,USR-129,Several systems in Seminar Hall cannot access the internet.,2026-03-03 17:53,Internet & Network,Wi-Fi,Seminar Hall,IT Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00349,USR-004,There has been no water supply in ECE Block since since yesterday.,2026-03-03 18:00,Water & Sanitation,Washroom,ECE Block,Facilities & Maintenance,High,Large Group,Assigned,INC-013,Web,True,False
+CMP-00618,USR-005,The furniture in CSE Block is broken and needs repair.,2026-03-04 18:20,Hostel,Laundry,CSE Block,Hostel Administration,Medium,Large Group,Reopened,,Mobile,True,False
+CMP-00641,USR-043,The network keeps disconnecting in ECE Block.,2026-03-05 08:40,Internet & Network,Wi-Fi,ECE Block,IT Services,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00600,USR-213,The queue at Campus Entrance is unusually long during lunch.,2026-03-05 09:20,Canteen,Payment,Campus Entrance,Food Services,Low,Large Group,Open,,Web,True,False
+CMP-00233,USR-046,There is a power outage affecting ECE Block.,2026-03-05 14:58,Electricity,Power Outage,ECE Block,Electrical Maintenance,High,Large Group,Open,,Mobile,True,False
+CMP-00657,USR-166,The CCTV camera near Parking Area appears to be offline.,2026-03-05 16:21,Safety,CCTV,Parking Area,Security Services,High,Multiple Users,Closed,,Web,False,False
+CMP-00027,USR-226,The fan is not working in Canteen.,2026-03-05 18:06,Electricity,Fan,Canteen,Electrical Maintenance,Medium,Small Group,Closed,INC-011,Web,True,True
+CMP-00249,USR-046,Several systems in Block B - Hostel cannot access the internet.,2026-03-05 18:15,Internet & Network,Internet Speed,Block B - Hostel,IT Services,High,Large Group,Assigned,,Mobile,False,False
+CMP-00039,USR-070,The lights in Parking Area are flickering repeatedly.,2026-03-05 21:40,Electricity,Fan,Parking Area,Electrical Maintenance,Medium,Small Group,Investigating,INC-019,Web,False,False
+CMP-00276,USR-144,The projector in Computer Lab 1 is not displaying properly.,2026-03-06 11:29,Classroom Equipment,Microphone,Computer Lab 1,Academic Infrastructure,Medium,Individual,Open,,Mobile,False,False
+CMP-00661,USR-098,The furniture in Block C - Hostel is broken and needs repair.,2026-03-06 11:32,Hostel,Food,Block C - Hostel,Hostel Administration,Medium,Individual,Open,,Web,True,False
+CMP-00312,USR-115,"Water pressure has been very low in Campus Entrance, especially during evening.",2026-03-06 11:39,Water & Sanitation,Leakage,Campus Entrance,Facilities & Maintenance,High,Multiple Users,Closed,,Mobile,True,True
+CMP-00914,USR-003,The queue at Seminar Hall is unusually long during lunch.,2026-03-06 15:29,Canteen,Payment,Seminar Hall,Food Services,Low,Small Group,Investigating,,Web,True,False
+CMP-00293,USR-219,The Wi-Fi connection in Transport Bay becomes very slow during evening.,2026-03-07 18:14,Internet & Network,Wi-Fi,Transport Bay,IT Services,Medium,Multiple Users,Resolved,INC-012,Web,False,False
+CMP-00899,USR-057,The door lock in Central Library is damaged.,2026-03-08 08:17,Hostel,Food,Central Library,Hostel Administration,High,Multiple Users,Assigned,,Mobile,False,False
+CMP-00647,USR-243,Food served at Transport Bay was cold today.,2026-03-08 08:49,Canteen,Payment,Transport Bay,Food Services,Medium,Multiple Users,Closed,,Web,True,False
+CMP-00359,USR-094,The CCTV camera near Sports Ground appears to be offline.,2026-03-08 10:35,Safety,CCTV,Sports Ground,Security Services,High,Large Group,Reopened,,Mobile,True,False
+CMP-00044,USR-214,Several systems in Block A - Hostel cannot access the internet.,2026-03-08 14:20,Internet & Network,Network Availability,Block A - Hostel,IT Services,High,Large Group,Closed,INC-027,Web,True,True
+CMP-00330,USR-035,There has been no water supply in Computer Lab 2 since for two days.,2026-03-08 16:57,Water & Sanitation,Leakage,Computer Lab 2,Facilities & Maintenance,High,Large Group,Investigating,,Web,True,False
+CMP-00888,USR-142,The washroom in Transport Bay has not been cleaned properly.,2026-03-08 17:48,Cleaning,Washroom Cleaning,Transport Bay,Housekeeping,Medium,Multiple Users,Investigating,,Mobile,False,False
+CMP-00827,USR-080,The queue at Block C - Hostel is unusually long during lunch.,2026-03-09 18:22,Canteen,Seating,Block C - Hostel,Food Services,Low,Large Group,Reopened,,Mobile,True,False
+CMP-00149,USR-038,The CCTV camera near Computer Lab 1 appears to be offline.,2026-03-09 18:50,Safety,Lighting,Computer Lab 1,Security Services,High,Multiple Users,Resolved,,Mobile,True,True
+CMP-00132,USR-052,Food served at Block B - Hostel was cold today.,2026-03-09 20:16,Canteen,Payment,Block B - Hostel,Food Services,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00439,USR-229,Food served at ECE Block was cold today.,2026-03-11 10:45,Canteen,Hygiene,ECE Block,Food Services,Medium,Small Group,Open,,Web,True,False
+CMP-00831,USR-208,Water is leaking near Campus Entrance and the floor remains wet.,2026-03-11 10:46,Water & Sanitation,Water Pressure,Campus Entrance,Facilities & Maintenance,Medium,Individual,Assigned,INC-023,Web,True,False
+CMP-00717,USR-097,Waste bins near Parking Area are overflowing.,2026-03-11 10:55,Cleaning,Washroom Cleaning,Parking Area,Housekeeping,Medium,Individual,Open,,Web,True,False
+CMP-00743,USR-226,The computer systems in Seminar Hall are extremely slow.,2026-03-11 11:11,Classroom Equipment,Projector,Seminar Hall,Academic Infrastructure,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00159,USR-184,The queue at Computer Lab 1 is unusually long during lunch.,2026-03-11 11:51,Canteen,Seating,Computer Lab 1,Food Services,Low,Small Group,Closed,,Mobile,True,False
+CMP-00817,USR-156,There has been no water supply in Computer Lab 1 since since this morning.,2026-03-11 13:06,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Assigned,INC-018,Web,True,False
+CMP-00516,USR-197,Several systems in Block A - Hostel cannot access the internet.,2026-03-11 13:26,Internet & Network,Internet Speed,Block A - Hostel,IT Services,High,Large Group,Resolved,,Mobile,True,True
+CMP-00097,USR-037,"Water pressure has been very low in Block C - Hostel, especially during afternoon.",2026-03-11 19:48,Water & Sanitation,Water Supply,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Investigating,INC-026,Web,True,False
+CMP-00529,USR-125,The pathway near Seminar Hall is damaged and difficult to use.,2026-03-11 20:50,Infrastructure,Lighting,Seminar Hall,Facilities & Maintenance,Medium,Large Group,Resolved,,Mobile,False,True
+CMP-00739,USR-151,There is a power outage affecting Canteen.,2026-03-12 11:37,Electricity,Power Outage,Canteen,Electrical Maintenance,High,Multiple Users,Resolved,,Mobile,False,False
+CMP-00182,USR-135,The queue at Campus Entrance is unusually long during lunch.,2026-03-12 16:18,Canteen,Food Quality,Campus Entrance,Food Services,Low,Small Group,Open,,Mobile,False,False
+CMP-00107,USR-015,The washroom in Parking Area has not been cleaned properly.,2026-03-12 17:03,Cleaning,Room Cleaning,Parking Area,Housekeeping,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00924,USR-221,There has been no water supply in Canteen since since yesterday.,2026-03-12 18:30,Water & Sanitation,Water Supply,Canteen,Facilities & Maintenance,High,Large Group,Resolved,,Web,True,False
+CMP-00863,USR-010,The CCTV camera near Computer Lab 1 appears to be offline.,2026-03-13 09:13,Safety,Emergency Equipment,Computer Lab 1,Security Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00714,USR-103,The pathway near ECE Block is damaged and difficult to use.,2026-03-13 10:46,Infrastructure,Furniture,ECE Block,Facilities & Maintenance,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00815,USR-005,The fan is not working in Block B - Hostel.,2026-03-13 14:10,Electricity,Fan,Block B - Hostel,Electrical Maintenance,Medium,Small Group,Resolved,INC-008,Web,False,False
+CMP-00215,USR-223,The queue at Campus Entrance is unusually long during lunch.,2026-03-13 19:59,Canteen,Food Quality,Campus Entrance,Food Services,Low,Large Group,Assigned,,Web,True,False
+CMP-00466,USR-244,There is a power outage affecting Campus Entrance.,2026-03-14 12:12,Electricity,Fan,Campus Entrance,Electrical Maintenance,High,Multiple Users,Reopened,,Mobile,True,True
+CMP-00754,USR-110,There is a power outage affecting Block B - Hostel.,2026-03-14 13:04,Electricity,Fan,Block B - Hostel,Electrical Maintenance,High,Multiple Users,Closed,,Mobile,False,True
+CMP-00518,USR-204,The network keeps disconnecting in Computer Lab 2.,2026-03-14 13:49,Internet & Network,Internet Speed,Computer Lab 2,IT Services,High,Multiple Users,Open,INC-015,Mobile,True,False
+CMP-00829,USR-212,The washroom in Computer Lab 1 has not been cleaned properly.,2026-03-15 09:51,Cleaning,Waste Disposal,Computer Lab 1,Housekeeping,Medium,Large Group,Open,,Mobile,True,False
+CMP-00365,USR-147,The computer systems in Seminar Hall are extremely slow.,2026-03-15 15:40,Classroom Equipment,Speaker,Seminar Hall,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,True,True
+CMP-00544,USR-205,The lights in Sports Ground are flickering repeatedly.,2026-03-15 18:10,Electricity,Fan,Sports Ground,Electrical Maintenance,Medium,Large Group,Investigating,INC-002,Web,True,False
+CMP-00733,USR-064,The door lock in Computer Lab 1 is damaged.,2026-03-16 12:31,Hostel,Furniture,Computer Lab 1,Hostel Administration,High,Multiple Users,Closed,,Web,True,False
+CMP-00213,USR-236,Waste bins near Campus Entrance are overflowing.,2026-03-16 12:36,Cleaning,Common Area,Campus Entrance,Housekeeping,Medium,Small Group,Reopened,,Web,False,True
+CMP-00771,USR-246,The network keeps disconnecting in ECE Block.,2026-03-16 13:39,Internet & Network,Wi-Fi,ECE Block,IT Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00823,USR-116,The pathway near Canteen is damaged and difficult to use.,2026-03-16 21:14,Infrastructure,Building Damage,Canteen,Facilities & Maintenance,Medium,Individual,Open,,Web,False,False
+CMP-00280,USR-168,Food served at Block C - Hostel was cold today.,2026-03-17 09:30,Canteen,Seating,Block C - Hostel,Food Services,Medium,Small Group,Reopened,,Web,False,False
+CMP-00019,USR-015,The network keeps disconnecting in Main Building.,2026-03-17 11:03,Internet & Network,Internet Speed,Main Building,IT Services,High,Multiple Users,Resolved,,Mobile,True,True
+CMP-00053,USR-180,"Water pressure has been very low in Block B - Hostel, especially during morning.",2026-03-17 11:25,Water & Sanitation,Leakage,Block B - Hostel,Facilities & Maintenance,High,Large Group,Resolved,INC-022,Web,False,False
+CMP-00496,USR-189,The queue at Block A - Hostel is unusually long during lunch.,2026-03-17 14:48,Canteen,Seating,Block A - Hostel,Food Services,Low,Individual,Resolved,,Web,False,True
+CMP-00318,USR-161,The campus bus has not arrived at Block A - Hostel on time.,2026-03-17 18:12,Transport,Bus Delay,Block A - Hostel,Transport Services,Medium,Individual,Investigating,,Web,False,False
+CMP-00261,USR-021,The door lock in Block B - Hostel is damaged.,2026-03-17 21:42,Hostel,Laundry,Block B - Hostel,Hostel Administration,High,Multiple Users,Investigating,,Web,True,False
+CMP-00712,USR-169,The Wi-Fi connection in Computer Lab 2 becomes very slow during morning.,2026-03-18 13:34,Internet & Network,Network Availability,Computer Lab 2,IT Services,Medium,Individual,Investigating,INC-034,Mobile,True,False
+CMP-00430,USR-050,Water is leaking near CSE Block and the floor remains wet.,2026-03-18 16:35,Water & Sanitation,Water Pressure,CSE Block,Facilities & Maintenance,Medium,Individual,Closed,INC-002,Web,False,False
+CMP-00991,USR-143,The network keeps disconnecting in Seminar Hall.,2026-03-18 17:12,Internet & Network,Network Availability,Seminar Hall,IT Services,High,Large Group,Resolved,,Mobile,False,True
+CMP-00950,USR-064,The furniture in ECE Block is broken and needs repair.,2026-03-18 18:02,Hostel,Food,ECE Block,Hostel Administration,Medium,Individual,Resolved,,Mobile,True,True
+CMP-00070,USR-086,The washroom in Campus Entrance has not been cleaned properly.,2026-03-18 21:37,Cleaning,Waste Disposal,Campus Entrance,Housekeeping,Medium,Large Group,Resolved,,Mobile,True,False
+CMP-00843,USR-003,"Water pressure has been very low in Seminar Hall, especially during evening.",2026-03-19 08:41,Water & Sanitation,Leakage,Seminar Hall,Facilities & Maintenance,High,Multiple Users,Resolved,,Mobile,False,True
+CMP-00520,USR-021,Several systems in Campus Entrance cannot access the internet.,2026-03-19 08:47,Internet & Network,Internet Speed,Campus Entrance,IT Services,High,Multiple Users,Closed,INC-014,Web,True,True
+CMP-00983,USR-055,The door lock in Canteen is damaged.,2026-03-19 09:59,Hostel,Furniture,Canteen,Hostel Administration,High,Multiple Users,Closed,,Web,False,False
+CMP-00707,USR-071,The computer systems in Computer Lab 1 are extremely slow.,2026-03-19 19:38,Classroom Equipment,Computer,Computer Lab 1,Academic Infrastructure,Medium,Individual,Closed,,Web,False,True
+CMP-00830,USR-171,There has been no water supply in Computer Lab 1 since since yesterday.,2026-03-20 08:27,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,High,Large Group,Investigating,,Mobile,False,False
+CMP-00604,USR-240,The Wi-Fi connection in ECE Block becomes very slow during afternoon.,2026-03-20 13:19,Internet & Network,Wi-Fi,ECE Block,IT Services,Medium,Individual,Closed,INC-027,Web,False,True
+CMP-00371,USR-089,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-03-20 13:26,Water & Sanitation,Water Pressure,Computer Lab 1,Facilities & Maintenance,Medium,Multiple Users,Open,,Web,True,False
+CMP-00143,USR-150,The campus bus has not arrived at Transport Bay on time.,2026-03-20 15:01,Transport,Bus Availability,Transport Bay,Transport Services,Medium,Large Group,Reopened,,Web,True,True
+CMP-00476,USR-202,Food served at Canteen was cold today.,2026-03-20 15:34,Canteen,Seating,Canteen,Food Services,Medium,Individual,Assigned,,Web,True,False
+CMP-00327,USR-064,The CCTV camera near Canteen appears to be offline.,2026-03-20 19:37,Safety,CCTV,Canteen,Security Services,High,Large Group,Investigating,,Mobile,True,False
+CMP-00749,USR-110,The washroom in Block A - Hostel has not been cleaned properly.,2026-03-21 10:56,Cleaning,Room Cleaning,Block A - Hostel,Housekeeping,Medium,Small Group,Open,,Mobile,True,False
+CMP-00633,USR-095,There has been no water supply in Block C - Hostel since for three days.,2026-03-21 17:27,Water & Sanitation,Leakage,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Resolved,,Web,False,True
+CMP-00033,USR-108,The washroom in Computer Lab 2 has not been cleaned properly.,2026-03-21 18:26,Cleaning,Washroom Cleaning,Computer Lab 2,Housekeeping,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00564,USR-213,The lights in Block B - Hostel are flickering repeatedly.,2026-03-22 08:08,Electricity,Socket,Block B - Hostel,Electrical Maintenance,Medium,Multiple Users,Closed,INC-017,Web,False,False
+CMP-00871,USR-059,The CCTV camera near Computer Lab 2 appears to be offline.,2026-03-22 09:28,Safety,Emergency Equipment,Computer Lab 2,Security Services,High,Large Group,Closed,,Mobile,False,True
+CMP-00594,USR-015,Water is leaking near ECE Block and the floor remains wet.,2026-03-22 14:49,Water & Sanitation,Washroom,ECE Block,Facilities & Maintenance,Medium,Individual,Assigned,INC-010,Mobile,False,False
+CMP-00392,USR-156,The projector in Transport Bay is not displaying properly.,2026-03-22 16:20,Classroom Equipment,Microphone,Transport Bay,Academic Infrastructure,Medium,Large Group,Closed,,Mobile,False,False
+CMP-00463,USR-157,The computer systems in Canteen are extremely slow.,2026-03-22 16:43,Classroom Equipment,Computer,Canteen,Academic Infrastructure,Medium,Multiple Users,Reopened,,Web,False,False
+CMP-00119,USR-195,There is a power outage affecting Block A - Hostel.,2026-03-23 09:53,Electricity,Fan,Block A - Hostel,Electrical Maintenance,High,Multiple Users,Assigned,,Web,True,False
+CMP-00509,USR-099,The fan is not working in Computer Lab 1.,2026-03-23 17:38,Electricity,Lighting,Computer Lab 1,Electrical Maintenance,Medium,Large Group,Investigating,,Web,True,False
+CMP-00438,USR-053,The lights in Computer Lab 2 are flickering repeatedly.,2026-03-23 20:28,Electricity,Power Outage,Computer Lab 2,Electrical Maintenance,Medium,Small Group,Investigating,INC-033,Mobile,False,False
+CMP-00387,USR-046,The CCTV camera near CSE Block appears to be offline.,2026-03-24 14:41,Safety,Emergency Equipment,CSE Block,Security Services,High,Multiple Users,Open,,Web,False,False
+CMP-00846,USR-025,The network keeps disconnecting in Campus Entrance.,2026-03-24 17:37,Internet & Network,Internet Speed,Campus Entrance,IT Services,High,Multiple Users,Open,,Web,True,False
+CMP-00177,USR-120,There is a power outage affecting Computer Lab 2.,2026-03-24 20:18,Electricity,AC,Computer Lab 2,Electrical Maintenance,High,Large Group,Investigating,,Web,True,False
+CMP-00050,USR-146,The pathway near CSE Block is damaged and difficult to use.,2026-03-24 21:15,Infrastructure,Lighting,CSE Block,Facilities & Maintenance,Medium,Large Group,Investigating,,Mobile,True,False
+CMP-00809,USR-209,The network keeps disconnecting in Block B - Hostel.,2026-03-24 21:44,Internet & Network,Network Availability,Block B - Hostel,IT Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00228,USR-117,The network keeps disconnecting in Computer Lab 2.,2026-03-25 14:37,Internet & Network,Wi-Fi,Computer Lab 2,IT Services,High,Multiple Users,Open,INC-028,Mobile,True,False
+CMP-00874,USR-250,There is a power outage affecting Main Building.,2026-03-25 17:23,Electricity,Lighting,Main Building,Electrical Maintenance,High,Large Group,Investigating,INC-024,Web,False,False
+CMP-00568,USR-040,The Wi-Fi connection in Transport Bay becomes very slow during 6 PM–10 PM.,2026-03-26 08:18,Internet & Network,Network Availability,Transport Bay,IT Services,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00996,USR-003,The network keeps disconnecting in Canteen.,2026-03-26 09:11,Internet & Network,Wi-Fi,Canteen,IT Services,High,Multiple Users,Resolved,INC-025,Mobile,False,False
+CMP-00260,USR-014,There has been no water supply in Block B - Hostel since for three days.,2026-03-26 11:12,Water & Sanitation,Water Pressure,Block B - Hostel,Facilities & Maintenance,High,Large Group,Investigating,INC-032,Web,True,False
+CMP-00179,USR-118,The network keeps disconnecting in Main Building.,2026-03-26 11:24,Internet & Network,LAN,Main Building,IT Services,High,Large Group,Closed,,Mobile,False,True
+CMP-00752,USR-027,Several systems in CSE Block cannot access the internet.,2026-03-26 15:09,Internet & Network,Network Availability,CSE Block,IT Services,High,Multiple Users,Open,INC-035,Mobile,True,False
+CMP-00626,USR-051,The computer systems in Main Building are extremely slow.,2026-03-27 09:56,Classroom Equipment,Smart Board,Main Building,Academic Infrastructure,Medium,Large Group,Reopened,,Mobile,False,False
+CMP-00363,USR-090,The furniture in Campus Entrance is broken and needs repair.,2026-03-27 12:23,Hostel,Room Maintenance,Campus Entrance,Hostel Administration,Medium,Multiple Users,Open,,Mobile,False,False
+CMP-00939,USR-052,The network keeps disconnecting in Canteen.,2026-03-27 20:03,Internet & Network,Internet Speed,Canteen,IT Services,High,Large Group,Resolved,INC-001,Mobile,False,False
+CMP-00399,USR-124,The network keeps disconnecting in Block C - Hostel.,2026-03-28 09:30,Internet & Network,Internet Speed,Block C - Hostel,IT Services,High,Multiple Users,Assigned,INC-009,Mobile,False,False
+CMP-00725,USR-055,The projector in Block B - Hostel is not displaying properly.,2026-03-28 18:15,Classroom Equipment,Microphone,Block B - Hostel,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,True,True
+CMP-00479,USR-083,The fan is not working in Central Library.,2026-03-28 20:53,Electricity,Fan,Central Library,Electrical Maintenance,Medium,Individual,Reopened,,Mobile,True,True
+CMP-00201,USR-185,The projector in CSE Block is not displaying properly.,2026-03-29 15:50,Classroom Equipment,Computer,CSE Block,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00943,USR-128,The projector in ECE Block is not displaying properly.,2026-03-29 16:52,Classroom Equipment,Smart Board,ECE Block,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,True,True
+CMP-00403,USR-054,The washroom in Block A - Hostel has not been cleaned properly.,2026-03-29 19:51,Cleaning,Waste Disposal,Block A - Hostel,Housekeeping,Medium,Large Group,Resolved,,Mobile,False,True
+CMP-00628,USR-196,The campus bus has not arrived at Main Building on time.,2026-03-29 21:03,Transport,Driver,Main Building,Transport Services,Medium,Individual,Closed,,Web,True,True
+CMP-00536,USR-234,The Wi-Fi connection in Central Library becomes very slow during afternoon.,2026-03-30 13:26,Internet & Network,Wi-Fi,Central Library,IT Services,Medium,Small Group,Investigating,,Web,False,False
+CMP-00797,USR-133,The Wi-Fi connection in ECE Block becomes very slow during 6 PM–10 PM.,2026-03-30 15:39,Internet & Network,Wi-Fi,ECE Block,IT Services,Medium,Multiple Users,Closed,INC-002,Mobile,False,True
+CMP-00167,USR-096,There has been no water supply in Central Library since since yesterday.,2026-03-30 19:04,Water & Sanitation,Drainage,Central Library,Facilities & Maintenance,High,Multiple Users,Assigned,INC-009,Web,True,False
+CMP-00045,USR-215,Food served at Block A - Hostel was cold today.,2026-03-31 11:41,Canteen,Queue,Block A - Hostel,Food Services,Medium,Individual,Reopened,,Web,False,True
+CMP-00510,USR-206,The washroom in ECE Block has not been cleaned properly.,2026-03-31 12:28,Cleaning,Common Area,ECE Block,Housekeeping,Medium,Large Group,Closed,,Web,False,True
+CMP-00799,USR-065,The fan is not working in Block B - Hostel.,2026-03-31 19:35,Electricity,Fan,Block B - Hostel,Electrical Maintenance,Medium,Large Group,Resolved,,Mobile,False,False
+CMP-00122,USR-202,"Water pressure has been very low in Seminar Hall, especially during evening.",2026-04-01 11:36,Water & Sanitation,Washroom,Seminar Hall,Facilities & Maintenance,High,Large Group,Open,,Mobile,True,False
+CMP-00879,USR-202,The projector in Block B - Hostel is not displaying properly.,2026-04-01 16:32,Classroom Equipment,Computer,Block B - Hostel,Academic Infrastructure,Medium,Large Group,Resolved,,Web,False,True
+CMP-00987,USR-214,There has been no water supply in Central Library since since this morning.,2026-04-01 18:51,Water & Sanitation,Leakage,Central Library,Facilities & Maintenance,High,Multiple Users,Closed,INC-017,Web,True,False
+CMP-00095,USR-040,The Wi-Fi connection in Central Library becomes very slow during evening.,2026-04-01 21:42,Internet & Network,Internet Speed,Central Library,IT Services,Medium,Multiple Users,Resolved,INC-033,Web,False,True
+CMP-00450,USR-101,Food served at Sports Ground was cold today.,2026-04-02 09:55,Canteen,Hygiene,Sports Ground,Food Services,Medium,Small Group,Resolved,,Web,True,False
+CMP-00395,USR-235,There has been no water supply in Computer Lab 1 since for three days.,2026-04-02 10:08,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Investigating,INC-026,Mobile,True,False
+CMP-00664,USR-100,The network keeps disconnecting in Computer Lab 1.,2026-04-02 10:13,Internet & Network,Wi-Fi,Computer Lab 1,IT Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00494,USR-192,The fan is not working in Block C - Hostel.,2026-04-02 12:15,Electricity,Socket,Block C - Hostel,Electrical Maintenance,Medium,Large Group,Resolved,INC-030,Mobile,True,False
+CMP-00622,USR-223,There is a power outage affecting Computer Lab 1.,2026-04-03 08:17,Electricity,Power Outage,Computer Lab 1,Electrical Maintenance,High,Multiple Users,Reopened,,Web,True,True
+CMP-00231,USR-229,The furniture in Computer Lab 2 is broken and needs repair.,2026-04-03 08:31,Hostel,Room Maintenance,Computer Lab 2,Hostel Administration,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00190,USR-027,The computer systems in ECE Block are extremely slow.,2026-04-03 09:05,Classroom Equipment,Microphone,ECE Block,Academic Infrastructure,Medium,Large Group,Assigned,,Mobile,True,False
+CMP-00328,USR-142,The lights in Sports Ground are flickering repeatedly.,2026-04-03 10:43,Electricity,AC,Sports Ground,Electrical Maintenance,Medium,Large Group,Resolved,,Web,False,True
+CMP-00008,USR-161,The pathway near Central Library is damaged and difficult to use.,2026-04-03 11:08,Infrastructure,Furniture,Central Library,Facilities & Maintenance,Medium,Individual,Closed,,Mobile,True,True
+CMP-00923,USR-236,The fan is not working in Computer Lab 1.,2026-04-03 16:12,Electricity,Socket,Computer Lab 1,Electrical Maintenance,Medium,Multiple Users,Open,INC-017,Web,False,False
+CMP-00134,USR-206,Several systems in Parking Area cannot access the internet.,2026-04-03 16:14,Internet & Network,LAN,Parking Area,IT Services,High,Multiple Users,Closed,INC-024,Mobile,False,True
+CMP-00162,USR-177,The lights in Canteen are flickering repeatedly.,2026-04-03 19:15,Electricity,Lighting,Canteen,Electrical Maintenance,Medium,Large Group,Assigned,INC-033,Web,False,False
+CMP-00738,USR-085,The lights in Computer Lab 1 are flickering repeatedly.,2026-04-04 13:19,Electricity,Fan,Computer Lab 1,Electrical Maintenance,Medium,Individual,Closed,,Web,False,False
+CMP-00591,USR-063,The network keeps disconnecting in Canteen.,2026-04-04 13:52,Internet & Network,Wi-Fi,Canteen,IT Services,High,Large Group,Reopened,,Web,False,False
+CMP-00539,USR-147,The CCTV camera near CSE Block appears to be offline.,2026-04-04 14:12,Safety,CCTV,CSE Block,Security Services,High,Large Group,Investigating,,Web,False,False
+CMP-00729,USR-042,The projector in CSE Block is not displaying properly.,2026-04-04 14:57,Classroom Equipment,Computer,CSE Block,Academic Infrastructure,Medium,Individual,Reopened,,Mobile,False,False
+CMP-00543,USR-082,The queue at Main Building is unusually long during lunch.,2026-04-04 15:09,Canteen,Payment,Main Building,Food Services,Low,Multiple Users,Closed,,Web,False,False
+CMP-00497,USR-144,The Wi-Fi connection in Central Library becomes very slow during 6 PM–10 PM.,2026-04-04 15:39,Internet & Network,Wi-Fi,Central Library,IT Services,Medium,Multiple Users,Investigating,,Mobile,False,False
+CMP-00081,USR-248,Food served at Transport Bay was cold today.,2026-04-04 16:32,Canteen,Payment,Transport Bay,Food Services,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00386,USR-197,The CCTV camera near Sports Ground appears to be offline.,2026-04-04 20:39,Safety,Lighting,Sports Ground,Security Services,High,Large Group,Investigating,,Mobile,False,False
+CMP-00572,USR-024,The Wi-Fi connection in Sports Ground becomes very slow during evening.,2026-04-05 16:12,Internet & Network,LAN,Sports Ground,IT Services,Medium,Large Group,Resolved,,Web,False,True
+CMP-00181,USR-106,The queue at Computer Lab 1 is unusually long during lunch.,2026-04-06 08:39,Canteen,Hygiene,Computer Lab 1,Food Services,Low,Individual,Open,,Web,True,False
+CMP-00499,USR-229,There has been no water supply in Block B - Hostel since since yesterday.,2026-04-06 13:28,Water & Sanitation,Water Pressure,Block B - Hostel,Facilities & Maintenance,High,Large Group,Resolved,INC-005,Web,True,True
+CMP-00680,USR-099,The computer systems in Campus Entrance are extremely slow.,2026-04-06 14:31,Classroom Equipment,Projector,Campus Entrance,Academic Infrastructure,Medium,Large Group,Closed,,Mobile,False,True
+CMP-00937,USR-196,The lights in Campus Entrance are flickering repeatedly.,2026-04-06 17:21,Electricity,Fan,Campus Entrance,Electrical Maintenance,Medium,Multiple Users,Open,,Mobile,True,False
+CMP-00701,USR-180,The washroom in Campus Entrance has not been cleaned properly.,2026-04-07 08:51,Cleaning,Washroom Cleaning,Campus Entrance,Housekeeping,Medium,Small Group,Closed,,Web,False,False
+CMP-00098,USR-199,The queue at Main Building is unusually long during lunch.,2026-04-07 14:29,Canteen,Seating,Main Building,Food Services,Low,Multiple Users,Assigned,,Mobile,True,False
+CMP-00533,USR-227,Waste bins near Sports Ground are overflowing.,2026-04-07 15:29,Cleaning,Waste Disposal,Sports Ground,Housekeeping,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00620,USR-032,The projector in Sports Ground is not displaying properly.,2026-04-07 21:38,Classroom Equipment,Projector,Sports Ground,Academic Infrastructure,Medium,Small Group,Closed,,Web,False,True
+CMP-00612,USR-127,Waste bins near CSE Block are overflowing.,2026-04-07 21:57,Cleaning,Washroom Cleaning,CSE Block,Housekeeping,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00645,USR-231,Waste bins near CSE Block are overflowing.,2026-04-08 08:11,Cleaning,Waste Disposal,CSE Block,Housekeeping,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00786,USR-023,Food served at Central Library was cold today.,2026-04-08 12:54,Canteen,Food Quality,Central Library,Food Services,Medium,Individual,Reopened,,Web,True,True
+CMP-00006,USR-069,Several systems in Computer Lab 1 cannot access the internet.,2026-04-08 12:59,Internet & Network,LAN,Computer Lab 1,IT Services,High,Multiple Users,Closed,,Web,False,False
+CMP-00988,USR-042,The door lock in Parking Area is damaged.,2026-04-08 13:35,Hostel,Furniture,Parking Area,Hostel Administration,High,Large Group,Open,,Web,True,False
+CMP-00531,USR-197,"Water pressure has been very low in Block C - Hostel, especially during afternoon.",2026-04-08 17:43,Water & Sanitation,Washroom,Block C - Hostel,Facilities & Maintenance,High,Multiple Users,Closed,,Web,True,True
+CMP-00462,USR-004,Food served at Main Building was cold today.,2026-04-08 18:45,Canteen,Payment,Main Building,Food Services,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00274,USR-167,The washroom in Block A - Hostel has not been cleaned properly.,2026-04-09 08:10,Cleaning,Waste Disposal,Block A - Hostel,Housekeeping,Medium,Small Group,Resolved,,Web,True,True
+CMP-00221,USR-165,Water is leaking near Main Building and the floor remains wet.,2026-04-09 09:46,Water & Sanitation,Water Pressure,Main Building,Facilities & Maintenance,Medium,Multiple Users,Assigned,INC-025,Mobile,True,False
+CMP-00286,USR-112,The network keeps disconnecting in Block B - Hostel.,2026-04-09 16:37,Internet & Network,Network Availability,Block B - Hostel,IT Services,High,Multiple Users,Assigned,INC-034,Mobile,False,False
+CMP-00204,USR-148,The pathway near Central Library is damaged and difficult to use.,2026-04-10 08:45,Infrastructure,Road,Central Library,Facilities & Maintenance,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00266,USR-029,Water is leaking near Block B - Hostel and the floor remains wet.,2026-04-10 16:25,Water & Sanitation,Drainage,Block B - Hostel,Facilities & Maintenance,Medium,Large Group,Closed,INC-034,Web,False,True
+CMP-00417,USR-043,There has been no water supply in Computer Lab 2 since for two days.,2026-04-10 16:48,Water & Sanitation,Drainage,Computer Lab 2,Facilities & Maintenance,High,Large Group,Assigned,INC-019,Web,False,False
+CMP-00551,USR-226,"Water pressure has been very low in Transport Bay, especially during 6 PM–10 PM.",2026-04-11 12:19,Water & Sanitation,Leakage,Transport Bay,Facilities & Maintenance,High,Multiple Users,Closed,INC-029,Web,True,False
+CMP-00200,USR-107,The furniture in ECE Block is broken and needs repair.,2026-04-11 15:49,Hostel,Laundry,ECE Block,Hostel Administration,Medium,Individual,Resolved,,Web,True,True
+CMP-00869,USR-032,Waste bins near Seminar Hall are overflowing.,2026-04-12 08:39,Cleaning,Room Cleaning,Seminar Hall,Housekeeping,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00607,USR-162,There is a power outage affecting Transport Bay.,2026-04-12 13:34,Electricity,Socket,Transport Bay,Electrical Maintenance,High,Multiple Users,Closed,,Web,True,True
+CMP-00131,USR-128,The queue at ECE Block is unusually long during lunch.,2026-04-12 13:41,Canteen,Queue,ECE Block,Food Services,Low,Individual,Open,,Mobile,True,False
+CMP-00262,USR-095,The washroom in Parking Area has not been cleaned properly.,2026-04-12 15:31,Cleaning,Common Area,Parking Area,Housekeeping,Medium,Large Group,Investigating,,Mobile,True,False
+CMP-00135,USR-116,Water is leaking near CSE Block and the floor remains wet.,2026-04-12 19:46,Water & Sanitation,Water Supply,CSE Block,Facilities & Maintenance,Medium,Large Group,Closed,INC-021,Web,False,True
+CMP-00104,USR-131,The queue at Block B - Hostel is unusually long during lunch.,2026-04-12 21:19,Canteen,Food Quality,Block B - Hostel,Food Services,Low,Multiple Users,Closed,,Web,False,False
+CMP-00145,USR-116,The projector in Block A - Hostel is not displaying properly.,2026-04-13 08:36,Classroom Equipment,Speaker,Block A - Hostel,Academic Infrastructure,Medium,Multiple Users,Open,,Mobile,False,False
+CMP-00690,USR-117,The projector in Canteen is not displaying properly.,2026-04-13 14:39,Classroom Equipment,Projector,Canteen,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00354,USR-056,The washroom in Block B - Hostel has not been cleaned properly.,2026-04-13 18:47,Cleaning,Waste Disposal,Block B - Hostel,Housekeeping,Medium,Small Group,Resolved,,Mobile,False,True
+CMP-00528,USR-060,The network keeps disconnecting in Central Library.,2026-04-13 19:37,Internet & Network,Wi-Fi,Central Library,IT Services,High,Large Group,Reopened,INC-026,Web,True,False
+CMP-00062,USR-189,The washroom in Campus Entrance has not been cleaned properly.,2026-04-14 12:32,Cleaning,Common Area,Campus Entrance,Housekeeping,Medium,Individual,Resolved,,Web,False,True
+CMP-00917,USR-046,The CCTV camera near Parking Area appears to be offline.,2026-04-14 12:35,Safety,CCTV,Parking Area,Security Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00571,USR-189,The computer systems in Parking Area are extremely slow.,2026-04-14 12:41,Classroom Equipment,Computer,Parking Area,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00836,USR-213,The computer systems in Block C - Hostel are extremely slow.,2026-04-14 18:00,Classroom Equipment,Microphone,Block C - Hostel,Academic Infrastructure,Medium,Individual,Open,,Web,False,False
+CMP-00236,USR-053,"Water pressure has been very low in Transport Bay, especially during afternoon.",2026-04-15 08:14,Water & Sanitation,Water Supply,Transport Bay,Facilities & Maintenance,High,Multiple Users,Closed,INC-020,Mobile,False,False
+CMP-00351,USR-225,The lights in Block C - Hostel are flickering repeatedly.,2026-04-15 16:06,Electricity,Lighting,Block C - Hostel,Electrical Maintenance,Medium,Multiple Users,Reopened,,Mobile,False,False
+CMP-00785,USR-110,The furniture in Central Library is broken and needs repair.,2026-04-16 13:22,Hostel,Food,Central Library,Hostel Administration,Medium,Individual,Closed,,Web,False,True
+CMP-00401,USR-044,The Wi-Fi connection in Canteen becomes very slow during afternoon.,2026-04-16 14:23,Internet & Network,Network Availability,Canteen,IT Services,Medium,Multiple Users,Assigned,,Web,True,False
+CMP-00307,USR-236,The network keeps disconnecting in Block C - Hostel.,2026-04-16 17:44,Internet & Network,Network Availability,Block C - Hostel,IT Services,High,Multiple Users,Investigating,,Mobile,False,False
+CMP-00227,USR-021,The queue at Parking Area is unusually long during lunch.,2026-04-17 14:44,Canteen,Seating,Parking Area,Food Services,Low,Small Group,Investigating,,Mobile,False,False
+CMP-00833,USR-140,The lights in Block C - Hostel are flickering repeatedly.,2026-04-17 16:12,Electricity,AC,Block C - Hostel,Electrical Maintenance,Medium,Individual,Assigned,,Mobile,True,False
+CMP-00315,USR-170,The queue at Block C - Hostel is unusually long during lunch.,2026-04-17 16:34,Canteen,Queue,Block C - Hostel,Food Services,Low,Multiple Users,Investigating,,Web,False,False
+CMP-00856,USR-027,The projector in Block B - Hostel is not displaying properly.,2026-04-17 17:47,Classroom Equipment,Projector,Block B - Hostel,Academic Infrastructure,Medium,Small Group,Investigating,,Web,True,False
+CMP-00955,USR-017,"Water pressure has been very low in Parking Area, especially during afternoon.",2026-04-17 18:08,Water & Sanitation,Water Pressure,Parking Area,Facilities & Maintenance,High,Large Group,Open,INC-021,Mobile,False,False
+CMP-00959,USR-034,The pathway near Central Library is damaged and difficult to use.,2026-04-17 20:01,Infrastructure,Lift,Central Library,Facilities & Maintenance,Medium,Small Group,Assigned,,Web,True,False
+CMP-00731,USR-129,The lights in Block B - Hostel are flickering repeatedly.,2026-04-18 15:35,Electricity,AC,Block B - Hostel,Electrical Maintenance,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00758,USR-061,There is a power outage affecting Central Library.,2026-04-18 16:31,Electricity,Power Outage,Central Library,Electrical Maintenance,High,Multiple Users,Resolved,INC-015,Web,True,True
+CMP-00207,USR-178,The queue at Central Library is unusually long during lunch.,2026-04-18 17:08,Canteen,Hygiene,Central Library,Food Services,Low,Small Group,Resolved,,Mobile,False,False
+CMP-00121,USR-062,There has been no water supply in Main Building since since yesterday.,2026-04-18 18:50,Water & Sanitation,Washroom,Main Building,Facilities & Maintenance,High,Large Group,Resolved,INC-033,Mobile,False,False
+CMP-00581,USR-052,The network keeps disconnecting in Computer Lab 1.,2026-04-19 08:07,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Large Group,Resolved,,Web,True,True
+CMP-00601,USR-144,Water is leaking near Block A - Hostel and the floor remains wet.,2026-04-19 10:30,Water & Sanitation,Washroom,Block A - Hostel,Facilities & Maintenance,Medium,Individual,Assigned,,Mobile,True,False
+CMP-00548,USR-137,There is a power outage affecting Transport Bay.,2026-04-19 11:09,Electricity,AC,Transport Bay,Electrical Maintenance,High,Large Group,Resolved,INC-004,Web,True,False
+CMP-00715,USR-183,The lights in Canteen are flickering repeatedly.,2026-04-19 19:09,Electricity,Fan,Canteen,Electrical Maintenance,Medium,Multiple Users,Reopened,,Web,False,False
+CMP-00561,USR-086,The computer systems in Campus Entrance are extremely slow.,2026-04-19 19:38,Classroom Equipment,Projector,Campus Entrance,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,True,False
+CMP-00573,USR-162,The door lock in Canteen is damaged.,2026-04-20 09:02,Hostel,Security,Canteen,Hostel Administration,High,Multiple Users,Reopened,,Mobile,True,False
+CMP-00906,USR-130,The computer systems in CSE Block are extremely slow.,2026-04-20 09:14,Classroom Equipment,Speaker,CSE Block,Academic Infrastructure,Medium,Large Group,Assigned,,Mobile,True,False
+CMP-00203,USR-102,Waste bins near Computer Lab 2 are overflowing.,2026-04-20 15:14,Cleaning,Common Area,Computer Lab 2,Housekeeping,Medium,Small Group,Resolved,,Web,False,False
+CMP-00675,USR-156,The queue at Block B - Hostel is unusually long during lunch.,2026-04-20 19:29,Canteen,Queue,Block B - Hostel,Food Services,Low,Small Group,Investigating,,Mobile,False,False
+CMP-00588,USR-197,Water is leaking near ECE Block and the floor remains wet.,2026-04-21 09:39,Water & Sanitation,Leakage,ECE Block,Facilities & Maintenance,Medium,Small Group,Resolved,,Web,False,True
+CMP-00075,USR-223,The projector in ECE Block is not displaying properly.,2026-04-21 10:15,Classroom Equipment,Speaker,ECE Block,Academic Infrastructure,Medium,Small Group,Investigating,,Web,False,False
+CMP-00777,USR-125,The computer systems in Parking Area are extremely slow.,2026-04-21 11:25,Classroom Equipment,Speaker,Parking Area,Academic Infrastructure,Medium,Multiple Users,Assigned,,Mobile,True,False
+CMP-00790,USR-241,Several systems in Seminar Hall cannot access the internet.,2026-04-21 11:35,Internet & Network,Internet Speed,Seminar Hall,IT Services,High,Multiple Users,Closed,,Web,False,False
+CMP-00828,USR-120,The CCTV camera near Block B - Hostel appears to be offline.,2026-04-21 20:29,Safety,Emergency Equipment,Block B - Hostel,Security Services,High,Multiple Users,Resolved,,Mobile,False,True
+CMP-00559,USR-203,The computer systems in Block C - Hostel are extremely slow.,2026-04-21 21:13,Classroom Equipment,Computer,Block C - Hostel,Academic Infrastructure,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00361,USR-229,There is a power outage affecting Computer Lab 2.,2026-04-21 21:24,Electricity,Fan,Computer Lab 2,Electrical Maintenance,High,Large Group,Closed,INC-032,Mobile,False,False
+CMP-00994,USR-024,"Water pressure has been very low in Seminar Hall, especially during afternoon.",2026-04-22 08:32,Water & Sanitation,Washroom,Seminar Hall,Facilities & Maintenance,High,Large Group,Resolved,,Mobile,True,True
+CMP-00031,USR-012,The Wi-Fi connection in Seminar Hall becomes very slow during afternoon.,2026-04-22 13:46,Internet & Network,Network Availability,Seminar Hall,IT Services,Medium,Individual,Assigned,,Web,True,False
+CMP-00545,USR-067,The campus bus has not arrived at Computer Lab 2 on time.,2026-04-22 14:41,Transport,Bus Delay,Computer Lab 2,Transport Services,Medium,Small Group,Investigating,,Web,False,False
+CMP-00402,USR-029,The CCTV camera near Block C - Hostel appears to be offline.,2026-04-23 08:59,Safety,Security,Block C - Hostel,Security Services,High,Multiple Users,Closed,,Web,False,True
+CMP-00150,USR-224,The fan is not working in Block A - Hostel.,2026-04-23 13:26,Electricity,AC,Block A - Hostel,Electrical Maintenance,Medium,Small Group,Resolved,,Web,False,True
+CMP-00263,USR-172,There has been no water supply in CSE Block since for three days.,2026-04-23 15:16,Water & Sanitation,Water Supply,CSE Block,Facilities & Maintenance,High,Multiple Users,Closed,,Web,True,True
+CMP-00257,USR-167,There has been no water supply in Central Library since since this morning.,2026-04-23 19:26,Water & Sanitation,Washroom,Central Library,Facilities & Maintenance,High,Large Group,Assigned,INC-031,Mobile,False,False
+CMP-00912,USR-192,Several systems in Main Building cannot access the internet.,2026-04-23 21:07,Internet & Network,Internet Speed,Main Building,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00289,USR-078,The Wi-Fi connection in Central Library becomes very slow during afternoon.,2026-04-24 14:07,Internet & Network,Wi-Fi,Central Library,IT Services,Medium,Small Group,Investigating,,Web,True,False
+CMP-00086,USR-016,The projector in Main Building is not displaying properly.,2026-04-24 15:15,Classroom Equipment,Microphone,Main Building,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00644,USR-111,Water is leaking near CSE Block and the floor remains wet.,2026-04-24 16:22,Water & Sanitation,Drainage,CSE Block,Facilities & Maintenance,Medium,Large Group,Resolved,INC-029,Web,False,False
+CMP-00154,USR-239,The projector in Transport Bay is not displaying properly.,2026-04-24 18:16,Classroom Equipment,Microphone,Transport Bay,Academic Infrastructure,Medium,Small Group,Closed,,Mobile,False,True
+CMP-00926,USR-086,The Wi-Fi connection in Block A - Hostel becomes very slow during 6 PM–10 PM.,2026-04-24 18:45,Internet & Network,Wi-Fi,Block A - Hostel,IT Services,Medium,Individual,Closed,INC-013,Web,False,False
+CMP-00412,USR-196,The door lock in CSE Block is damaged.,2026-04-24 19:59,Hostel,Room Maintenance,CSE Block,Hostel Administration,High,Multiple Users,Investigating,,Mobile,False,False
+CMP-00270,USR-049,The washroom in Campus Entrance has not been cleaned properly.,2026-04-24 20:52,Cleaning,Room Cleaning,Campus Entrance,Housekeeping,Medium,Large Group,Resolved,,Web,False,False
+CMP-01000,USR-024,The computer systems in Block A - Hostel are extremely slow.,2026-04-25 15:25,Classroom Equipment,Projector,Block A - Hostel,Academic Infrastructure,Medium,Large Group,Resolved,,Mobile,True,True
+CMP-00191,USR-004,Several systems in Central Library cannot access the internet.,2026-04-25 16:35,Internet & Network,LAN,Central Library,IT Services,High,Multiple Users,Assigned,INC-021,Web,True,False
+CMP-00676,USR-102,The washroom in Seminar Hall has not been cleaned properly.,2026-04-25 18:12,Cleaning,Waste Disposal,Seminar Hall,Housekeeping,Medium,Individual,Reopened,,Web,False,False
+CMP-00090,USR-118,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-04-25 20:23,Water & Sanitation,Leakage,Computer Lab 1,Facilities & Maintenance,Medium,Small Group,Reopened,INC-034,Web,True,False
+CMP-00419,USR-184,The door lock in ECE Block is damaged.,2026-04-26 08:11,Hostel,Furniture,ECE Block,Hostel Administration,High,Multiple Users,Investigating,,Web,True,False
+CMP-00420,USR-145,The Wi-Fi connection in Campus Entrance becomes very slow during 6 PM–10 PM.,2026-04-26 18:23,Internet & Network,Network Availability,Campus Entrance,IT Services,Medium,Small Group,Assigned,INC-011,Mobile,False,False
+CMP-00778,USR-016,The Wi-Fi connection in CSE Block becomes very slow during morning.,2026-04-27 08:34,Internet & Network,LAN,CSE Block,IT Services,Medium,Small Group,Resolved,INC-003,Web,True,False
+CMP-00065,USR-222,Food served at Block A - Hostel was cold today.,2026-04-27 09:20,Canteen,Payment,Block A - Hostel,Food Services,Medium,Individual,Reopened,,Mobile,True,False
+CMP-00140,USR-053,The computer systems in CSE Block are extremely slow.,2026-04-27 09:44,Classroom Equipment,Computer,CSE Block,Academic Infrastructure,Medium,Large Group,Resolved,,Web,False,False
+CMP-00166,USR-191,The queue at Central Library is unusually long during lunch.,2026-04-27 17:03,Canteen,Food Quality,Central Library,Food Services,Low,Individual,Assigned,,Mobile,True,False
+CMP-00814,USR-250,The washroom in Campus Entrance has not been cleaned properly.,2026-04-27 18:09,Cleaning,Common Area,Campus Entrance,Housekeeping,Medium,Small Group,Closed,,Web,False,False
+CMP-00205,USR-090,Waste bins near Main Building are overflowing.,2026-04-28 09:16,Cleaning,Room Cleaning,Main Building,Housekeeping,Medium,Large Group,Resolved,,Web,True,True
+CMP-00966,USR-165,The pathway near Computer Lab 1 is damaged and difficult to use.,2026-04-28 11:43,Infrastructure,Lift,Computer Lab 1,Facilities & Maintenance,Medium,Small Group,Reopened,,Web,False,True
+CMP-00004,USR-170,There has been no water supply in Campus Entrance since since yesterday.,2026-04-28 16:07,Water & Sanitation,Water Supply,Campus Entrance,Facilities & Maintenance,High,Large Group,Resolved,,Mobile,False,True
+CMP-00407,USR-191,The fan is not working in Computer Lab 2.,2026-04-28 16:59,Electricity,AC,Computer Lab 2,Electrical Maintenance,Medium,Small Group,Closed,INC-032,Mobile,True,False
+CMP-00956,USR-089,The CCTV camera near Sports Ground appears to be offline.,2026-04-28 17:26,Safety,CCTV,Sports Ground,Security Services,High,Multiple Users,Assigned,,Web,False,False
+CMP-00870,USR-105,Several systems in Computer Lab 1 cannot access the internet.,2026-04-29 08:28,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Large Group,Resolved,,Web,True,False
+CMP-00174,USR-217,The network keeps disconnecting in Parking Area.,2026-04-29 08:35,Internet & Network,LAN,Parking Area,IT Services,High,Large Group,Investigating,INC-006,Web,True,False
+CMP-00929,USR-161,The pathway near Transport Bay is damaged and difficult to use.,2026-04-29 09:07,Infrastructure,Lift,Transport Bay,Facilities & Maintenance,Medium,Individual,Investigating,,Web,False,False
+CMP-00642,USR-164,The campus bus has not arrived at Computer Lab 2 on time.,2026-04-29 10:20,Transport,Driver,Computer Lab 2,Transport Services,Medium,Large Group,Resolved,,Mobile,True,True
+CMP-00116,USR-036,The pathway near Computer Lab 1 is damaged and difficult to use.,2026-04-29 20:18,Infrastructure,Lift,Computer Lab 1,Facilities & Maintenance,Medium,Small Group,Closed,,Web,True,False
+CMP-00934,USR-145,The lights in Main Building are flickering repeatedly.,2026-04-30 12:02,Electricity,Lighting,Main Building,Electrical Maintenance,Medium,Large Group,Investigating,,Web,True,False
+CMP-00490,USR-148,The Wi-Fi connection in Sports Ground becomes very slow during morning.,2026-04-30 15:26,Internet & Network,Internet Speed,Sports Ground,IT Services,Medium,Small Group,Closed,,Mobile,False,True
+CMP-00936,USR-188,The washroom in Block C - Hostel has not been cleaned properly.,2026-04-30 16:11,Cleaning,Common Area,Block C - Hostel,Housekeeping,Medium,Large Group,Resolved,,Web,True,True
+CMP-00016,USR-064,The door lock in Central Library is damaged.,2026-04-30 21:46,Hostel,Room Maintenance,Central Library,Hostel Administration,High,Large Group,Closed,,Mobile,False,False
+CMP-00123,USR-202,The computer systems in Sports Ground are extremely slow.,2026-05-01 08:40,Classroom Equipment,Microphone,Sports Ground,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00915,USR-153,Several systems in Block C - Hostel cannot access the internet.,2026-05-01 09:00,Internet & Network,LAN,Block C - Hostel,IT Services,High,Multiple Users,Resolved,INC-004,Mobile,True,False
+CMP-00064,USR-106,The campus bus has not arrived at Block B - Hostel on time.,2026-05-01 13:26,Transport,Bus Condition,Block B - Hostel,Transport Services,Medium,Individual,Closed,,Web,False,False
+CMP-00941,USR-181,The projector in Block B - Hostel is not displaying properly.,2026-05-01 16:43,Classroom Equipment,Computer,Block B - Hostel,Academic Infrastructure,Medium,Large Group,Resolved,,Mobile,True,False
+CMP-00603,USR-147,The fan is not working in Computer Lab 1.,2026-05-02 08:47,Electricity,Lighting,Computer Lab 1,Electrical Maintenance,Medium,Individual,Resolved,INC-008,Web,True,True
+CMP-00584,USR-121,The door lock in Transport Bay is damaged.,2026-05-02 09:31,Hostel,Furniture,Transport Bay,Hostel Administration,High,Multiple Users,Investigating,,Web,True,False
+CMP-00549,USR-211,Food served at Central Library was cold today.,2026-05-02 18:15,Canteen,Seating,Central Library,Food Services,Medium,Multiple Users,Resolved,,Web,True,True
+CMP-00507,USR-092,The Wi-Fi connection in Campus Entrance becomes very slow during 6 PM–10 PM.,2026-05-03 08:08,Internet & Network,LAN,Campus Entrance,IT Services,Medium,Individual,Resolved,,Web,False,True
+CMP-00493,USR-193,The queue at Central Library is unusually long during lunch.,2026-05-03 20:51,Canteen,Hygiene,Central Library,Food Services,Low,Large Group,Investigating,,Web,True,False
+CMP-00555,USR-205,Waste bins near Computer Lab 1 are overflowing.,2026-05-03 21:47,Cleaning,Waste Disposal,Computer Lab 1,Housekeeping,Medium,Small Group,Closed,,Web,False,True
+CMP-00858,USR-232,"Water pressure has been very low in Computer Lab 2, especially during evening.",2026-05-04 08:24,Water & Sanitation,Washroom,Computer Lab 2,Facilities & Maintenance,High,Large Group,Resolved,INC-008,Web,False,True
+CMP-00396,USR-021,Waste bins near Parking Area are overflowing.,2026-05-04 10:31,Cleaning,Common Area,Parking Area,Housekeeping,Medium,Individual,Closed,,Web,False,False
+CMP-00840,USR-111,The washroom in Central Library has not been cleaned properly.,2026-05-04 10:52,Cleaning,Room Cleaning,Central Library,Housekeeping,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00445,USR-146,Food served at Block C - Hostel was cold today.,2026-05-04 14:04,Canteen,Payment,Block C - Hostel,Food Services,Medium,Large Group,Closed,,Web,False,True
+CMP-00781,USR-100,The projector in Central Library is not displaying properly.,2026-05-04 15:34,Classroom Equipment,Speaker,Central Library,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00911,USR-033,The furniture in Campus Entrance is broken and needs repair.,2026-05-04 16:35,Hostel,Food,Campus Entrance,Hostel Administration,Medium,Large Group,Closed,,Web,False,True
+CMP-00694,USR-028,The furniture in Block B - Hostel is broken and needs repair.,2026-05-04 18:34,Hostel,Room Maintenance,Block B - Hostel,Hostel Administration,Medium,Small Group,Investigating,,Web,True,False
+CMP-00455,USR-063,The Wi-Fi connection in Seminar Hall becomes very slow during morning.,2026-05-04 19:05,Internet & Network,Wi-Fi,Seminar Hall,IT Services,Medium,Large Group,Resolved,,Web,True,False
+CMP-00352,USR-124,The computer systems in Seminar Hall are extremely slow.,2026-05-04 20:15,Classroom Equipment,Projector,Seminar Hall,Academic Infrastructure,Medium,Large Group,Closed,,Web,False,True
+CMP-00521,USR-121,"Water pressure has been very low in Parking Area, especially during 6 PM–10 PM.",2026-05-04 20:27,Water & Sanitation,Water Supply,Parking Area,Facilities & Maintenance,High,Multiple Users,Closed,,Web,False,True
+CMP-00488,USR-046,The campus bus has not arrived at Seminar Hall on time.,2026-05-05 08:56,Transport,Driver,Seminar Hall,Transport Services,Medium,Small Group,Closed,,Web,False,True
+CMP-00113,USR-130,Waste bins near Parking Area are overflowing.,2026-05-05 11:14,Cleaning,Room Cleaning,Parking Area,Housekeeping,Medium,Individual,Assigned,,Mobile,True,False
+CMP-00015,USR-025,The lights in Canteen are flickering repeatedly.,2026-05-05 11:34,Electricity,Fan,Canteen,Electrical Maintenance,Medium,Small Group,Closed,,Web,True,False
+CMP-00018,USR-109,Several systems in Central Library cannot access the internet.,2026-05-05 15:13,Internet & Network,Network Availability,Central Library,IT Services,High,Large Group,Open,INC-030,Mobile,True,False
+CMP-00546,USR-230,There has been no water supply in Campus Entrance since since yesterday.,2026-05-05 20:01,Water & Sanitation,Drainage,Campus Entrance,Facilities & Maintenance,High,Large Group,Closed,,Web,True,False
+CMP-00209,USR-075,The door lock in Canteen is damaged.,2026-05-06 14:45,Hostel,Furniture,Canteen,Hostel Administration,High,Multiple Users,Resolved,,Web,False,True
+CMP-00713,USR-246,The network keeps disconnecting in Seminar Hall.,2026-05-06 19:20,Internet & Network,Internet Speed,Seminar Hall,IT Services,High,Multiple Users,Investigating,INC-020,Mobile,False,False
+CMP-00865,USR-048,The CCTV camera near Central Library appears to be offline.,2026-05-07 08:55,Safety,Lighting,Central Library,Security Services,High,Multiple Users,Investigating,,Web,True,False
+CMP-00051,USR-088,Waste bins near Block A - Hostel are overflowing.,2026-05-07 21:20,Cleaning,Waste Disposal,Block A - Hostel,Housekeeping,Medium,Small Group,Assigned,,Web,False,False
+CMP-00434,USR-201,The door lock in Block B - Hostel is damaged.,2026-05-08 11:23,Hostel,Laundry,Block B - Hostel,Hostel Administration,High,Large Group,Investigating,,Web,False,False
+CMP-00007,USR-068,The fan is not working in Canteen.,2026-05-08 14:56,Electricity,Socket,Canteen,Electrical Maintenance,Medium,Multiple Users,Investigating,,Mobile,True,False
+CMP-00532,USR-111,The washroom in Canteen has not been cleaned properly.,2026-05-08 15:32,Cleaning,Room Cleaning,Canteen,Housekeeping,Medium,Individual,Reopened,,Web,True,False
+CMP-00602,USR-183,The lights in Seminar Hall are flickering repeatedly.,2026-05-08 18:27,Electricity,AC,Seminar Hall,Electrical Maintenance,Medium,Large Group,Closed,INC-009,Web,False,True
+CMP-00127,USR-111,Waste bins near Block C - Hostel are overflowing.,2026-05-08 19:31,Cleaning,Room Cleaning,Block C - Hostel,Housekeeping,Medium,Individual,Closed,,Mobile,False,False
+CMP-00422,USR-114,"Water pressure has been very low in Computer Lab 1, especially during 6 PM–10 PM.",2026-05-08 21:31,Water & Sanitation,Drainage,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Resolved,,Web,True,True
+CMP-00331,USR-145,The computer systems in ECE Block are extremely slow.,2026-05-09 08:42,Classroom Equipment,Smart Board,ECE Block,Academic Infrastructure,Medium,Small Group,Resolved,,Mobile,False,False
+CMP-00920,USR-091,Waste bins near CSE Block are overflowing.,2026-05-09 20:07,Cleaning,Common Area,CSE Block,Housekeeping,Medium,Large Group,Closed,,Web,False,True
+CMP-00435,USR-080,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-05-10 08:51,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,Medium,Small Group,Assigned,,Web,False,False
+CMP-00238,USR-061,The pathway near Block B - Hostel is damaged and difficult to use.,2026-05-10 10:40,Infrastructure,Furniture,Block B - Hostel,Facilities & Maintenance,Medium,Individual,Resolved,,Web,False,False
+CMP-00898,USR-106,The washroom in CSE Block has not been cleaned properly.,2026-05-10 11:56,Cleaning,Waste Disposal,CSE Block,Housekeeping,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00677,USR-110,The furniture in Central Library is broken and needs repair.,2026-05-10 17:47,Hostel,Food,Central Library,Hostel Administration,Medium,Large Group,Open,,Web,False,False
+CMP-00232,USR-239,There is a power outage affecting Campus Entrance.,2026-05-11 08:02,Electricity,Fan,Campus Entrance,Electrical Maintenance,High,Large Group,Assigned,,Web,True,False
+CMP-00339,USR-028,The CCTV camera near Canteen appears to be offline.,2026-05-11 12:10,Safety,Emergency Equipment,Canteen,Security Services,High,Multiple Users,Assigned,,Web,False,False
+CMP-00736,USR-242,The campus bus has not arrived at Block A - Hostel on time.,2026-05-11 14:41,Transport,Bus Condition,Block A - Hostel,Transport Services,Medium,Individual,Investigating,,Web,True,False
+CMP-00030,USR-046,The projector in Canteen is not displaying properly.,2026-05-11 14:43,Classroom Equipment,Microphone,Canteen,Academic Infrastructure,Medium,Individual,Closed,,Mobile,False,True
+CMP-00973,USR-151,The projector in Campus Entrance is not displaying properly.,2026-05-11 19:55,Classroom Equipment,Smart Board,Campus Entrance,Academic Infrastructure,Medium,Small Group,Reopened,,Mobile,False,False
+CMP-00313,USR-002,Several systems in Campus Entrance cannot access the internet.,2026-05-12 09:24,Internet & Network,Network Availability,Campus Entrance,IT Services,High,Large Group,Investigating,,Web,True,False
+CMP-00052,USR-177,Food served at Block A - Hostel was cold today.,2026-05-13 11:05,Canteen,Queue,Block A - Hostel,Food Services,Medium,Large Group,Resolved,,Web,True,False
+CMP-00887,USR-113,The fan is not working in Central Library.,2026-05-13 12:36,Electricity,AC,Central Library,Electrical Maintenance,Medium,Multiple Users,Assigned,INC-018,Mobile,False,False
+CMP-00825,USR-092,The lights in Canteen are flickering repeatedly.,2026-05-13 19:40,Electricity,Fan,Canteen,Electrical Maintenance,Medium,Large Group,Closed,,Web,True,True
+CMP-00271,USR-035,The campus bus has not arrived at Parking Area on time.,2026-05-13 21:23,Transport,Driver,Parking Area,Transport Services,Medium,Individual,Assigned,,Mobile,True,False
+CMP-00971,USR-122,The network keeps disconnecting in Block C - Hostel.,2026-05-14 12:01,Internet & Network,Network Availability,Block C - Hostel,IT Services,High,Large Group,Assigned,,Web,False,False
+CMP-00303,USR-028,The washroom in Computer Lab 2 has not been cleaned properly.,2026-05-14 13:44,Cleaning,Common Area,Computer Lab 2,Housekeeping,Medium,Small Group,Resolved,,Web,False,True
+CMP-00021,USR-034,The pathway near Seminar Hall is damaged and difficult to use.,2026-05-14 13:59,Infrastructure,Lighting,Seminar Hall,Facilities & Maintenance,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00165,USR-208,Waste bins near Sports Ground are overflowing.,2026-05-14 15:07,Cleaning,Common Area,Sports Ground,Housekeeping,Medium,Individual,Closed,,Web,True,True
+CMP-00491,USR-189,The door lock in Sports Ground is damaged.,2026-05-14 15:55,Hostel,Food,Sports Ground,Hostel Administration,High,Large Group,Open,,Mobile,False,False
+CMP-00502,USR-114,There is a power outage affecting Sports Ground.,2026-05-14 18:21,Electricity,Socket,Sports Ground,Electrical Maintenance,High,Large Group,Resolved,,Web,False,True
+CMP-00183,USR-145,The fan is not working in Seminar Hall.,2026-05-15 12:52,Electricity,AC,Seminar Hall,Electrical Maintenance,Medium,Large Group,Open,,Mobile,False,False
+CMP-00610,USR-197,"Water pressure has been very low in Sports Ground, especially during afternoon.",2026-05-16 13:24,Water & Sanitation,Leakage,Sports Ground,Facilities & Maintenance,High,Multiple Users,Resolved,INC-012,Web,False,False
+CMP-00305,USR-188,The campus bus has not arrived at Block A - Hostel on time.,2026-05-16 19:03,Transport,Bus Availability,Block A - Hostel,Transport Services,Medium,Small Group,Closed,,Mobile,True,False
+CMP-00578,USR-223,The Wi-Fi connection in Central Library becomes very slow during evening.,2026-05-17 08:00,Internet & Network,LAN,Central Library,IT Services,Medium,Individual,Investigating,,Mobile,True,False
+CMP-00285,USR-178,"Water pressure has been very low in Block A - Hostel, especially during afternoon.",2026-05-17 11:46,Water & Sanitation,Water Pressure,Block A - Hostel,Facilities & Maintenance,High,Multiple Users,Open,INC-016,Web,False,False
+CMP-00102,USR-221,The network keeps disconnecting in Central Library.,2026-05-17 19:14,Internet & Network,Wi-Fi,Central Library,IT Services,High,Multiple Users,Resolved,,Web,True,False
+CMP-00085,USR-158,There is a power outage affecting Transport Bay.,2026-05-18 10:24,Electricity,AC,Transport Bay,Electrical Maintenance,High,Multiple Users,Closed,,Web,False,True
+CMP-00979,USR-022,The furniture in Block B - Hostel is broken and needs repair.,2026-05-18 20:03,Hostel,Food,Block B - Hostel,Hostel Administration,Medium,Small Group,Resolved,,Web,False,True
+CMP-00699,USR-175,The computer systems in Block A - Hostel are extremely slow.,2026-05-18 21:29,Classroom Equipment,Computer,Block A - Hostel,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00498,USR-129,Waste bins near Main Building are overflowing.,2026-05-19 09:41,Cleaning,Waste Disposal,Main Building,Housekeeping,Medium,Small Group,Assigned,,Web,False,False
+CMP-00597,USR-062,The network keeps disconnecting in Computer Lab 2.,2026-05-19 12:13,Internet & Network,Network Availability,Computer Lab 2,IT Services,High,Multiple Users,Open,,Web,True,False
+CMP-00608,USR-247,The fan is not working in Seminar Hall.,2026-05-19 17:48,Electricity,Fan,Seminar Hall,Electrical Maintenance,Medium,Large Group,Resolved,INC-035,Web,False,True
+CMP-00384,USR-071,Food served at CSE Block was cold today.,2026-05-19 19:31,Canteen,Payment,CSE Block,Food Services,Medium,Multiple Users,Assigned,,Mobile,False,False
+CMP-00866,USR-194,The washroom in Block A - Hostel has not been cleaned properly.,2026-05-19 20:22,Cleaning,Washroom Cleaning,Block A - Hostel,Housekeeping,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00013,USR-231,The fan is not working in Transport Bay.,2026-05-19 20:46,Electricity,AC,Transport Bay,Electrical Maintenance,Medium,Large Group,Reopened,,Mobile,True,True
+CMP-00451,USR-216,The computer systems in Central Library are extremely slow.,2026-05-20 11:42,Classroom Equipment,Computer,Central Library,Academic Infrastructure,Medium,Small Group,Investigating,,Web,True,False
+CMP-00343,USR-168,The CCTV camera near Transport Bay appears to be offline.,2026-05-20 14:16,Safety,Lighting,Transport Bay,Security Services,High,Multiple Users,Resolved,,Mobile,False,False
+CMP-00180,USR-182,The network keeps disconnecting in Campus Entrance.,2026-05-20 15:11,Internet & Network,Wi-Fi,Campus Entrance,IT Services,High,Multiple Users,Closed,INC-015,Mobile,True,True
+CMP-00596,USR-010,The fan is not working in Transport Bay.,2026-05-20 17:50,Electricity,Power Outage,Transport Bay,Electrical Maintenance,Medium,Large Group,Closed,,Mobile,False,False
+CMP-00575,USR-170,The pathway near Block A - Hostel is damaged and difficult to use.,2026-05-22 09:58,Infrastructure,Lighting,Block A - Hostel,Facilities & Maintenance,Medium,Large Group,Resolved,,Mobile,False,False
+CMP-00024,USR-130,The Wi-Fi connection in Campus Entrance becomes very slow during afternoon.,2026-05-22 10:17,Internet & Network,Network Availability,Campus Entrance,IT Services,Medium,Multiple Users,Investigating,,Web,False,False
+CMP-00767,USR-145,The washroom in Main Building has not been cleaned properly.,2026-05-22 11:40,Cleaning,Room Cleaning,Main Building,Housekeeping,Medium,Multiple Users,Open,,Web,True,False
+CMP-00862,USR-027,The projector in Parking Area is not displaying properly.,2026-05-22 12:55,Classroom Equipment,Speaker,Parking Area,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00883,USR-152,The computer systems in Campus Entrance are extremely slow.,2026-05-23 11:45,Classroom Equipment,Microphone,Campus Entrance,Academic Infrastructure,Medium,Multiple Users,Closed,,Mobile,True,True
+CMP-00096,USR-158,The projector in Sports Ground is not displaying properly.,2026-05-23 13:07,Classroom Equipment,Speaker,Sports Ground,Academic Infrastructure,Medium,Large Group,Closed,,Mobile,True,False
+CMP-00759,USR-076,"Water pressure has been very low in ECE Block, especially during 6 PM–10 PM.",2026-05-23 15:08,Water & Sanitation,Water Pressure,ECE Block,Facilities & Maintenance,High,Large Group,Closed,,Web,False,False
+CMP-00345,USR-089,Food served at Parking Area was cold today.,2026-05-23 15:11,Canteen,Hygiene,Parking Area,Food Services,Medium,Multiple Users,Reopened,,Web,False,True
+CMP-00614,USR-201,There is a power outage affecting Parking Area.,2026-05-23 18:50,Electricity,Fan,Parking Area,Electrical Maintenance,High,Large Group,Open,,Mobile,False,False
+CMP-00982,USR-127,The lights in Canteen are flickering repeatedly.,2026-05-24 16:19,Electricity,AC,Canteen,Electrical Maintenance,Medium,Small Group,Resolved,INC-033,Mobile,False,True
+CMP-00505,USR-032,Several systems in Main Building cannot access the internet.,2026-05-24 19:02,Internet & Network,Network Availability,Main Building,IT Services,High,Large Group,Resolved,,Web,True,False
+CMP-00362,USR-056,The washroom in CSE Block has not been cleaned properly.,2026-05-24 21:36,Cleaning,Room Cleaning,CSE Block,Housekeeping,Medium,Individual,Closed,,Web,True,True
+CMP-00931,USR-179,The lights in Block C - Hostel are flickering repeatedly.,2026-05-25 13:26,Electricity,Lighting,Block C - Hostel,Electrical Maintenance,Medium,Multiple Users,Closed,INC-019,Web,False,True
+CMP-00334,USR-250,The pathway near Computer Lab 2 is damaged and difficult to use.,2026-05-26 10:24,Infrastructure,Lighting,Computer Lab 2,Facilities & Maintenance,Medium,Individual,Resolved,,Mobile,True,False
+CMP-00653,USR-212,The Wi-Fi connection in ECE Block becomes very slow during afternoon.,2026-05-26 15:40,Internet & Network,Wi-Fi,ECE Block,IT Services,Medium,Small Group,Open,,Mobile,True,False
+CMP-00977,USR-011,There has been no water supply in Computer Lab 1 since for three days.,2026-05-26 16:15,Water & Sanitation,Water Pressure,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Investigating,,Mobile,False,False
+CMP-00473,USR-094,The campus bus has not arrived at Block B - Hostel on time.,2026-05-26 16:59,Transport,Bus Delay,Block B - Hostel,Transport Services,Medium,Multiple Users,Resolved,,Mobile,False,True
+CMP-00720,USR-129,The network keeps disconnecting in Central Library.,2026-05-26 19:17,Internet & Network,LAN,Central Library,IT Services,High,Large Group,Closed,INC-023,Web,False,False
+CMP-00078,USR-234,There is a power outage affecting Central Library.,2026-05-27 13:36,Electricity,Power Outage,Central Library,Electrical Maintenance,High,Large Group,Investigating,,Mobile,True,False
+CMP-00538,USR-087,Waste bins near Central Library are overflowing.,2026-05-27 14:20,Cleaning,Washroom Cleaning,Central Library,Housekeeping,Medium,Individual,Closed,,Web,False,True
+CMP-00300,USR-191,The furniture in Parking Area is broken and needs repair.,2026-05-27 15:05,Hostel,Food,Parking Area,Hostel Administration,Medium,Multiple Users,Open,,Web,True,False
+CMP-00153,USR-075,The washroom in Block B - Hostel has not been cleaned properly.,2026-05-27 18:34,Cleaning,Washroom Cleaning,Block B - Hostel,Housekeeping,Medium,Multiple Users,Reopened,,Web,False,True
+CMP-00881,USR-108,The queue at Block C - Hostel is unusually long during lunch.,2026-05-28 15:40,Canteen,Food Quality,Block C - Hostel,Food Services,Low,Large Group,Open,,Web,True,False
+CMP-00946,USR-109,Waste bins near Block C - Hostel are overflowing.,2026-05-28 16:24,Cleaning,Common Area,Block C - Hostel,Housekeeping,Medium,Large Group,Resolved,,Web,False,False
+CMP-00650,USR-087,The projector in Block C - Hostel is not displaying properly.,2026-05-28 21:08,Classroom Equipment,Microphone,Block C - Hostel,Academic Infrastructure,Medium,Large Group,Closed,,Mobile,True,False
+CMP-00563,USR-023,Food served at Block A - Hostel was cold today.,2026-05-29 10:16,Canteen,Queue,Block A - Hostel,Food Services,Medium,Multiple Users,Closed,,Web,True,True
+CMP-00492,USR-121,Waste bins near Central Library are overflowing.,2026-05-29 11:57,Cleaning,Room Cleaning,Central Library,Housekeeping,Medium,Large Group,Reopened,,Mobile,True,False
+CMP-00932,USR-040,The campus bus has not arrived at ECE Block on time.,2026-05-29 13:22,Transport,Driver,ECE Block,Transport Services,Medium,Individual,Reopened,,Mobile,False,False
+CMP-00080,USR-045,The furniture in Block A - Hostel is broken and needs repair.,2026-05-29 13:46,Hostel,Food,Block A - Hostel,Hostel Administration,Medium,Multiple Users,Assigned,,Mobile,False,False
+CMP-00124,USR-179,The Wi-Fi connection in Parking Area becomes very slow during afternoon.,2026-05-29 19:48,Internet & Network,LAN,Parking Area,IT Services,Medium,Individual,Assigned,INC-012,Web,False,False
+CMP-00449,USR-248,The projector in Block B - Hostel is not displaying properly.,2026-05-30 08:39,Classroom Equipment,Speaker,Block B - Hostel,Academic Infrastructure,Medium,Multiple Users,Open,,Web,True,False
+CMP-00076,USR-231,The campus bus has not arrived at Transport Bay on time.,2026-05-30 10:14,Transport,Bus Delay,Transport Bay,Transport Services,Medium,Large Group,Investigating,,Web,False,False
+CMP-00092,USR-026,The CCTV camera near Canteen appears to be offline.,2026-05-30 16:45,Safety,Lighting,Canteen,Security Services,High,Large Group,Resolved,,Web,False,False
+CMP-00710,USR-178,The queue at Sports Ground is unusually long during lunch.,2026-05-30 16:45,Canteen,Hygiene,Sports Ground,Food Services,Low,Individual,Investigating,,Mobile,True,False
+CMP-00267,USR-225,The pathway near Seminar Hall is damaged and difficult to use.,2026-05-30 20:06,Infrastructure,Building Damage,Seminar Hall,Facilities & Maintenance,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00800,USR-111,The computer systems in Block B - Hostel are extremely slow.,2026-05-30 20:49,Classroom Equipment,Computer,Block B - Hostel,Academic Infrastructure,Medium,Small Group,Reopened,,Web,True,False
+CMP-00136,USR-040,Food served at Canteen was cold today.,2026-05-31 10:49,Canteen,Hygiene,Canteen,Food Services,Medium,Individual,Closed,,Web,False,True
+CMP-00244,USR-024,Water is leaking near Seminar Hall and the floor remains wet.,2026-05-31 12:58,Water & Sanitation,Water Pressure,Seminar Hall,Facilities & Maintenance,Medium,Individual,Investigating,,Web,True,False
+CMP-00802,USR-110,The queue at CSE Block is unusually long during lunch.,2026-05-31 14:18,Canteen,Seating,CSE Block,Food Services,Low,Individual,Open,,Mobile,False,False
+CMP-00250,USR-139,The projector in Transport Bay is not displaying properly.,2026-06-01 08:45,Classroom Equipment,Computer,Transport Bay,Academic Infrastructure,Medium,Small Group,Closed,,Web,False,False
+CMP-00806,USR-034,The CCTV camera near ECE Block appears to be offline.,2026-06-01 14:15,Safety,CCTV,ECE Block,Security Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00698,USR-134,The washroom in Block A - Hostel has not been cleaned properly.,2026-06-01 16:12,Cleaning,Washroom Cleaning,Block A - Hostel,Housekeeping,Medium,Multiple Users,Closed,,Mobile,False,True
+CMP-00225,USR-094,The campus bus has not arrived at Canteen on time.,2026-06-02 09:33,Transport,Driver,Canteen,Transport Services,Medium,Multiple Users,Investigating,,Mobile,False,False
+CMP-00009,USR-193,The computer systems in Central Library are extremely slow.,2026-06-02 15:33,Classroom Equipment,Speaker,Central Library,Academic Infrastructure,Medium,Individual,Closed,,Web,False,True
+CMP-00108,USR-083,Water is leaking near Seminar Hall and the floor remains wet.,2026-06-02 16:24,Water & Sanitation,Water Pressure,Seminar Hall,Facilities & Maintenance,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00761,USR-020,The campus bus has not arrived at Sports Ground on time.,2026-06-02 21:10,Transport,Bus Availability,Sports Ground,Transport Services,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00144,USR-035,The washroom in Computer Lab 1 has not been cleaned properly.,2026-06-02 21:41,Cleaning,Common Area,Computer Lab 1,Housekeeping,Medium,Individual,Closed,,Web,False,False
+CMP-00961,USR-127,The door lock in Transport Bay is damaged.,2026-06-03 12:20,Hostel,Food,Transport Bay,Hostel Administration,High,Large Group,Investigating,,Web,False,False
+CMP-00198,USR-164,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-06-03 15:37,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,Medium,Individual,Closed,INC-035,Web,True,True
+CMP-00069,USR-240,The fan is not working in Transport Bay.,2026-06-03 16:47,Electricity,Lighting,Transport Bay,Electrical Maintenance,Medium,Multiple Users,Closed,,Mobile,False,True
+CMP-00949,USR-076,There has been no water supply in Transport Bay since since this morning.,2026-06-03 18:23,Water & Sanitation,Water Pressure,Transport Bay,Facilities & Maintenance,High,Large Group,Closed,INC-018,Web,True,True
+CMP-00467,USR-164,Water is leaking near Sports Ground and the floor remains wet.,2026-06-04 10:24,Water & Sanitation,Water Supply,Sports Ground,Facilities & Maintenance,Medium,Small Group,Investigating,,Web,False,False
+CMP-00424,USR-042,The pathway near Sports Ground is damaged and difficult to use.,2026-06-04 12:21,Infrastructure,Furniture,Sports Ground,Facilities & Maintenance,Medium,Individual,Resolved,,Web,False,False
+CMP-00656,USR-115,The campus bus has not arrived at Block C - Hostel on time.,2026-06-04 17:19,Transport,Bus Availability,Block C - Hostel,Transport Services,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00195,USR-075,The washroom in ECE Block has not been cleaned properly.,2026-06-04 19:12,Cleaning,Waste Disposal,ECE Block,Housekeeping,Medium,Small Group,Reopened,,Web,False,False
+CMP-00993,USR-213,The lights in CSE Block are flickering repeatedly.,2026-06-04 19:59,Electricity,Power Outage,CSE Block,Electrical Maintenance,Medium,Individual,Resolved,INC-032,Mobile,True,False
+CMP-00766,USR-055,Water is leaking near ECE Block and the floor remains wet.,2026-06-04 20:54,Water & Sanitation,Water Supply,ECE Block,Facilities & Maintenance,Medium,Small Group,Assigned,,Mobile,True,False
+CMP-00291,USR-042,The campus bus has not arrived at Main Building on time.,2026-06-05 11:49,Transport,Bus Condition,Main Building,Transport Services,Medium,Multiple Users,Closed,,Web,True,True
+CMP-00268,USR-010,The campus bus has not arrived at Seminar Hall on time.,2026-06-05 15:02,Transport,Driver,Seminar Hall,Transport Services,Medium,Large Group,Investigating,,Web,False,False
+CMP-00952,USR-103,There has been no water supply in Block C - Hostel since since this morning.,2026-06-05 19:40,Water & Sanitation,Drainage,Block C - Hostel,Facilities & Maintenance,High,Large Group,Closed,,Web,False,False
+CMP-00905,USR-068,The fan is not working in Sports Ground.,2026-06-05 21:19,Electricity,Power Outage,Sports Ground,Electrical Maintenance,Medium,Individual,Assigned,,Mobile,True,False
+CMP-00146,USR-194,The CCTV camera near Canteen appears to be offline.,2026-06-06 09:08,Safety,CCTV,Canteen,Security Services,High,Large Group,Resolved,,Mobile,False,False
+CMP-00964,USR-142,"Water pressure has been very low in ECE Block, especially during evening.",2026-06-06 11:10,Water & Sanitation,Drainage,ECE Block,Facilities & Maintenance,High,Multiple Users,Closed,,Mobile,False,True
+CMP-00413,USR-035,The CCTV camera near Seminar Hall appears to be offline.,2026-06-06 11:38,Safety,Lighting,Seminar Hall,Security Services,High,Large Group,Open,,Mobile,True,False
+CMP-00429,USR-164,The fan is not working in Parking Area.,2026-06-07 14:26,Electricity,Power Outage,Parking Area,Electrical Maintenance,Medium,Multiple Users,Resolved,,Mobile,False,False
+CMP-00206,USR-047,The washroom in Transport Bay has not been cleaned properly.,2026-06-07 17:05,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Individual,Investigating,,Web,False,False
+CMP-00148,USR-107,Several systems in Central Library cannot access the internet.,2026-06-07 19:53,Internet & Network,Wi-Fi,Central Library,IT Services,High,Large Group,Resolved,INC-022,Mobile,False,True
+CMP-00560,USR-250,The lights in Main Building are flickering repeatedly.,2026-06-08 15:58,Electricity,Lighting,Main Building,Electrical Maintenance,Medium,Large Group,Open,,Web,False,False
+CMP-00423,USR-010,Food served at CSE Block was cold today.,2026-06-08 18:35,Canteen,Seating,CSE Block,Food Services,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00875,USR-028,The campus bus has not arrived at CSE Block on time.,2026-06-09 08:10,Transport,Bus Delay,CSE Block,Transport Services,Medium,Multiple Users,Reopened,,Mobile,False,False
+CMP-00375,USR-249,The lights in Campus Entrance are flickering repeatedly.,2026-06-09 15:12,Electricity,Fan,Campus Entrance,Electrical Maintenance,Medium,Small Group,Open,,Web,False,False
+CMP-00290,USR-031,The queue at CSE Block is unusually long during lunch.,2026-06-09 17:44,Canteen,Hygiene,CSE Block,Food Services,Low,Individual,Resolved,,Web,True,True
+CMP-00073,USR-224,The lights in ECE Block are flickering repeatedly.,2026-06-09 19:25,Electricity,AC,ECE Block,Electrical Maintenance,Medium,Large Group,Reopened,,Mobile,True,True
+CMP-00627,USR-216,Water is leaking near Canteen and the floor remains wet.,2026-06-10 09:01,Water & Sanitation,Leakage,Canteen,Facilities & Maintenance,Medium,Individual,Resolved,,Web,False,True
+CMP-00770,USR-187,Water is leaking near Transport Bay and the floor remains wet.,2026-06-10 09:45,Water & Sanitation,Washroom,Transport Bay,Facilities & Maintenance,Medium,Small Group,Closed,INC-033,Mobile,False,False
+CMP-00408,USR-242,The projector in ECE Block is not displaying properly.,2026-06-10 12:15,Classroom Equipment,Projector,ECE Block,Academic Infrastructure,Medium,Multiple Users,Closed,,Mobile,False,True
+CMP-00554,USR-217,The computer systems in Main Building are extremely slow.,2026-06-10 12:20,Classroom Equipment,Smart Board,Main Building,Academic Infrastructure,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00569,USR-084,The campus bus has not arrived at Computer Lab 1 on time.,2026-06-10 12:38,Transport,Driver,Computer Lab 1,Transport Services,Medium,Individual,Resolved,,Mobile,False,True
+CMP-00433,USR-181,Waste bins near Central Library are overflowing.,2026-06-10 16:53,Cleaning,Waste Disposal,Central Library,Housekeeping,Medium,Small Group,Resolved,,Web,True,False
+CMP-00674,USR-024,Several systems in Computer Lab 1 cannot access the internet.,2026-06-11 08:04,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Multiple Users,Resolved,INC-014,Mobile,False,True
+CMP-00428,USR-031,The queue at Campus Entrance is unusually long during lunch.,2026-06-11 15:31,Canteen,Food Quality,Campus Entrance,Food Services,Low,Multiple Users,Reopened,,Web,True,True
+CMP-00793,USR-216,The furniture in Canteen is broken and needs repair.,2026-06-11 20:22,Hostel,Security,Canteen,Hostel Administration,Medium,Small Group,Assigned,,Mobile,True,False
+CMP-00894,USR-010,The network keeps disconnecting in Main Building.,2026-06-12 09:33,Internet & Network,Internet Speed,Main Building,IT Services,High,Multiple Users,Resolved,,Web,False,False
+CMP-00947,USR-029,The lights in Campus Entrance are flickering repeatedly.,2026-06-12 09:38,Electricity,Lighting,Campus Entrance,Electrical Maintenance,Medium,Large Group,Closed,,Mobile,True,False
+CMP-00025,USR-042,There has been no water supply in Block B - Hostel since since yesterday.,2026-06-12 14:53,Water & Sanitation,Leakage,Block B - Hostel,Facilities & Maintenance,High,Large Group,Closed,,Web,True,True
+CMP-00049,USR-199,The door lock in ECE Block is damaged.,2026-06-12 21:29,Hostel,Security,ECE Block,Hostel Administration,High,Large Group,Resolved,,Web,True,False
+CMP-00512,USR-211,"Water pressure has been very low in Central Library, especially during morning.",2026-06-13 12:26,Water & Sanitation,Water Supply,Central Library,Facilities & Maintenance,High,Multiple Users,Investigating,INC-032,Web,False,False
+CMP-00820,USR-123,The fan is not working in ECE Block.,2026-06-13 12:45,Electricity,Socket,ECE Block,Electrical Maintenance,Medium,Individual,Investigating,,Web,False,False
+CMP-00990,USR-199,The Wi-Fi connection in Block A - Hostel becomes very slow during afternoon.,2026-06-13 13:17,Internet & Network,Network Availability,Block A - Hostel,IT Services,Medium,Multiple Users,Open,INC-005,Web,False,False
+CMP-00930,USR-014,"Water pressure has been very low in Main Building, especially during 6 PM–10 PM.",2026-06-13 13:29,Water & Sanitation,Leakage,Main Building,Facilities & Maintenance,High,Multiple Users,Closed,,Web,False,True
+CMP-00895,USR-126,The pathway near Main Building is damaged and difficult to use.,2026-06-13 13:30,Infrastructure,Lighting,Main Building,Facilities & Maintenance,Medium,Small Group,Closed,,Web,False,False
+CMP-00391,USR-169,The Wi-Fi connection in Parking Area becomes very slow during evening.,2026-06-13 17:22,Internet & Network,Network Availability,Parking Area,IT Services,Medium,Individual,Investigating,INC-026,Mobile,True,False
+CMP-00570,USR-006,There has been no water supply in Parking Area since since yesterday.,2026-06-14 12:20,Water & Sanitation,Water Supply,Parking Area,Facilities & Maintenance,High,Multiple Users,Assigned,INC-026,Mobile,False,False
+CMP-00247,USR-089,The door lock in Main Building is damaged.,2026-06-14 20:33,Hostel,Food,Main Building,Hostel Administration,High,Large Group,Resolved,,Mobile,False,False
+CMP-00199,USR-067,The projector in Block C - Hostel is not displaying properly.,2026-06-15 17:02,Classroom Equipment,Projector,Block C - Hostel,Academic Infrastructure,Medium,Large Group,Open,,Mobile,False,False
+CMP-00918,USR-201,The queue at Seminar Hall is unusually long during lunch.,2026-06-15 20:24,Canteen,Food Quality,Seminar Hall,Food Services,Low,Large Group,Investigating,,Mobile,False,False
+CMP-00478,USR-030,There is a power outage affecting Campus Entrance.,2026-06-16 10:00,Electricity,Power Outage,Campus Entrance,Electrical Maintenance,High,Multiple Users,Resolved,INC-005,Web,False,True
+CMP-00139,USR-075,The pathway near CSE Block is damaged and difficult to use.,2026-06-16 11:49,Infrastructure,Lift,CSE Block,Facilities & Maintenance,Medium,Large Group,Closed,,Web,True,True
+CMP-00857,USR-007,The queue at Main Building is unusually long during lunch.,2026-06-16 13:27,Canteen,Food Quality,Main Building,Food Services,Low,Small Group,Open,,Mobile,True,False
+CMP-00400,USR-083,The campus bus has not arrived at Central Library on time.,2026-06-16 17:12,Transport,Driver,Central Library,Transport Services,Medium,Individual,Investigating,,Mobile,True,False
+CMP-00364,USR-125,The pathway near Seminar Hall is damaged and difficult to use.,2026-06-16 18:34,Infrastructure,Lift,Seminar Hall,Facilities & Maintenance,Medium,Multiple Users,Assigned,,Web,True,False
+CMP-00872,USR-250,There is a power outage affecting Block B - Hostel.,2026-06-17 08:11,Electricity,Lighting,Block B - Hostel,Electrical Maintenance,High,Multiple Users,Open,,Web,True,False
+CMP-00963,USR-157,The computer systems in Seminar Hall are extremely slow.,2026-06-17 14:26,Classroom Equipment,Smart Board,Seminar Hall,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,True,False
+CMP-00471,USR-232,The campus bus has not arrived at Block C - Hostel on time.,2026-06-17 18:00,Transport,Bus Condition,Block C - Hostel,Transport Services,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00765,USR-050,The campus bus has not arrived at ECE Block on time.,2026-06-17 18:25,Transport,Driver,ECE Block,Transport Services,Medium,Individual,Closed,,Web,True,True
+CMP-00037,USR-013,There is a power outage affecting Block C - Hostel.,2026-06-17 19:00,Electricity,AC,Block C - Hostel,Electrical Maintenance,High,Multiple Users,Closed,,Mobile,False,True
+CMP-00639,USR-241,The network keeps disconnecting in Central Library.,2026-06-17 20:56,Internet & Network,Internet Speed,Central Library,IT Services,High,Large Group,Resolved,INC-024,Mobile,True,True
+CMP-00659,USR-071,The computer systems in Transport Bay are extremely slow.,2026-06-18 10:44,Classroom Equipment,Smart Board,Transport Bay,Academic Infrastructure,Medium,Individual,Investigating,,Mobile,False,False
+CMP-00341,USR-059,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-06-18 10:57,Water & Sanitation,Drainage,Computer Lab 1,Facilities & Maintenance,Medium,Large Group,Assigned,INC-034,Web,True,False
+CMP-00789,USR-040,The lights in Transport Bay are flickering repeatedly.,2026-06-18 12:19,Electricity,Power Outage,Transport Bay,Electrical Maintenance,Medium,Individual,Closed,INC-001,Web,False,False
+CMP-00623,USR-067,Food served at Main Building was cold today.,2026-06-18 19:36,Canteen,Queue,Main Building,Food Services,Medium,Small Group,Closed,,Mobile,False,False
+CMP-00824,USR-182,Food served at CSE Block was cold today.,2026-06-19 15:16,Canteen,Seating,CSE Block,Food Services,Medium,Individual,Closed,,Web,True,True
+CMP-00151,USR-088,Food served at ECE Block was cold today.,2026-06-19 15:33,Canteen,Hygiene,ECE Block,Food Services,Medium,Small Group,Resolved,,Mobile,False,False
+CMP-00816,USR-111,"Water pressure has been very low in Computer Lab 1, especially during afternoon.",2026-06-19 16:28,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Assigned,INC-026,Mobile,False,False
+CMP-00522,USR-024,Water is leaking near CSE Block and the floor remains wet.,2026-06-20 08:48,Water & Sanitation,Water Supply,CSE Block,Facilities & Maintenance,Medium,Small Group,Resolved,INC-023,Mobile,False,False
+CMP-00700,USR-162,The network keeps disconnecting in Campus Entrance.,2026-06-20 21:51,Internet & Network,LAN,Campus Entrance,IT Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00046,USR-200,The network keeps disconnecting in Computer Lab 1.,2026-06-21 09:36,Internet & Network,Wi-Fi,Computer Lab 1,IT Services,High,Large Group,Investigating,,Mobile,False,False
+CMP-00589,USR-250,The queue at Seminar Hall is unusually long during lunch.,2026-06-21 09:45,Canteen,Food Quality,Seminar Hall,Food Services,Low,Large Group,Reopened,,Web,True,True
+CMP-00465,USR-176,Food served at Block A - Hostel was cold today.,2026-06-22 08:53,Canteen,Food Quality,Block A - Hostel,Food Services,Medium,Large Group,Open,,Web,False,False
+CMP-00688,USR-171,The campus bus has not arrived at Computer Lab 1 on time.,2026-06-22 20:06,Transport,Bus Delay,Computer Lab 1,Transport Services,Medium,Multiple Users,Closed,,Mobile,True,True
+CMP-00160,USR-103,The washroom in Seminar Hall has not been cleaned properly.,2026-06-22 20:12,Cleaning,Room Cleaning,Seminar Hall,Housekeeping,Medium,Large Group,Resolved,,Web,False,True
+CMP-00063,USR-235,Water is leaking near Main Building and the floor remains wet.,2026-06-22 21:55,Water & Sanitation,Drainage,Main Building,Facilities & Maintenance,Medium,Individual,Closed,INC-034,Web,False,False
+CMP-00630,USR-060,Water is leaking near Block B - Hostel and the floor remains wet.,2026-06-23 08:35,Water & Sanitation,Drainage,Block B - Hostel,Facilities & Maintenance,Medium,Large Group,Resolved,,Mobile,True,False
+CMP-00624,USR-219,The fan is not working in Sports Ground.,2026-06-23 08:44,Electricity,Power Outage,Sports Ground,Electrical Maintenance,Medium,Individual,Reopened,,Web,True,False
+CMP-00242,USR-192,The queue at Block A - Hostel is unusually long during lunch.,2026-06-23 12:16,Canteen,Hygiene,Block A - Hostel,Food Services,Low,Large Group,Closed,,Mobile,False,True
+CMP-00487,USR-097,The fan is not working in Campus Entrance.,2026-06-23 13:14,Electricity,Fan,Campus Entrance,Electrical Maintenance,Medium,Small Group,Open,,Mobile,True,False
+CMP-00432,USR-017,The pathway near Campus Entrance is damaged and difficult to use.,2026-06-23 13:35,Infrastructure,Building Damage,Campus Entrance,Facilities & Maintenance,Medium,Multiple Users,Closed,,Mobile,False,True
+CMP-00115,USR-248,The door lock in ECE Block is damaged.,2026-06-23 19:15,Hostel,Laundry,ECE Block,Hostel Administration,High,Multiple Users,Resolved,,Web,False,False
+CMP-00705,USR-238,The pathway near Block B - Hostel is damaged and difficult to use.,2026-06-23 20:54,Infrastructure,Furniture,Block B - Hostel,Facilities & Maintenance,Medium,Large Group,Resolved,,Web,True,False
+CMP-00822,USR-121,Water is leaking near Block C - Hostel and the floor remains wet.,2026-06-23 20:54,Water & Sanitation,Water Pressure,Block C - Hostel,Facilities & Maintenance,Medium,Large Group,Resolved,,Web,True,True
+CMP-00323,USR-138,The network keeps disconnecting in CSE Block.,2026-06-23 20:55,Internet & Network,LAN,CSE Block,IT Services,High,Multiple Users,Open,,Mobile,True,False
+CMP-00821,USR-086,Several systems in ECE Block cannot access the internet.,2026-06-24 09:10,Internet & Network,LAN,ECE Block,IT Services,High,Multiple Users,Reopened,,Web,False,False
+CMP-00625,USR-137,The lights in Block B - Hostel are flickering repeatedly.,2026-06-24 16:29,Electricity,AC,Block B - Hostel,Electrical Maintenance,Medium,Individual,Closed,INC-018,Web,False,True
+CMP-00189,USR-069,The door lock in Block C - Hostel is damaged.,2026-06-24 17:42,Hostel,Room Maintenance,Block C - Hostel,Hostel Administration,High,Multiple Users,Closed,,Mobile,True,True
+CMP-00091,USR-017,The computer systems in Central Library are extremely slow.,2026-06-25 09:31,Classroom Equipment,Smart Board,Central Library,Academic Infrastructure,Medium,Individual,Assigned,,Mobile,False,False
+CMP-00074,USR-012,There is a power outage affecting Canteen.,2026-06-25 12:14,Electricity,Power Outage,Canteen,Electrical Maintenance,High,Multiple Users,Resolved,,Web,True,False
+CMP-00796,USR-162,Water is leaking near Main Building and the floor remains wet.,2026-06-25 14:24,Water & Sanitation,Washroom,Main Building,Facilities & Maintenance,Medium,Small Group,Investigating,INC-012,Mobile,True,False
+CMP-00319,USR-007,The fan is not working in Sports Ground.,2026-06-25 14:53,Electricity,Fan,Sports Ground,Electrical Maintenance,Medium,Large Group,Resolved,,Web,False,True
+CMP-00447,USR-228,The CCTV camera near Block B - Hostel appears to be offline.,2026-06-25 21:38,Safety,Emergency Equipment,Block B - Hostel,Security Services,High,Multiple Users,Open,,Mobile,True,False
+CMP-00372,USR-153,Food served at Block A - Hostel was cold today.,2026-06-26 15:48,Canteen,Seating,Block A - Hostel,Food Services,Medium,Individual,Closed,,Mobile,True,False
+CMP-00910,USR-128,There has been no water supply in ECE Block since since yesterday.,2026-06-26 17:38,Water & Sanitation,Washroom,ECE Block,Facilities & Maintenance,High,Multiple Users,Closed,,Web,False,False
+CMP-00427,USR-238,The campus bus has not arrived at Campus Entrance on time.,2026-06-26 17:59,Transport,Bus Condition,Campus Entrance,Transport Services,Medium,Multiple Users,Investigating,,Mobile,True,False
+CMP-00635,USR-027,The campus bus has not arrived at Campus Entrance on time.,2026-06-27 15:38,Transport,Bus Availability,Campus Entrance,Transport Services,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00457,USR-208,Several systems in Block A - Hostel cannot access the internet.,2026-06-27 17:47,Internet & Network,Network Availability,Block A - Hostel,IT Services,High,Large Group,Resolved,,Mobile,True,False
+CMP-00308,USR-173,The queue at Computer Lab 2 is unusually long during lunch.,2026-06-27 18:20,Canteen,Payment,Computer Lab 2,Food Services,Low,Large Group,Resolved,,Mobile,False,False
+CMP-00617,USR-227,Water is leaking near Central Library and the floor remains wet.,2026-06-28 09:53,Water & Sanitation,Leakage,Central Library,Facilities & Maintenance,Medium,Large Group,Investigating,,Web,False,False
+CMP-00742,USR-043,The CCTV camera near CSE Block appears to be offline.,2026-06-28 10:18,Safety,Security,CSE Block,Security Services,High,Large Group,Resolved,,Web,True,False
+CMP-00398,USR-057,Waste bins near Computer Lab 2 are overflowing.,2026-06-28 11:09,Cleaning,Room Cleaning,Computer Lab 2,Housekeeping,Medium,Large Group,Closed,,Web,False,False
+CMP-00826,USR-164,The pathway near Campus Entrance is damaged and difficult to use.,2026-06-28 14:23,Infrastructure,Lighting,Campus Entrance,Facilities & Maintenance,Medium,Small Group,Closed,,Web,False,False
+CMP-00358,USR-149,The furniture in Block B - Hostel is broken and needs repair.,2026-06-28 16:29,Hostel,Food,Block B - Hostel,Hostel Administration,Medium,Individual,Resolved,,Web,False,False
+CMP-00377,USR-019,The projector in Computer Lab 1 is not displaying properly.,2026-06-28 20:02,Classroom Equipment,Computer,Computer Lab 1,Academic Infrastructure,Medium,Small Group,Open,,Mobile,True,False
+CMP-00360,USR-176,The fan is not working in Central Library.,2026-06-29 20:23,Electricity,Socket,Central Library,Electrical Maintenance,Medium,Multiple Users,Resolved,,Mobile,True,False
+CMP-00557,USR-243,The fan is not working in CSE Block.,2026-06-29 21:10,Electricity,Fan,CSE Block,Electrical Maintenance,Medium,Large Group,Resolved,INC-024,Mobile,True,True
+CMP-00844,USR-087,The projector in Transport Bay is not displaying properly.,2026-06-30 16:24,Classroom Equipment,Speaker,Transport Bay,Academic Infrastructure,Medium,Small Group,Assigned,,Web,False,False
+CMP-00241,USR-248,The washroom in Sports Ground has not been cleaned properly.,2026-06-30 19:38,Cleaning,Washroom Cleaning,Sports Ground,Housekeeping,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00609,USR-088,There is a power outage affecting Sports Ground.,2026-06-30 21:56,Electricity,Power Outage,Sports Ground,Electrical Maintenance,High,Large Group,Resolved,,Web,False,False
+CMP-00112,USR-093,The network keeps disconnecting in Seminar Hall.,2026-07-01 09:19,Internet & Network,Wi-Fi,Seminar Hall,IT Services,High,Multiple Users,Resolved,INC-024,Web,False,True
+CMP-00137,USR-033,Waste bins near Transport Bay are overflowing.,2026-07-01 11:22,Cleaning,Waste Disposal,Transport Bay,Housekeeping,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00632,USR-048,"Water pressure has been very low in Seminar Hall, especially during morning.",2026-07-02 09:37,Water & Sanitation,Drainage,Seminar Hall,Facilities & Maintenance,High,Large Group,Resolved,,Mobile,False,True
+CMP-00683,USR-248,Water is leaking near Canteen and the floor remains wet.,2026-07-02 14:25,Water & Sanitation,Washroom,Canteen,Facilities & Maintenance,Medium,Large Group,Investigating,INC-020,Mobile,True,False
+CMP-00288,USR-170,The Wi-Fi connection in ECE Block becomes very slow during 6 PM–10 PM.,2026-07-02 18:50,Internet & Network,Wi-Fi,ECE Block,IT Services,Medium,Multiple Users,Closed,,Web,True,True
+CMP-00444,USR-152,The computer systems in Sports Ground are extremely slow.,2026-07-02 20:06,Classroom Equipment,Computer,Sports Ground,Academic Infrastructure,Medium,Multiple Users,Resolved,,Web,False,True
+CMP-00873,USR-029,The projector in Computer Lab 2 is not displaying properly.,2026-07-03 08:38,Classroom Equipment,Computer,Computer Lab 2,Academic Infrastructure,Medium,Individual,Open,,Mobile,True,False
+CMP-00534,USR-068,The network keeps disconnecting in CSE Block.,2026-07-03 14:31,Internet & Network,LAN,CSE Block,IT Services,High,Large Group,Resolved,INC-004,Web,True,False
+CMP-00376,USR-108,The lights in Block C - Hostel are flickering repeatedly.,2026-07-03 15:46,Electricity,Lighting,Block C - Hostel,Electrical Maintenance,Medium,Individual,Investigating,,Web,True,False
+CMP-00125,USR-239,The network keeps disconnecting in Block B - Hostel.,2026-07-03 20:29,Internet & Network,Network Availability,Block B - Hostel,IT Services,High,Multiple Users,Closed,,Web,True,False
+CMP-00783,USR-108,The lights in Computer Lab 2 are flickering repeatedly.,2026-07-04 08:28,Electricity,Fan,Computer Lab 2,Electrical Maintenance,Medium,Individual,Open,,Mobile,False,False
+CMP-00967,USR-031,There is a power outage affecting Computer Lab 1.,2026-07-04 09:00,Electricity,Socket,Computer Lab 1,Electrical Maintenance,High,Large Group,Open,INC-017,Mobile,True,False
+CMP-00746,USR-211,Food served at CSE Block was cold today.,2026-07-04 10:26,Canteen,Food Quality,CSE Block,Food Services,Medium,Individual,Resolved,,Web,False,False
+CMP-00296,USR-157,The network keeps disconnecting in Campus Entrance.,2026-07-05 08:54,Internet & Network,Internet Speed,Campus Entrance,IT Services,High,Large Group,Closed,,Web,False,True
+CMP-00748,USR-146,There is a power outage affecting Campus Entrance.,2026-07-05 14:23,Electricity,Fan,Campus Entrance,Electrical Maintenance,High,Large Group,Investigating,INC-012,Web,False,False
+CMP-00577,USR-055,Waste bins near Seminar Hall are overflowing.,2026-07-05 15:48,Cleaning,Washroom Cleaning,Seminar Hall,Housekeeping,Medium,Multiple Users,Reopened,,Mobile,True,False
+CMP-00750,USR-212,The computer systems in Block B - Hostel are extremely slow.,2026-07-05 16:08,Classroom Equipment,Projector,Block B - Hostel,Academic Infrastructure,Medium,Large Group,Assigned,,Web,True,False
+CMP-00583,USR-148,The queue at Seminar Hall is unusually long during lunch.,2026-07-05 17:59,Canteen,Payment,Seminar Hall,Food Services,Low,Individual,Resolved,,Web,True,False
+CMP-00660,USR-020,Water is leaking near Campus Entrance and the floor remains wet.,2026-07-05 19:57,Water & Sanitation,Leakage,Campus Entrance,Facilities & Maintenance,Medium,Large Group,Reopened,,Web,False,False
+CMP-00965,USR-017,The furniture in ECE Block is broken and needs repair.,2026-07-05 21:15,Hostel,Laundry,ECE Block,Hostel Administration,Medium,Small Group,Assigned,,Web,False,False
+CMP-00350,USR-117,Food served at CSE Block was cold today.,2026-07-05 21:35,Canteen,Queue,CSE Block,Food Services,Medium,Multiple Users,Investigating,,Web,True,False
+CMP-00111,USR-235,The washroom in CSE Block has not been cleaned properly.,2026-07-05 21:42,Cleaning,Washroom Cleaning,CSE Block,Housekeeping,Medium,Individual,Resolved,,Web,False,False
+CMP-00157,USR-240,Food served at Campus Entrance was cold today.,2026-07-05 21:59,Canteen,Queue,Campus Entrance,Food Services,Medium,Large Group,Closed,,Web,True,False
+CMP-00298,USR-130,The door lock in Canteen is damaged.,2026-07-06 11:30,Hostel,Furniture,Canteen,Hostel Administration,High,Multiple Users,Open,,Web,True,False
+CMP-00703,USR-222,Water is leaking near Computer Lab 2 and the floor remains wet.,2026-07-06 12:18,Water & Sanitation,Washroom,Computer Lab 2,Facilities & Maintenance,Medium,Individual,Investigating,,Web,False,False
+CMP-00718,USR-044,Several systems in Computer Lab 2 cannot access the internet.,2026-07-06 12:37,Internet & Network,Wi-Fi,Computer Lab 2,IT Services,High,Large Group,Resolved,,Web,True,True
+CMP-00986,USR-196,The washroom in ECE Block has not been cleaned properly.,2026-07-06 13:53,Cleaning,Common Area,ECE Block,Housekeeping,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00907,USR-145,"Water pressure has been very low in Computer Lab 1, especially during 6 PM–10 PM.",2026-07-06 14:23,Water & Sanitation,Drainage,Computer Lab 1,Facilities & Maintenance,High,Multiple Users,Assigned,INC-024,Web,False,False
+CMP-00851,USR-113,Several systems in Canteen cannot access the internet.,2026-07-06 19:41,Internet & Network,Wi-Fi,Canteen,IT Services,High,Large Group,Resolved,INC-009,Web,True,True
+CMP-00867,USR-119,The door lock in Parking Area is damaged.,2026-07-06 19:48,Hostel,Security,Parking Area,Hostel Administration,High,Large Group,Closed,,Web,False,True
+CMP-00553,USR-162,The door lock in Seminar Hall is damaged.,2026-07-06 21:35,Hostel,Furniture,Seminar Hall,Hostel Administration,High,Multiple Users,Resolved,,Web,False,True
+CMP-00598,USR-115,The queue at Block B - Hostel is unusually long during lunch.,2026-07-07 08:53,Canteen,Food Quality,Block B - Hostel,Food Services,Low,Multiple Users,Investigating,,Web,True,False
+CMP-00259,USR-242,The computer systems in Block C - Hostel are extremely slow.,2026-07-07 09:35,Classroom Equipment,Computer,Block C - Hostel,Academic Infrastructure,Medium,Large Group,Closed,,Mobile,True,True
+CMP-00684,USR-192,The pathway near CSE Block is damaged and difficult to use.,2026-07-07 14:48,Infrastructure,Building Damage,CSE Block,Facilities & Maintenance,Medium,Multiple Users,Closed,,Mobile,True,False
+CMP-00254,USR-101,The computer systems in CSE Block are extremely slow.,2026-07-07 19:18,Classroom Equipment,Speaker,CSE Block,Academic Infrastructure,Medium,Individual,Reopened,,Mobile,True,True
+CMP-00355,USR-092,The fan is not working in Computer Lab 1.,2026-07-08 11:15,Electricity,Socket,Computer Lab 1,Electrical Maintenance,Medium,Small Group,Investigating,,Mobile,True,False
+CMP-00692,USR-110,There has been no water supply in Parking Area since for two days.,2026-07-08 13:43,Water & Sanitation,Leakage,Parking Area,Facilities & Maintenance,High,Large Group,Closed,,Web,True,False
+CMP-00565,USR-067,Several systems in ECE Block cannot access the internet.,2026-07-08 15:48,Internet & Network,LAN,ECE Block,IT Services,High,Multiple Users,Investigating,INC-003,Mobile,True,False
+CMP-00042,USR-008,Food served at Campus Entrance was cold today.,2026-07-08 16:51,Canteen,Payment,Campus Entrance,Food Services,Medium,Small Group,Investigating,,Web,False,False
+CMP-00486,USR-152,There has been no water supply in Block B - Hostel since for two days.,2026-07-09 08:59,Water & Sanitation,Drainage,Block B - Hostel,Facilities & Maintenance,High,Large Group,Resolved,INC-016,Mobile,False,False
+CMP-00001,USR-152,The Wi-Fi connection in Block A - Hostel becomes very slow during morning.,2026-07-09 12:15,Internet & Network,Wi-Fi,Block A - Hostel,IT Services,Medium,Individual,Resolved,,Web,True,True
+CMP-00904,USR-025,The network keeps disconnecting in Sports Ground.,2026-07-09 12:55,Internet & Network,Internet Speed,Sports Ground,IT Services,High,Large Group,Open,,Mobile,True,False
+CMP-00605,USR-231,Several systems in Sports Ground cannot access the internet.,2026-07-09 15:00,Internet & Network,LAN,Sports Ground,IT Services,High,Multiple Users,Resolved,,Web,True,False
+CMP-00513,USR-032,The campus bus has not arrived at Computer Lab 2 on time.,2026-07-09 15:14,Transport,Driver,Computer Lab 2,Transport Services,Medium,Small Group,Investigating,,Web,True,False
+CMP-00769,USR-075,The door lock in Transport Bay is damaged.,2026-07-09 16:06,Hostel,Room Maintenance,Transport Bay,Hostel Administration,High,Large Group,Resolved,,Mobile,False,False
+CMP-00155,USR-184,The Wi-Fi connection in Seminar Hall becomes very slow during morning.,2026-07-09 17:15,Internet & Network,Network Availability,Seminar Hall,IT Services,Medium,Small Group,Resolved,INC-027,Web,True,True
+CMP-00229,USR-042,The washroom in Canteen has not been cleaned properly.,2026-07-09 18:47,Cleaning,Room Cleaning,Canteen,Housekeeping,Medium,Individual,Closed,,Web,False,False
+CMP-00719,USR-183,The projector in Parking Area is not displaying properly.,2026-07-09 18:50,Classroom Equipment,Speaker,Parking Area,Academic Infrastructure,Medium,Small Group,Investigating,,Mobile,False,False
+CMP-00868,USR-198,The computer systems in Computer Lab 1 are extremely slow.,2026-07-10 11:08,Classroom Equipment,Smart Board,Computer Lab 1,Academic Infrastructure,Medium,Multiple Users,Open,,Mobile,False,False
+CMP-00393,USR-073,Food served at Transport Bay was cold today.,2026-07-10 12:23,Canteen,Food Quality,Transport Bay,Food Services,Medium,Large Group,Open,,Mobile,True,False
+CMP-00957,USR-248,The furniture in Sports Ground is broken and needs repair.,2026-07-10 15:13,Hostel,Security,Sports Ground,Hostel Administration,Medium,Multiple Users,Resolved,,Web,True,False
+CMP-00269,USR-220,There is a power outage affecting Block A - Hostel.,2026-07-10 15:58,Electricity,AC,Block A - Hostel,Electrical Maintenance,High,Large Group,Closed,INC-018,Web,False,True
+CMP-00415,USR-177,The door lock in Main Building is damaged.,2026-07-10 18:12,Hostel,Food,Main Building,Hostel Administration,High,Large Group,Closed,,Web,True,True
+CMP-00841,USR-095,The network keeps disconnecting in Sports Ground.,2026-07-10 18:15,Internet & Network,LAN,Sports Ground,IT Services,High,Large Group,Assigned,,Web,True,False
+CMP-00586,USR-026,The washroom in Campus Entrance has not been cleaned properly.,2026-07-11 09:42,Cleaning,Common Area,Campus Entrance,Housekeeping,Medium,Small Group,Investigating,,Web,True,False
+CMP-00958,USR-160,Water is leaking near Main Building and the floor remains wet.,2026-07-11 16:23,Water & Sanitation,Water Pressure,Main Building,Facilities & Maintenance,Medium,Multiple Users,Resolved,,Mobile,False,False
+CMP-00083,USR-007,The projector in Canteen is not displaying properly.,2026-07-11 18:16,Classroom Equipment,Computer,Canteen,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,False,True
+CMP-00324,USR-042,The washroom in Main Building has not been cleaned properly.,2026-07-11 19:57,Cleaning,Washroom Cleaning,Main Building,Housekeeping,Medium,Large Group,Closed,,Mobile,False,False
+CMP-00925,USR-223,Several systems in Computer Lab 1 cannot access the internet.,2026-07-11 21:41,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00158,USR-117,Several systems in Transport Bay cannot access the internet.,2026-07-11 21:59,Internet & Network,Network Availability,Transport Bay,IT Services,High,Large Group,Resolved,INC-022,Mobile,True,True
+CMP-00022,USR-034,Waste bins near Transport Bay are overflowing.,2026-07-12 09:00,Cleaning,Waste Disposal,Transport Bay,Housekeeping,Medium,Individual,Resolved,,Web,True,True
+CMP-00287,USR-055,The campus bus has not arrived at ECE Block on time.,2026-07-12 11:10,Transport,Bus Availability,ECE Block,Transport Services,Medium,Small Group,Investigating,,Web,False,False
+CMP-00404,USR-012,Food served at Computer Lab 2 was cold today.,2026-07-12 12:35,Canteen,Hygiene,Computer Lab 2,Food Services,Medium,Individual,Assigned,,Web,False,False
+CMP-00299,USR-104,Several systems in Block B - Hostel cannot access the internet.,2026-07-12 15:20,Internet & Network,LAN,Block B - Hostel,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00787,USR-055,The campus bus has not arrived at Campus Entrance on time.,2026-07-12 17:59,Transport,Driver,Campus Entrance,Transport Services,Medium,Individual,Resolved,,Mobile,True,False
+CMP-00126,USR-112,The lights in Block A - Hostel are flickering repeatedly.,2026-07-12 18:12,Electricity,Lighting,Block A - Hostel,Electrical Maintenance,Medium,Individual,Closed,INC-008,Web,True,False
+CMP-00981,USR-068,"Water pressure has been very low in CSE Block, especially during afternoon.",2026-07-13 14:38,Water & Sanitation,Leakage,CSE Block,Facilities & Maintenance,High,Large Group,Resolved,,Mobile,False,False
+CMP-00524,USR-214,Several systems in Transport Bay cannot access the internet.,2026-07-13 16:00,Internet & Network,Internet Speed,Transport Bay,IT Services,High,Large Group,Closed,INC-007,Web,True,False
+CMP-00164,USR-147,There is a power outage affecting Canteen.,2026-07-13 17:55,Electricity,Fan,Canteen,Electrical Maintenance,High,Multiple Users,Closed,INC-033,Mobile,False,True
+CMP-00671,USR-039,"Water pressure has been very low in Seminar Hall, especially during morning.",2026-07-14 09:19,Water & Sanitation,Water Pressure,Seminar Hall,Facilities & Maintenance,High,Multiple Users,Open,INC-019,Web,False,False
+CMP-00847,USR-194,The campus bus has not arrived at ECE Block on time.,2026-07-14 11:49,Transport,Driver,ECE Block,Transport Services,Medium,Small Group,Closed,,Web,True,True
+CMP-00441,USR-025,The fan is not working in Campus Entrance.,2026-07-14 18:51,Electricity,AC,Campus Entrance,Electrical Maintenance,Medium,Small Group,Open,,Web,False,False
+CMP-00670,USR-131,Several systems in Canteen cannot access the internet.,2026-07-14 19:20,Internet & Network,LAN,Canteen,IT Services,High,Multiple Users,Resolved,,Mobile,True,True
+CMP-00284,USR-110,The lights in Main Building are flickering repeatedly.,2026-07-14 20:10,Electricity,AC,Main Building,Electrical Maintenance,Medium,Individual,Investigating,INC-028,Web,True,False
+CMP-00855,USR-207,Waste bins near Transport Bay are overflowing.,2026-07-15 08:08,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Individual,Investigating,,Mobile,True,False
+CMP-00368,USR-080,The computer systems in Computer Lab 2 are extremely slow.,2026-07-15 09:06,Classroom Equipment,Computer,Computer Lab 2,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,False,False
+CMP-00942,USR-227,The network keeps disconnecting in ECE Block.,2026-07-15 10:25,Internet & Network,Internet Speed,ECE Block,IT Services,High,Large Group,Resolved,INC-002,Mobile,False,True
+CMP-00606,USR-023,The CCTV camera near Block C - Hostel appears to be offline.,2026-07-15 10:32,Safety,CCTV,Block C - Hostel,Security Services,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00845,USR-148,The lights in Parking Area are flickering repeatedly.,2026-07-15 18:19,Electricity,Fan,Parking Area,Electrical Maintenance,Medium,Large Group,Assigned,,Mobile,False,False
+CMP-00374,USR-029,There is a power outage affecting Computer Lab 2.,2026-07-15 20:58,Electricity,Lighting,Computer Lab 2,Electrical Maintenance,High,Large Group,Investigating,INC-009,Web,True,False
+CMP-00170,USR-063,The door lock in Seminar Hall is damaged.,2026-07-16 08:15,Hostel,Room Maintenance,Seminar Hall,Hostel Administration,High,Multiple Users,Resolved,,Web,True,False
+CMP-00101,USR-192,The washroom in Main Building has not been cleaned properly.,2026-07-16 10:48,Cleaning,Common Area,Main Building,Housekeeping,Medium,Multiple Users,Open,,Web,False,False
+CMP-00474,USR-077,The furniture in Parking Area is broken and needs repair.,2026-07-16 12:41,Hostel,Furniture,Parking Area,Hostel Administration,Medium,Individual,Reopened,,Web,True,False
+CMP-00835,USR-033,Food served at Block A - Hostel was cold today.,2026-07-16 14:05,Canteen,Seating,Block A - Hostel,Food Services,Medium,Small Group,Resolved,,Mobile,False,True
+CMP-00901,USR-215,The projector in Parking Area is not displaying properly.,2026-07-16 16:04,Classroom Equipment,Smart Board,Parking Area,Academic Infrastructure,Medium,Multiple Users,Resolved,,Mobile,True,True
+CMP-00114,USR-185,Waste bins near Transport Bay are overflowing.,2026-07-16 17:08,Cleaning,Washroom Cleaning,Transport Bay,Housekeeping,Medium,Small Group,Investigating,,Web,True,False
+CMP-00421,USR-001,The network keeps disconnecting in Block C - Hostel.,2026-07-16 19:03,Internet & Network,Internet Speed,Block C - Hostel,IT Services,High,Large Group,Assigned,INC-009,Mobile,False,False
+CMP-00751,USR-052,The network keeps disconnecting in Main Building.,2026-07-17 09:17,Internet & Network,Wi-Fi,Main Building,IT Services,High,Multiple Users,Resolved,,Mobile,True,False
+CMP-00379,USR-240,The furniture in Campus Entrance is broken and needs repair.,2026-07-17 09:33,Hostel,Laundry,Campus Entrance,Hostel Administration,Medium,Large Group,Closed,,Web,False,True
+CMP-00992,USR-093,The network keeps disconnecting in Parking Area.,2026-07-17 09:55,Internet & Network,LAN,Parking Area,IT Services,High,Multiple Users,Investigating,,Web,False,False
+CMP-00558,USR-243,The queue at Central Library is unusually long during lunch.,2026-07-17 15:52,Canteen,Queue,Central Library,Food Services,Low,Small Group,Closed,,Web,False,False
+CMP-00106,USR-113,Water is leaking near Block C - Hostel and the floor remains wet.,2026-07-17 18:31,Water & Sanitation,Water Pressure,Block C - Hostel,Facilities & Maintenance,Medium,Multiple Users,Closed,,Web,True,False
+CMP-00812,USR-143,The lights in ECE Block are flickering repeatedly.,2026-07-17 19:30,Electricity,Lighting,ECE Block,Electrical Maintenance,Medium,Multiple Users,Closed,,Mobile,False,True
+CMP-00681,USR-189,The door lock in CSE Block is damaged.,2026-07-17 20:46,Hostel,Food,CSE Block,Hostel Administration,High,Multiple Users,Resolved,,Mobile,False,False
+CMP-00416,USR-117,The door lock in Central Library is damaged.,2026-07-18 08:38,Hostel,Food,Central Library,Hostel Administration,High,Multiple Users,Resolved,,Web,False,False
+CMP-00088,USR-170,There is a power outage affecting ECE Block.,2026-07-18 10:50,Electricity,Power Outage,ECE Block,Electrical Maintenance,High,Multiple Users,Resolved,,Web,False,True
+CMP-00938,USR-248,The door lock in Central Library is damaged.,2026-07-18 12:36,Hostel,Security,Central Library,Hostel Administration,High,Multiple Users,Closed,,Mobile,False,True
+CMP-00880,USR-021,Food served at Main Building was cold today.,2026-07-18 14:43,Canteen,Food Quality,Main Building,Food Services,Medium,Multiple Users,Assigned,,Web,True,False
+CMP-00348,USR-050,The CCTV camera near Block A - Hostel appears to be offline.,2026-07-18 21:11,Safety,CCTV,Block A - Hostel,Security Services,High,Multiple Users,Closed,,Web,False,True
+CMP-00552,USR-179,Water is leaking near Sports Ground and the floor remains wet.,2026-07-19 15:30,Water & Sanitation,Water Pressure,Sports Ground,Facilities & Maintenance,Medium,Large Group,Closed,,Web,True,False
+CMP-00900,USR-206,Food served at Main Building was cold today.,2026-07-19 18:07,Canteen,Food Quality,Main Building,Food Services,Medium,Individual,Reopened,,Web,True,False
+CMP-00876,USR-169,The queue at Campus Entrance is unusually long during lunch.,2026-07-19 19:32,Canteen,Food Quality,Campus Entrance,Food Services,Low,Large Group,Closed,,Mobile,True,True
+CMP-00651,USR-237,The computer systems in Parking Area are extremely slow.,2026-07-19 19:34,Classroom Equipment,Projector,Parking Area,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,False,False
+CMP-00615,USR-247,Food served at Block C - Hostel was cold today.,2026-07-20 11:34,Canteen,Payment,Block C - Hostel,Food Services,Medium,Individual,Open,,Mobile,False,False
+CMP-00310,USR-222,There has been no water supply in Campus Entrance since for three days.,2026-07-20 12:13,Water & Sanitation,Washroom,Campus Entrance,Facilities & Maintenance,High,Multiple Users,Resolved,,Mobile,True,True
+CMP-00235,USR-198,The washroom in Seminar Hall has not been cleaned properly.,2026-07-20 12:47,Cleaning,Common Area,Seminar Hall,Housekeeping,Medium,Multiple Users,Resolved,,Mobile,False,True
+CMP-00346,USR-042,There is a power outage affecting Computer Lab 1.,2026-07-20 19:10,Electricity,Power Outage,Computer Lab 1,Electrical Maintenance,High,Large Group,Closed,,Web,True,True
+CMP-00089,USR-190,The projector in Parking Area is not displaying properly.,2026-07-21 11:37,Classroom Equipment,Smart Board,Parking Area,Academic Infrastructure,Medium,Small Group,Investigating,,Web,True,False
+CMP-00353,USR-138,The computer systems in Canteen are extremely slow.,2026-07-21 11:43,Classroom Equipment,Speaker,Canteen,Academic Infrastructure,Medium,Large Group,Reopened,,Web,False,True
+CMP-00716,USR-085,The network keeps disconnecting in ECE Block.,2026-07-21 14:24,Internet & Network,Wi-Fi,ECE Block,IT Services,High,Large Group,Investigating,INC-027,Web,False,False
+CMP-00689,USR-095,The fan is not working in Computer Lab 2.,2026-07-22 08:24,Electricity,Lighting,Computer Lab 2,Electrical Maintenance,Medium,Large Group,Closed,,Web,False,True
+CMP-00503,USR-038,The washroom in Block C - Hostel has not been cleaned properly.,2026-07-22 12:14,Cleaning,Room Cleaning,Block C - Hostel,Housekeeping,Medium,Multiple Users,Closed,,Web,False,False
+CMP-00335,USR-132,The projector in Computer Lab 1 is not displaying properly.,2026-07-22 15:56,Classroom Equipment,Projector,Computer Lab 1,Academic Infrastructure,Medium,Large Group,Investigating,,Web,False,False
+CMP-00058,USR-079,The CCTV camera near Seminar Hall appears to be offline.,2026-07-22 17:14,Safety,Lighting,Seminar Hall,Security Services,High,Large Group,Closed,,Mobile,True,True
+CMP-00631,USR-151,The computer systems in Computer Lab 1 are extremely slow.,2026-07-23 14:56,Classroom Equipment,Microphone,Computer Lab 1,Academic Infrastructure,Medium,Individual,Resolved,,Mobile,True,True
+CMP-00311,USR-248,The queue at Parking Area is unusually long during lunch.,2026-07-23 20:44,Canteen,Seating,Parking Area,Food Services,Low,Large Group,Assigned,,Mobile,True,False
+CMP-00842,USR-031,The computer systems in Campus Entrance are extremely slow.,2026-07-24 09:29,Classroom Equipment,Computer,Campus Entrance,Academic Infrastructure,Medium,Small Group,Open,,Mobile,True,False
+CMP-00079,USR-161,The washroom in Parking Area has not been cleaned properly.,2026-07-24 11:38,Cleaning,Washroom Cleaning,Parking Area,Housekeeping,Medium,Small Group,Resolved,,Web,True,False
+CMP-00197,USR-184,The fan is not working in Computer Lab 1.,2026-07-24 12:53,Electricity,Fan,Computer Lab 1,Electrical Maintenance,Medium,Large Group,Investigating,INC-017,Web,True,False
+CMP-00711,USR-144,Food served at Computer Lab 1 was cold today.,2026-07-24 13:07,Canteen,Food Quality,Computer Lab 1,Food Services,Medium,Small Group,Resolved,,Web,True,True
+CMP-00652,USR-137,The pathway near Canteen is damaged and difficult to use.,2026-07-24 17:58,Infrastructure,Road,Canteen,Facilities & Maintenance,Medium,Small Group,Reopened,,Web,False,False
+CMP-00258,USR-019,The furniture in Block B - Hostel is broken and needs repair.,2026-07-24 21:02,Hostel,Room Maintenance,Block B - Hostel,Hostel Administration,Medium,Multiple Users,Investigating,,Web,False,False
+CMP-00541,USR-172,The washroom in Computer Lab 2 has not been cleaned properly.,2026-07-25 12:27,Cleaning,Common Area,Computer Lab 2,Housekeeping,Medium,Large Group,Resolved,,Mobile,False,True
+CMP-00038,USR-115,The furniture in Block C - Hostel is broken and needs repair.,2026-07-25 15:42,Hostel,Security,Block C - Hostel,Hostel Administration,Medium,Large Group,Closed,,Mobile,True,False
+CMP-00919,USR-131,Water is leaking near Transport Bay and the floor remains wet.,2026-07-25 17:09,Water & Sanitation,Water Pressure,Transport Bay,Facilities & Maintenance,Medium,Large Group,Closed,INC-004,Web,True,False
+CMP-00562,USR-172,The CCTV camera near Canteen appears to be offline.,2026-07-25 17:45,Safety,Lighting,Canteen,Security Services,High,Large Group,Assigned,,Web,False,False
+CMP-00389,USR-011,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-07-25 18:03,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,Medium,Multiple Users,Closed,INC-018,Web,False,True
+CMP-00342,USR-233,The projector in Seminar Hall is not displaying properly.,2026-07-25 19:58,Classroom Equipment,Smart Board,Seminar Hall,Academic Infrastructure,Medium,Small Group,Investigating,,Web,False,False
+CMP-00243,USR-034,The furniture in Block B - Hostel is broken and needs repair.,2026-07-25 20:08,Hostel,Furniture,Block B - Hostel,Hostel Administration,Medium,Individual,Closed,,Mobile,True,False
+CMP-00453,USR-099,The network keeps disconnecting in Canteen.,2026-07-26 14:55,Internet & Network,LAN,Canteen,IT Services,High,Large Group,Resolved,,Web,False,True
+CMP-00032,USR-160,The queue at Transport Bay is unusually long during lunch.,2026-07-26 16:43,Canteen,Seating,Transport Bay,Food Services,Low,Large Group,Open,,Web,True,False
+CMP-00477,USR-168,The Wi-Fi connection in Main Building becomes very slow during evening.,2026-07-26 18:42,Internet & Network,LAN,Main Building,IT Services,Medium,Small Group,Closed,INC-010,Web,True,True
+CMP-00972,USR-038,The network keeps disconnecting in Campus Entrance.,2026-07-26 19:08,Internet & Network,Network Availability,Campus Entrance,IT Services,High,Large Group,Resolved,INC-014,Mobile,True,False
+CMP-00908,USR-152,Waste bins near Block C - Hostel are overflowing.,2026-07-27 18:05,Cleaning,Common Area,Block C - Hostel,Housekeeping,Medium,Small Group,Closed,,Mobile,True,True
+CMP-00933,USR-142,The projector in Canteen is not displaying properly.,2026-07-27 18:50,Classroom Equipment,Speaker,Canteen,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,True,True
+CMP-00202,USR-239,The washroom in Block A - Hostel has not been cleaned properly.,2026-07-27 19:07,Cleaning,Washroom Cleaning,Block A - Hostel,Housekeeping,Medium,Individual,Resolved,,Mobile,False,True
+CMP-00212,USR-146,There is a power outage affecting Main Building.,2026-07-27 19:37,Electricity,Power Outage,Main Building,Electrical Maintenance,High,Multiple Users,Closed,,Web,False,True
+CMP-00469,USR-037,There has been no water supply in CSE Block since since yesterday.,2026-07-28 12:11,Water & Sanitation,Water Supply,CSE Block,Facilities & Maintenance,High,Multiple Users,Resolved,INC-032,Mobile,True,True
+CMP-00295,USR-205,Water is leaking near ECE Block and the floor remains wet.,2026-07-28 13:11,Water & Sanitation,Drainage,ECE Block,Facilities & Maintenance,Medium,Large Group,Reopened,INC-025,Web,False,True
+CMP-00667,USR-060,The queue at Block B - Hostel is unusually long during lunch.,2026-07-28 13:20,Canteen,Food Quality,Block B - Hostel,Food Services,Low,Large Group,Reopened,,Mobile,True,False
+CMP-00682,USR-149,There has been no water supply in Transport Bay since for two days.,2026-07-28 13:40,Water & Sanitation,Washroom,Transport Bay,Facilities & Maintenance,High,Large Group,Reopened,INC-016,Mobile,True,True
+CMP-00685,USR-046,"Water pressure has been very low in Block C - Hostel, especially during 6 PM–10 PM.",2026-07-28 15:00,Water & Sanitation,Water Pressure,Block C - Hostel,Facilities & Maintenance,High,Large Group,Resolved,,Web,False,True
+CMP-00579,USR-049,The washroom in Seminar Hall has not been cleaned properly.,2026-07-28 17:23,Cleaning,Room Cleaning,Seminar Hall,Housekeeping,Medium,Individual,Investigating,,Web,True,False
+CMP-00702,USR-090,The computer systems in CSE Block are extremely slow.,2026-07-28 18:58,Classroom Equipment,Computer,CSE Block,Academic Infrastructure,Medium,Large Group,Assigned,,Web,True,False
+CMP-00515,USR-082,The campus bus has not arrived at Campus Entrance on time.,2026-07-29 09:23,Transport,Bus Availability,Campus Entrance,Transport Services,Medium,Small Group,Resolved,,Web,False,False
+CMP-00105,USR-045,The projector in Campus Entrance is not displaying properly.,2026-07-29 18:52,Classroom Equipment,Smart Board,Campus Entrance,Academic Infrastructure,Medium,Individual,Investigating,,Mobile,False,False
+CMP-00196,USR-047,The computer systems in CSE Block are extremely slow.,2026-07-29 20:25,Classroom Equipment,Speaker,CSE Block,Academic Infrastructure,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00634,USR-202,There is a power outage affecting Computer Lab 2.,2026-07-29 21:35,Electricity,Fan,Computer Lab 2,Electrical Maintenance,High,Multiple Users,Reopened,,Web,False,True
+CMP-00837,USR-180,The CCTV camera near Block B - Hostel appears to be offline.,2026-07-30 12:36,Safety,Security,Block B - Hostel,Security Services,High,Multiple Users,Closed,,Mobile,False,False
+CMP-00663,USR-020,The network keeps disconnecting in Computer Lab 1.,2026-07-30 12:53,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Multiple Users,Investigating,INC-026,Web,False,False
+CMP-00734,USR-059,There is a power outage affecting Canteen.,2026-07-30 14:12,Electricity,Fan,Canteen,Electrical Maintenance,High,Multiple Users,Reopened,,Web,False,False
+CMP-00087,USR-018,The Wi-Fi connection in Sports Ground becomes very slow during morning.,2026-07-30 15:05,Internet & Network,Internet Speed,Sports Ground,IT Services,Medium,Individual,Closed,INC-009,Mobile,False,True
+CMP-00084,USR-127,Water is leaking near Canteen and the floor remains wet.,2026-07-30 15:58,Water & Sanitation,Leakage,Canteen,Facilities & Maintenance,Medium,Individual,Investigating,,Web,True,False
+CMP-00658,USR-188,The computer systems in Seminar Hall are extremely slow.,2026-07-30 20:54,Classroom Equipment,Speaker,Seminar Hall,Academic Infrastructure,Medium,Small Group,Investigating,,Web,True,False
+CMP-00329,USR-162,The lights in Sports Ground are flickering repeatedly.,2026-07-31 10:57,Electricity,Socket,Sports Ground,Electrical Maintenance,Medium,Individual,Closed,,Web,True,True
+CMP-00760,USR-096,There is a power outage affecting Main Building.,2026-07-31 11:03,Electricity,AC,Main Building,Electrical Maintenance,High,Large Group,Closed,,Web,True,True
+CMP-00968,USR-162,The furniture in Computer Lab 1 is broken and needs repair.,2026-07-31 19:03,Hostel,Security,Computer Lab 1,Hostel Administration,Medium,Individual,Assigned,,Web,True,False
+CMP-00184,USR-015,The washroom in Canteen has not been cleaned properly.,2026-07-31 21:05,Cleaning,Common Area,Canteen,Housekeeping,Medium,Large Group,Assigned,,Web,False,False
+CMP-00175,USR-206,Food served at Campus Entrance was cold today.,2026-08-01 11:03,Canteen,Queue,Campus Entrance,Food Services,Medium,Individual,Closed,,Mobile,False,False
+CMP-00239,USR-035,The computer systems in Campus Entrance are extremely slow.,2026-08-01 19:20,Classroom Equipment,Smart Board,Campus Entrance,Academic Infrastructure,Medium,Multiple Users,Investigating,,Mobile,True,False
+CMP-00034,USR-168,The computer systems in Computer Lab 2 are extremely slow.,2026-08-02 08:19,Classroom Equipment,Speaker,Computer Lab 2,Academic Infrastructure,Medium,Large Group,Closed,,Web,True,False
+CMP-00068,USR-117,The Wi-Fi connection in Canteen becomes very slow during afternoon.,2026-08-02 10:31,Internet & Network,Internet Speed,Canteen,IT Services,Medium,Large Group,Closed,,Mobile,False,False
+CMP-00567,USR-107,The washroom in Block C - Hostel has not been cleaned properly.,2026-08-02 10:47,Cleaning,Washroom Cleaning,Block C - Hostel,Housekeeping,Medium,Individual,Resolved,,Web,False,False
+CMP-00188,USR-126,The door lock in Main Building is damaged.,2026-08-03 09:21,Hostel,Food,Main Building,Hostel Administration,High,Large Group,Closed,,Mobile,False,False
+CMP-00909,USR-190,The computer systems in Seminar Hall are extremely slow.,2026-08-03 15:33,Classroom Equipment,Microphone,Seminar Hall,Academic Infrastructure,Medium,Large Group,Investigating,,Web,False,False
+CMP-00461,USR-122,The pathway near Campus Entrance is damaged and difficult to use.,2026-08-04 13:03,Infrastructure,Lighting,Campus Entrance,Facilities & Maintenance,Medium,Individual,Investigating,,Web,True,False
+CMP-00264,USR-102,Food served at Block A - Hostel was cold today.,2026-08-04 14:52,Canteen,Food Quality,Block A - Hostel,Food Services,Medium,Small Group,Resolved,,Web,False,True
+CMP-00527,USR-102,Water is leaking near Transport Bay and the floor remains wet.,2026-08-04 20:30,Water & Sanitation,Water Supply,Transport Bay,Facilities & Maintenance,Medium,Individual,Reopened,,Web,True,True
+CMP-00185,USR-122,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-08-05 14:41,Water & Sanitation,Washroom,Computer Lab 1,Facilities & Maintenance,Medium,Individual,Investigating,,Web,True,False
+CMP-00481,USR-238,The Wi-Fi connection in Parking Area becomes very slow during evening.,2026-08-05 18:39,Internet & Network,Internet Speed,Parking Area,IT Services,Medium,Individual,Closed,INC-001,Web,False,False
+CMP-00224,USR-099,"Water pressure has been very low in Sports Ground, especially during afternoon.",2026-08-05 18:56,Water & Sanitation,Drainage,Sports Ground,Facilities & Maintenance,High,Large Group,Assigned,INC-016,Web,False,False
+CMP-00673,USR-206,"Water pressure has been very low in Main Building, especially during afternoon.",2026-08-05 19:21,Water & Sanitation,Water Pressure,Main Building,Facilities & Maintenance,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00995,USR-210,The queue at Sports Ground is unusually long during lunch.,2026-08-06 09:36,Canteen,Payment,Sports Ground,Food Services,Low,Individual,Closed,,Web,True,False
+CMP-00367,USR-141,Several systems in Block C - Hostel cannot access the internet.,2026-08-07 08:08,Internet & Network,LAN,Block C - Hostel,IT Services,High,Multiple Users,Investigating,INC-005,Web,True,False
+CMP-00304,USR-118,The Wi-Fi connection in Transport Bay becomes very slow during evening.,2026-08-07 14:13,Internet & Network,LAN,Transport Bay,IT Services,Medium,Multiple Users,Open,INC-008,Mobile,False,False
+CMP-00414,USR-105,The projector in Block C - Hostel is not displaying properly.,2026-08-07 14:31,Classroom Equipment,Projector,Block C - Hostel,Academic Infrastructure,Medium,Small Group,Investigating,,Web,False,False
+CMP-00523,USR-136,The projector in Block C - Hostel is not displaying properly.,2026-08-07 16:49,Classroom Equipment,Projector,Block C - Hostel,Academic Infrastructure,Medium,Individual,Closed,,Mobile,False,False
+CMP-00997,USR-049,The network keeps disconnecting in CSE Block.,2026-08-08 11:37,Internet & Network,Internet Speed,CSE Block,IT Services,High,Large Group,Closed,,Mobile,False,False
+CMP-00774,USR-096,There has been no water supply in ECE Block since for two days.,2026-08-08 12:25,Water & Sanitation,Leakage,ECE Block,Facilities & Maintenance,High,Large Group,Resolved,,Web,True,False
+CMP-00788,USR-002,The Wi-Fi connection in Main Building becomes very slow during afternoon.,2026-08-08 15:07,Internet & Network,LAN,Main Building,IT Services,Medium,Large Group,Closed,,Web,False,False
+CMP-00141,USR-032,Waste bins near Campus Entrance are overflowing.,2026-08-09 13:25,Cleaning,Common Area,Campus Entrance,Housekeeping,Medium,Individual,Assigned,,Web,True,False
+CMP-00655,USR-223,Several systems in ECE Block cannot access the internet.,2026-08-09 14:25,Internet & Network,Internet Speed,ECE Block,IT Services,High,Large Group,Resolved,INC-014,Mobile,False,False
+CMP-00484,USR-204,The CCTV camera near ECE Block appears to be offline.,2026-08-09 20:34,Safety,Security,ECE Block,Security Services,High,Large Group,Open,,Mobile,True,False
+CMP-00922,USR-098,Several systems in Block A - Hostel cannot access the internet.,2026-08-10 13:54,Internet & Network,Internet Speed,Block A - Hostel,IT Services,High,Multiple Users,Resolved,,Web,False,True
+CMP-00882,USR-232,The Wi-Fi connection in Block C - Hostel becomes very slow during evening.,2026-08-11 08:53,Internet & Network,LAN,Block C - Hostel,IT Services,Medium,Small Group,Reopened,INC-034,Web,False,True
+CMP-00129,USR-244,There has been no water supply in Campus Entrance since for three days.,2026-08-11 13:39,Water & Sanitation,Water Pressure,Campus Entrance,Facilities & Maintenance,High,Multiple Users,Resolved,INC-033,Web,False,False
+CMP-00691,USR-001,The CCTV camera near Block B - Hostel appears to be offline.,2026-08-11 16:17,Safety,Emergency Equipment,Block B - Hostel,Security Services,High,Large Group,Resolved,,Web,True,False
+CMP-00687,USR-088,The CCTV camera near Block B - Hostel appears to be offline.,2026-08-11 18:10,Safety,Security,Block B - Hostel,Security Services,High,Large Group,Investigating,,Web,False,False
+CMP-00056,USR-241,The network keeps disconnecting in Canteen.,2026-08-11 20:31,Internet & Network,Network Availability,Canteen,IT Services,High,Large Group,Resolved,INC-004,Web,True,True
+CMP-00893,USR-188,The pathway near Central Library is damaged and difficult to use.,2026-08-12 11:43,Infrastructure,Furniture,Central Library,Facilities & Maintenance,Medium,Large Group,Investigating,,Web,False,False
+CMP-00281,USR-149,There is a power outage affecting Campus Entrance.,2026-08-12 12:26,Electricity,Socket,Campus Entrance,Electrical Maintenance,High,Large Group,Resolved,INC-004,Mobile,True,False
+CMP-00517,USR-091,Food served at ECE Block was cold today.,2026-08-12 13:52,Canteen,Hygiene,ECE Block,Food Services,Medium,Multiple Users,Open,,Mobile,True,False
+CMP-00776,USR-028,There is a power outage affecting Central Library.,2026-08-12 15:42,Electricity,AC,Central Library,Electrical Maintenance,High,Large Group,Resolved,,Web,False,True
+CMP-00452,USR-250,The network keeps disconnecting in CSE Block.,2026-08-12 18:08,Internet & Network,LAN,CSE Block,IT Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00234,USR-003,The computer systems in Block B - Hostel are extremely slow.,2026-08-13 15:55,Classroom Equipment,Computer,Block B - Hostel,Academic Infrastructure,Medium,Multiple Users,Open,,Web,False,False
+CMP-00012,USR-043,There has been no water supply in Main Building since since this morning.,2026-08-13 17:05,Water & Sanitation,Washroom,Main Building,Facilities & Maintenance,High,Multiple Users,Investigating,,Web,True,False
+CMP-00775,USR-146,The lights in Transport Bay are flickering repeatedly.,2026-08-13 18:02,Electricity,Fan,Transport Bay,Electrical Maintenance,Medium,Individual,Investigating,INC-025,Web,True,False
+CMP-00272,USR-095,Several systems in Main Building cannot access the internet.,2026-08-13 21:12,Internet & Network,Network Availability,Main Building,IT Services,High,Large Group,Open,INC-013,Web,True,False
+CMP-00640,USR-236,The Wi-Fi connection in Block C - Hostel becomes very slow during morning.,2026-08-14 10:50,Internet & Network,Internet Speed,Block C - Hostel,IT Services,Medium,Large Group,Closed,INC-028,Web,False,False
+CMP-00306,USR-249,The CCTV camera near Seminar Hall appears to be offline.,2026-08-14 13:32,Safety,CCTV,Seminar Hall,Security Services,High,Large Group,Assigned,,Web,True,False
+CMP-00373,USR-057,The fan is not working in Central Library.,2026-08-14 16:27,Electricity,AC,Central Library,Electrical Maintenance,Medium,Small Group,Closed,,Web,True,False
+CMP-00819,USR-127,The lights in Main Building are flickering repeatedly.,2026-08-14 17:44,Electricity,Lighting,Main Building,Electrical Maintenance,Medium,Large Group,Open,,Mobile,False,False
+CMP-00721,USR-217,The queue at Campus Entrance is unusually long during lunch.,2026-08-14 21:14,Canteen,Seating,Campus Entrance,Food Services,Low,Multiple Users,Resolved,,Web,True,True
+CMP-00256,USR-066,Several systems in Canteen cannot access the internet.,2026-08-15 09:52,Internet & Network,Network Availability,Canteen,IT Services,High,Large Group,Investigating,,Web,True,False
+CMP-00246,USR-023,The lights in Computer Lab 1 are flickering repeatedly.,2026-08-15 10:02,Electricity,Power Outage,Computer Lab 1,Electrical Maintenance,Medium,Large Group,Resolved,,Web,True,True
+CMP-00669,USR-174,There has been no water supply in Block B - Hostel since since this morning.,2026-08-15 11:26,Water & Sanitation,Drainage,Block B - Hostel,Facilities & Maintenance,High,Multiple Users,Investigating,INC-021,Mobile,False,False
+CMP-00406,USR-222,The washroom in Sports Ground has not been cleaned properly.,2026-08-15 18:24,Cleaning,Common Area,Sports Ground,Housekeeping,Medium,Individual,Closed,,Mobile,True,True
+CMP-00475,USR-126,The campus bus has not arrived at Block B - Hostel on time.,2026-08-15 18:28,Transport,Bus Availability,Block B - Hostel,Transport Services,Medium,Individual,Investigating,,Web,True,False
+CMP-00595,USR-157,The door lock in Central Library is damaged.,2026-08-15 18:44,Hostel,Security,Central Library,Hostel Administration,High,Multiple Users,Closed,,Mobile,True,False
+CMP-00810,USR-070,There has been no water supply in CSE Block since since yesterday.,2026-08-15 20:02,Water & Sanitation,Drainage,CSE Block,Facilities & Maintenance,High,Multiple Users,Investigating,,Mobile,False,False
+CMP-00730,USR-042,"Water pressure has been very low in ECE Block, especially during morning.",2026-08-15 21:45,Water & Sanitation,Water Supply,ECE Block,Facilities & Maintenance,High,Large Group,Open,INC-022,Mobile,True,False
+CMP-00437,USR-083,Waste bins near Computer Lab 1 are overflowing.,2026-08-16 08:06,Cleaning,Washroom Cleaning,Computer Lab 1,Housekeeping,Medium,Multiple Users,Resolved,,Mobile,False,False
+CMP-00394,USR-198,The queue at Block C - Hostel is unusually long during lunch.,2026-08-16 12:00,Canteen,Food Quality,Block C - Hostel,Food Services,Low,Small Group,Closed,,Web,False,True
+CMP-00755,USR-170,The door lock in Block C - Hostel is damaged.,2026-08-17 18:43,Hostel,Food,Block C - Hostel,Hostel Administration,High,Multiple Users,Investigating,,Web,False,False
+CMP-00737,USR-026,There is a power outage affecting ECE Block.,2026-08-18 08:11,Electricity,Socket,ECE Block,Electrical Maintenance,High,Large Group,Investigating,,Web,False,False
+CMP-00741,USR-239,Food served at ECE Block was cold today.,2026-08-18 13:28,Canteen,Hygiene,ECE Block,Food Services,Medium,Individual,Resolved,,Mobile,True,True
+CMP-00511,USR-086,The door lock in Campus Entrance is damaged.,2026-08-18 14:08,Hostel,Security,Campus Entrance,Hostel Administration,High,Large Group,Resolved,,Web,True,True
+CMP-00409,USR-249,The network keeps disconnecting in ECE Block.,2026-08-18 14:42,Internet & Network,LAN,ECE Block,IT Services,High,Multiple Users,Resolved,,Web,False,False
+CMP-00566,USR-032,The door lock in Block B - Hostel is damaged.,2026-08-18 15:02,Hostel,Furniture,Block B - Hostel,Hostel Administration,High,Large Group,Resolved,,Web,True,True
+CMP-00838,USR-030,The network keeps disconnecting in Main Building.,2026-08-18 18:40,Internet & Network,Internet Speed,Main Building,IT Services,High,Multiple Users,Closed,,Web,True,True
+CMP-00378,USR-189,Several systems in Main Building cannot access the internet.,2026-08-18 21:16,Internet & Network,Internet Speed,Main Building,IT Services,High,Multiple Users,Assigned,,Web,False,False
+CMP-00728,USR-058,The queue at Computer Lab 2 is unusually long during lunch.,2026-08-19 10:26,Canteen,Seating,Computer Lab 2,Food Services,Low,Individual,Investigating,,Web,True,False
+CMP-00798,USR-069,The projector in Block B - Hostel is not displaying properly.,2026-08-19 11:01,Classroom Equipment,Smart Board,Block B - Hostel,Academic Infrastructure,Medium,Small Group,Open,,Web,True,False
+CMP-00133,USR-139,The furniture in Block C - Hostel is broken and needs repair.,2026-08-19 19:28,Hostel,Security,Block C - Hostel,Hostel Administration,Medium,Multiple Users,Closed,,Web,False,True
+CMP-00970,USR-146,Water is leaking near Computer Lab 1 and the floor remains wet.,2026-08-19 19:31,Water & Sanitation,Leakage,Computer Lab 1,Facilities & Maintenance,Medium,Multiple Users,Assigned,INC-029,Web,True,False
+CMP-00889,USR-134,"Water pressure has been very low in Seminar Hall, especially during morning.",2026-08-20 08:57,Water & Sanitation,Drainage,Seminar Hall,Facilities & Maintenance,High,Multiple Users,Assigned,INC-028,Mobile,True,False
+CMP-00120,USR-061,The CCTV camera near Block A - Hostel appears to be offline.,2026-08-20 09:01,Safety,CCTV,Block A - Hostel,Security Services,High,Large Group,Open,,Web,True,False
+CMP-00456,USR-108,The CCTV camera near Block A - Hostel appears to be offline.,2026-08-20 13:34,Safety,CCTV,Block A - Hostel,Security Services,High,Large Group,Resolved,,Web,False,False
+CMP-00219,USR-110,The projector in Canteen is not displaying properly.,2026-08-20 18:10,Classroom Equipment,Smart Board,Canteen,Academic Infrastructure,Medium,Multiple Users,Closed,,Web,True,True
+CMP-00468,USR-098,The door lock in Campus Entrance is damaged.,2026-08-20 18:49,Hostel,Room Maintenance,Campus Entrance,Hostel Administration,High,Multiple Users,Investigating,,Web,False,False
+CMP-00176,USR-179,The fan is not working in Sports Ground.,2026-08-21 13:19,Electricity,Fan,Sports Ground,Electrical Maintenance,Medium,Small Group,Reopened,INC-031,Mobile,False,False
+CMP-00283,USR-081,The pathway near Transport Bay is damaged and difficult to use.,2026-08-21 15:09,Infrastructure,Furniture,Transport Bay,Facilities & Maintenance,Medium,Individual,Resolved,,Web,True,False
+CMP-00340,USR-154,The queue at Sports Ground is unusually long during lunch.,2026-08-21 16:43,Canteen,Hygiene,Sports Ground,Food Services,Low,Individual,Investigating,,Web,True,False
+CMP-00459,USR-125,The CCTV camera near Block C - Hostel appears to be offline.,2026-08-21 17:47,Safety,Emergency Equipment,Block C - Hostel,Security Services,High,Multiple Users,Investigating,,Mobile,True,False
+CMP-00514,USR-149,Several systems in Computer Lab 1 cannot access the internet.,2026-08-21 19:41,Internet & Network,Network Availability,Computer Lab 1,IT Services,High,Large Group,Resolved,,Web,True,False
+CMP-00753,USR-126,The network keeps disconnecting in Block A - Hostel.,2026-08-22 11:01,Internet & Network,Wi-Fi,Block A - Hostel,IT Services,High,Multiple Users,Assigned,INC-025,Mobile,True,False
+CMP-00878,USR-178,The pathway near CSE Block is damaged and difficult to use.,2026-08-22 11:21,Infrastructure,Road,CSE Block,Facilities & Maintenance,Medium,Small Group,Resolved,,Mobile,True,False
+CMP-00953,USR-178,Water is leaking near Sports Ground and the floor remains wet.,2026-08-22 14:07,Water & Sanitation,Water Pressure,Sports Ground,Facilities & Maintenance,Medium,Multiple Users,Resolved,,Web,False,False
+CMP-00629,USR-078,Water is leaking near Block A - Hostel and the floor remains wet.,2026-08-23 08:24,Water & Sanitation,Water Supply,Block A - Hostel,Facilities & Maintenance,Medium,Small Group,Open,,Mobile,True,False
+CMP-00519,USR-036,The door lock in Computer Lab 1 is damaged.,2026-08-23 09:07,Hostel,Laundry,Computer Lab 1,Hostel Administration,High,Large Group,Assigned,,Web,False,False
+CMP-00110,USR-017,The projector in ECE Block is not displaying properly.,2026-08-23 12:24,Classroom Equipment,Microphone,ECE Block,Academic Infrastructure,Medium,Individual,Closed,,Web,True,False
+CMP-00333,USR-163,The computer systems in Computer Lab 1 are extremely slow.,2026-08-23 15:56,Classroom Equipment,Speaker,Computer Lab 1,Academic Infrastructure,Medium,Multiple Users,Open,,Web,False,False
+CMP-00357,USR-129,Several systems in Parking Area cannot access the internet.,2026-08-23 16:17,Internet & Network,Wi-Fi,Parking Area,IT Services,High,Multiple Users,Resolved,INC-035,Web,True,True
+CMP-00317,USR-132,Waste bins near Central Library are overflowing.,2026-08-23 20:07,Cleaning,Waste Disposal,Central Library,Housekeeping,Medium,Multiple Users,Open,,Mobile,True,False
+CMP-00550,USR-137,There has been no water supply in Campus Entrance since for three days.,2026-08-23 20:42,Water & Sanitation,Water Supply,Campus Entrance,Facilities & Maintenance,High,Large Group,Resolved,,Mobile,True,False
+CMP-00859,USR-206,Waste bins near Central Library are overflowing.,2026-08-24 08:15,Cleaning,Room Cleaning,Central Library,Housekeeping,Medium,Individual,Investigating,,Web,False,False
+CMP-00884,USR-188,Water is leaking near Campus Entrance and the floor remains wet.,2026-08-24 13:28,Water & Sanitation,Water Pressure,Campus Entrance,Facilities & Maintenance,Medium,Large Group,Assigned,,Mobile,True,False
+CMP-00593,USR-184,The door lock in Central Library is damaged.,2026-08-24 14:57,Hostel,Room Maintenance,Central Library,Hostel Administration,High,Large Group,Investigating,,Mobile,True,False
+CMP-00297,USR-245,The network keeps disconnecting in Computer Lab 1.,2026-08-24 15:07,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Multiple Users,Investigating,INC-034,Web,True,False
+CMP-00029,USR-222,The fan is not working in Sports Ground.,2026-08-24 15:22,Electricity,Lighting,Sports Ground,Electrical Maintenance,Medium,Small Group,Open,INC-022,Web,False,False
+CMP-00255,USR-061,The CCTV camera near ECE Block appears to be offline.,2026-08-24 20:39,Safety,Security,ECE Block,Security Services,High,Multiple Users,Assigned,,Web,False,False
+CMP-00892,USR-243,Waste bins near Transport Bay are overflowing.,2026-08-25 08:27,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Small Group,Closed,,Web,False,True
+CMP-00504,USR-113,Several systems in Seminar Hall cannot access the internet.,2026-08-25 10:45,Internet & Network,Internet Speed,Seminar Hall,IT Services,High,Multiple Users,Investigating,INC-021,Web,False,False
+CMP-00186,USR-238,Water is leaking near Canteen and the floor remains wet.,2026-08-25 12:57,Water & Sanitation,Drainage,Canteen,Facilities & Maintenance,Medium,Multiple Users,Open,INC-010,Web,False,False
+CMP-00094,USR-143,The network keeps disconnecting in Canteen.,2026-08-25 15:04,Internet & Network,Internet Speed,Canteen,IT Services,High,Large Group,Open,,Web,False,False
+CMP-00672,USR-134,There has been no water supply in Main Building since for three days.,2026-08-25 19:38,Water & Sanitation,Water Supply,Main Building,Facilities & Maintenance,High,Large Group,Assigned,,Web,False,False
+CMP-00962,USR-196,The furniture in Block C - Hostel is broken and needs repair.,2026-08-25 21:11,Hostel,Laundry,Block C - Hostel,Hostel Administration,Medium,Individual,Resolved,,Web,False,True
+CMP-00156,USR-167,"Water pressure has been very low in Computer Lab 2, especially during evening.",2026-08-26 10:26,Water & Sanitation,Water Supply,Computer Lab 2,Facilities & Maintenance,High,Large Group,Assigned,,Mobile,False,False
+CMP-00506,USR-205,The network keeps disconnecting in Computer Lab 1.,2026-08-26 13:09,Internet & Network,Internet Speed,Computer Lab 1,IT Services,High,Large Group,Closed,,Mobile,True,False
+CMP-00695,USR-171,Several systems in Transport Bay cannot access the internet.,2026-08-26 13:57,Internet & Network,Wi-Fi,Transport Bay,IT Services,High,Large Group,Resolved,,Mobile,True,True
+CMP-00322,USR-035,The washroom in Parking Area has not been cleaned properly.,2026-08-26 15:24,Cleaning,Washroom Cleaning,Parking Area,Housekeeping,Medium,Large Group,Investigating,,Web,False,False
+CMP-00974,USR-004,The computer systems in Sports Ground are extremely slow.,2026-08-26 15:41,Classroom Equipment,Computer,Sports Ground,Academic Infrastructure,Medium,Small Group,Resolved,,Web,False,True
+CMP-00347,USR-239,The network keeps disconnecting in Computer Lab 1.,2026-08-26 17:27,Internet & Network,LAN,Computer Lab 1,IT Services,High,Multiple Users,Assigned,,Web,False,False
+CMP-00425,USR-195,The pathway near ECE Block is damaged and difficult to use.,2026-08-27 08:05,Infrastructure,Road,ECE Block,Facilities & Maintenance,Medium,Multiple Users,Closed,,Web,True,False
+CMP-00028,USR-098,Waste bins near Parking Area are overflowing.,2026-08-27 14:51,Cleaning,Room Cleaning,Parking Area,Housekeeping,Medium,Small Group,Closed,,Web,True,True
+CMP-00726,USR-158,The washroom in Transport Bay has not been cleaned properly.,2026-08-27 18:32,Cleaning,Room Cleaning,Transport Bay,Housekeeping,Medium,Large Group,Open,,Web,False,False
+CMP-00446,USR-079,Water is leaking near Campus Entrance and the floor remains wet.,2026-08-27 19:36,Water & Sanitation,Water Pressure,Campus Entrance,Facilities & Maintenance,Medium,Large Group,Assigned,INC-029,Web,True,False
+CMP-00724,USR-109,Several systems in Canteen cannot access the internet.,2026-08-27 20:33,Internet & Network,Wi-Fi,Canteen,IT Services,High,Large Group,Closed,,Web,True,True
+CMP-00397,USR-082,The door lock in Central Library is damaged.,2026-08-27 21:07,Hostel,Room Maintenance,Central Library,Hostel Administration,High,Multiple Users,Assigned,,Mobile,False,False
+CMP-00117,USR-116,The projector in Computer Lab 2 is not displaying properly.,2026-08-28 09:45,Classroom Equipment,Microphone,Computer Lab 2,Academic Infrastructure,Medium,Individual,Closed,,Mobile,False,False
+CMP-00161,USR-245,The campus bus has not arrived at ECE Block on time.,2026-08-28 11:00,Transport,Bus Condition,ECE Block,Transport Services,Medium,Small Group,Resolved,,Web,False,True
+CMP-00954,USR-070,The fan is not working in Parking Area.,2026-08-28 14:17,Electricity,Lighting,Parking Area,Electrical Maintenance,Medium,Individual,Resolved,,Web,True,True
+CMP-00853,USR-137,There is a power outage affecting Sports Ground.,2026-08-29 12:59,Electricity,Power Outage,Sports Ground,Electrical Maintenance,High,Multiple Users,Closed,INC-019,Mobile,False,False
+CMP-00436,USR-002,The Wi-Fi connection in Sports Ground becomes very slow during morning.,2026-08-29 16:43,Internet & Network,Wi-Fi,Sports Ground,IT Services,Medium,Individual,Resolved,,Web,True,True
+CMP-00927,USR-038,The queue at Block A - Hostel is unusually long during lunch.,2026-08-29 18:25,Canteen,Hygiene,Block A - Hostel,Food Services,Low,Individual,Investigating,,Web,True,False
+CMP-00472,USR-139,The queue at Campus Entrance is unusually long during lunch.,2026-08-29 20:31,Canteen,Food Quality,Campus Entrance,Food Services,Low,Large Group,Closed,,Mobile,True,False
+CMP-00706,USR-063,The campus bus has not arrived at Block C - Hostel on time.,2026-08-30 08:07,Transport,Driver,Block C - Hostel,Transport Services,Medium,Small Group,Resolved,,Web,True,True
+CMP-00740,USR-033,The Wi-Fi connection in Block B - Hostel becomes very slow during afternoon.,2026-08-30 16:39,Internet & Network,Wi-Fi,Block B - Hostel,IT Services,Medium,Large Group,Reopened,INC-010,Mobile,True,False
+CMP-00173,USR-062,There has been no water supply in ECE Block since for three days.,2026-08-30 18:42,Water & Sanitation,Drainage,ECE Block,Facilities & Maintenance,High,Large Group,Investigating,INC-035,Mobile,False,False
+CMP-00026,USR-079,The Wi-Fi connection in Block B - Hostel becomes very slow during morning.,2026-08-30 19:57,Internet & Network,Wi-Fi,Block B - Hostel,IT Services,Medium,Multiple Users,Resolved,INC-009,Web,True,False

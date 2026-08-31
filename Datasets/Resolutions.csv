@@ -1,0 +1,76 @@
+resolution_id,incident_id,attempt_number,action_taken,performed_by,performed_at,action_type,outcome,success,resolution_time_hours,verification_status,user_feedback_summary,follow_up_required,incident_final_status
+RES-00001,INC-001,1,Rebooted edge router and refreshed IP leases,Tech Support Team A,2026-01-15 09:30:00,Maintenance,Failed,False,2.5,Not Verified,User reported speed still throttled after 10 mins,True,In Progress
+RES-00002,INC-001,2,Replaced faulty edge router hardware and updated firmware,Network Ops,2026-01-15 14:00:00,Replacement,Successful,True,4.0,Verified,Full connectivity restored across block,False,Resolved
+RES-00003,INC-002,1,Flushed local DNS cache on regional server,IT Ops,2026-01-18 10:15:00,Configuration Change,Failed,False,1.5,Not Verified,Domain resolution issues persisted,True,In Progress
+RES-00004,INC-002,2,Replaced corrupt DNS gateway route and synchronized backup node,Network Ops,2026-01-18 13:45:00,Infrastructure Upgrade,Successful,True,3.5,Verified,Portal loaded instantly,False,Resolved
+RES-00005,INC-003,1,Cleared blockage in primary drainage line,Facilities Team B,2026-01-20 08:00:00,Cleaning,Failed,False,3.0,Disputed,Water backup returned within 2 hours,True,In Progress
+RES-00006,INC-003,2,Replaced collapsed section of PVC main line,Plumbing Dept,2026-01-20 16:30:00,Repair,Successful,True,8.5,Verified,Drainage operating normally,False,Resolved
+RES-00007,INC-004,1,Reset HVAC thermostat schedule,Building Maintenance,2026-01-22 11:00:00,Schedule Change,Failed,False,1.0,Not Verified,Temperature remained stuck at 82F,True,In Progress
+RES-00008,INC-004,2,Replaced blown compressor capacitor,HVAC Support,2026-01-22 15:20:00,Repair,Successful,True,4.2,Verified,Cooling operational,False,Resolved
+RES-00009,INC-005,1,Soft restart of Block A Wi-Fi access points,Network Ops,2026-01-25 19:10:00,Maintenance,Failed,False,0.8,Not Verified,Signal dropped immediately during high demand,True,In Progress
+RES-00010,INC-005,2,Deployed dual high-density AP nodes in Block A corridor,Network Ops,2026-01-26 10:00:00,Infrastructure Upgrade,Successful,True,5.0,Verified,Bandwidth stabilized during peak hours,False,Resolved
+RES-00011,INC-006,1,Reassigned evening janitorial shift,Operations,2026-01-28 08:30:00,Staff Reallocation,Partially Successful,False,2.0,Not Verified,Trash overflow reduced but bin capacity inadequate,True,In Progress
+RES-00012,INC-006,2,Installed 4 commercial dumpsters and doubled pickup cycle,Waste Mgmt,2026-01-29 09:00:00,Infrastructure Upgrade,Successful,True,3.0,Verified,Area clean and cleared,False,Resolved
+RES-00013,INC-007,1,Adjusted elevator sensor sensitivity,Vendor Tech,2026-02-01 12:00:00,Configuration Change,Failed,False,2.0,Disputed,Elevator door stalled again on Floor 3,True,In Progress
+RES-00014,INC-007,2,Replaced door optical sensor assembly,Vendor Tech,2026-02-01 17:00:00,Replacement,Successful,True,5.0,Verified,Elevator functioning smoothly,False,Resolved
+RES-00015,INC-008,1,Applied temporary sealant to roof leak above Lab 2,Facilities,2026-02-03 14:00:00,Temporary Fix,Failed,False,2.0,Not Verified,Rain leak breached sealant overnight,True,In Progress
+RES-00016,INC-008,2,Installed commercial elastomeric roof membrane,Contractor Team,2026-02-05 11:00:00,Repair,Successful,True,12.0,Verified,No water intrusion recorded,False,Resolved
+RES-00017,INC-009,1,Reset security gate access database,Campus Safety,2026-02-08 09:00:00,Configuration Change,Successful,True,1.5,Verified,RFID cards scanning properly,False,Resolved
+RES-00018,INC-010,1,Rebalanced water pump pressure output,Facilities,2026-02-10 07:30:00,Configuration Change,Failed,False,2.0,Not Verified,Low water pressure on upper floors persisted,True,In Progress
+RES-00019,INC-010,2,Replaced secondary booster pump impellers,Plumbing Dept,2026-02-10 15:00:00,Repair,Successful,True,7.5,Verified,Water pressure fully restored on Floor 4,False,Resolved
+RES-00020,INC-011,1,Updated SSO authentication server certs,IT Security,2026-02-12 10:00:00,Configuration Change,Successful,True,2.0,Verified,Login errors resolved for all users,False,Resolved
+RES-00021,INC-012,1,Tightened loose valve on radiator unit,Maintenance,2026-02-15 11:30:00,Repair,Failed,False,1.0,Disputed,Radiator leaking steam continuously,True,In Progress
+RES-00022,INC-012,2,Replaced radiator control valve and bleeder plug,HVAC Support,2026-02-15 16:00:00,Replacement,Successful,True,4.5,Verified,Heating operating without leaks,False,Resolved
+RES-00023,INC-013,1,Adjusted street lighting timer clock,Electrical,2026-02-18 18:00:00,Schedule Change,Failed,False,1.0,Not Verified,Lights failed to turn on at sunset,True,In Progress
+RES-00024,INC-013,2,Replaced faulty photocell relay control box,Electrical,2026-02-19 10:00:00,Replacement,Successful,True,3.0,Verified,Pathways adequately illuminated,False,Resolved
+RES-00025,INC-014,1,Repaired latch on West Gate emergency exit,Security Maintenance,2026-02-21 13:00:00,Repair,Successful,True,2.5,Verified,Door locks and alarm triggers correctly,False,Resolved
+RES-00026,INC-015,1,Patched local database connection pool,Software Engineering,2026-02-24 09:00:00,Temporary Fix,Failed,False,3.0,Not Verified,Timeout errors spiked at noon peak,True,In Progress
+RES-00027,INC-015,2,Scaled database connection pool max limits and optimized queries,DBA Team,2026-02-24 16:30:00,Configuration Change,Successful,True,7.5,Verified,Application latency under 200ms,False,Resolved
+RES-00028,INC-016,1,Cleaned mold from surface air vents,Sanitation,2026-02-26 10:00:00,Cleaning,Failed,False,2.0,Not Verified,Musty odor returned within 24 hours,True,In Progress
+RES-00029,INC-016,2,Replaced duct liner and installed UV air purification unit,HVAC Support,2026-02-28 14:00:00,Infrastructure Upgrade,Successful,True,10.0,Verified,Air quality test passed,False,Resolved
+RES-00030,INC-017,1,Re-calibrated cafeteria freezer temperature module,Vendor Maintenance,2026-03-02 08:30:00,Inspection,Failed,False,2.0,Not Verified,Freezer temp rose above safety threshold,True,In Progress
+RES-00031,INC-017,2,Replaced coolant line valve and recharged refrigerant,Vendor Maintenance,2026-03-02 14:00:00,Repair,Successful,True,5.5,Verified,Freezer holding -5F consistently,False,Resolved
+RES-00032,INC-018,1,Repaired physical keyboard hardware on terminal 3,IT Helpdesk,2026-03-05 11:00:00,Repair,Successful,True,1.0,Verified,Key input responding cleanly,False,Resolved
+RES-00033,INC-019,1,Patched storm drain grate near Parking Lot B,Grounds,2026-03-08 10:00:00,Temporary Fix,Failed,False,2.0,Not Verified,Water overflowed during rainstorm,True,In Progress
+RES-00034,INC-019,2,Excavated debris and installed enlarged drainage culvert,Grounds & Civil,2026-03-10 16:00:00,Infrastructure Upgrade,Successful,True,14.0,Verified,No water pooling during heavy rainfall,False,Resolved
+RES-00035,INC-020,1,Re-assigned security guards during night shift,Campus Security,2026-03-12 20:00:00,Staff Reallocation,Successful,True,1.5,Verified,Noise complaints dropped to zero,False,Resolved
+RES-00036,INC-021,1,Replaced burned out hallway fluorescent bulb,Electrical,2026-03-15 09:00:00,Replacement,Successful,True,0.5,Verified,Hallway lighting restored,False,Resolved
+RES-00037,INC-022,1,Reset router on Floor 2,Network Ops,2026-03-18 10:00:00,Maintenance,Failed,False,1.0,Not Verified,Packet loss still exceeding 30%,True,In Progress
+RES-00038,INC-022,2,Replaced damaged Ethernet backhaul cabling,Network Ops,2026-03-18 15:30:00,Repair,Successful,True,5.5,Verified,Zero packet loss reported,False,Resolved
+RES-00039,INC-023,1,Greased noisy exhaust fan bearings,Facilities,2026-03-21 11:00:00,Maintenance,Failed,False,1.5,Not Verified,Loud screeching resumed after 3 hours,True,In Progress
+RES-00040,INC-023,2,Replaced worn fan belt and fan motor assembly,Facilities,2026-03-21 16:00:00,Replacement,Successful,True,4.0,Verified,Noise level within ambient specs,False,Resolved
+RES-00041,INC-024,1,Reprogrammed RFID entry card reader,Security Systems,2026-03-24 09:30:00,Configuration Change,Successful,True,1.5,Verified,Door Unlocked cleanly for lab members,False,Resolved
+RES-00042,INC-025,1,Poured chemical drain opener down clogged sink,Maintenance,2026-03-27 10:00:00,Cleaning,Failed,False,1.0,Not Verified,Sink remained completely blocked,True,In Progress
+RES-00043,INC-025,2,Snaked grease trap line and cleared solid obstruction,Plumbing Dept,2026-03-27 14:00:00,Repair,Successful,True,3.5,Verified,Drain flowing at full speed,False,Resolved
+RES-00044,INC-026,1,Reinstalled print driver software on client machines,IT Services,2026-03-30 11:30:00,Configuration Change,Failed,False,2.0,Not Verified,Spooler service kept crashing,True,In Progress
+RES-00045,INC-026,2,Replaced network card inside central printer unit,IT Services,2026-03-30 15:00:00,Replacement,Successful,True,3.5,Verified,Print queue functioning normally,False,Resolved
+RES-00046,INC-027,1,Adjusted door closer tension screw,Maintenance,2026-04-02 08:30:00,Configuration Change,Failed,False,0.5,Disputed,Door still slamming shut violently,True,In Progress
+RES-00047,INC-027,2,Replaced hydraulic cylinder in heavy-duty door closer,Maintenance,2026-04-02 12:00:00,Replacement,Successful,True,2.0,Verified,Door closes smoothly and quietly,False,Resolved
+RES-00048,INC-028,1,Increased AC fan speed setting,Building Services,2026-04-05 14:00:00,Configuration Change,Failed,False,1.0,Not Verified,Humidity levels stayed at 85%,True,In Progress
+RES-00049,INC-028,2,Serviced commercial dehumidifier and cleared condensate drip pan,HVAC Support,2026-04-06 10:00:00,Maintenance,Successful,True,4.0,Verified,Humidity restored to 45%,False,Resolved
+RES-00050,INC-029,1,Replaced power strip under lab bench,Electrical,2026-04-08 11:00:00,Replacement,Successful,True,1.0,Verified,Equipment power stable,False,Resolved
+RES-00051,INC-030,1,Reset Wi-Fi credentials for Guest network,IT Ops,2026-04-10 09:00:00,Configuration Change,Failed,False,1.0,Not Verified,Authentication splash page stuck in loop,True,In Progress
+RES-00052,INC-030,2,Rebuilt guest portal SSL certificates and radius service,IT Security,2026-04-10 14:30:00,Configuration Change,Successful,True,5.0,Verified,Guest logins working smoothly,False,Resolved
+RES-00053,INC-031,1,Tightened leaky pipe fitting under water station,Plumbing Dept,2026-04-12 10:00:00,Repair,Failed,False,1.5,Not Verified,Water continuing to puddle beneath basin,True,In Progress
+RES-00054,INC-031,2,Replaced corroded copper elbow joints and seal ring,Plumbing Dept,2026-04-12 15:00:00,Replacement,Successful,True,4.0,Verified,Water station dry and operational,False,Resolved
+RES-00055,INC-032,1,Adjusted motion detector angle in hallway,Electrical,2026-04-15 13:00:00,Configuration Change,Failed,False,1.0,Not Verified,Lights shut off while occupants walking,True,In Progress
+RES-00056,INC-032,2,Replaced occupancy sensor with dual PIR/Ultrasound sensor,Electrical,2026-04-15 17:00:00,Replacement,Successful,True,3.0,Verified,Motion sensing active and accurate,False,Resolved
+RES-00057,INC-033,1,Cleared cache on mobile application gateway,Software Engineering,2026-04-18 10:00:00,Temporary Fix,Failed,False,2.0,Not Verified,Push notifications failing to deliver,True,In Progress
+RES-00058,INC-033,2,Patched FCM notification handler payload format,Software Engineering,2026-04-18 16:00:00,Configuration Change,Successful,True,6.0,Verified,Push alerts delivered in real-time,False,Resolved
+RES-00059,INC-034,1,Replaced blown fuse on exterior lighting grid,Electrical,2026-04-20 11:00:00,Repair,Failed,False,1.5,Not Verified,Fuse blew again after 20 minutes,True,In Progress
+RES-00060,INC-034,2,Replaced shorted subterranean power wiring section,Electrical,2026-04-21 15:00:00,Infrastructure Upgrade,Successful,True,9.0,Verified,Exterior lighting stable,False,Resolved
+RES-00061,INC-035,1,Re-poured patching asphalt on parking lot pot hole,Grounds,2026-04-23 09:00:00,Temporary Fix,Failed,False,2.5,Disputed,Asphalt degraded after rain,True,In Progress
+RES-00062,INC-035,2,Excavated sub-base layer and poured heavy-duty asphalt patch,Civil Engineering,2026-04-25 14:00:00,Repair,Successful,True,8.0,Verified,Road surface smooth and level,False,Resolved
+RES-00063,INC-001,3,Adjusted bandwidth allocation parameters,Network Ops,2026-01-16 10:00:00,Configuration Change,Successful,True,2.0,Verified,Bandwidth throughput steady,False,Resolved
+RES-00064,INC-005,3,Re-tuned Wi-Fi channel spectrum mapping,Network Ops,2026-01-27 11:00:00,Configuration Change,Successful,True,2.5,Verified,Zero packet drop on 5GHz band,False,Resolved
+RES-00065,INC-008,3,Inspected attic space for secondary leaks,Facilities,2026-02-06 10:00:00,Inspection,Successful,True,2.0,Verified,No water infiltration detected,False,Resolved
+RES-00066,INC-010,3,Tested water pressure across all rest rooms,Plumbing Dept,2026-02-11 09:00:00,Inspection,Successful,True,1.5,Verified,PSI readings within nominal limits,False,Resolved
+RES-00067,INC-015,3,Monitored DB load during peak spike hour,DBA Team,2026-02-25 13:00:00,Inspection,Successful,True,2.0,Verified,CPU utilization below 40%,False,Resolved
+RES-00068,INC-019,3,Inspected drainage outflow channels,Grounds,2026-03-11 11:00:00,Inspection,Successful,True,1.5,Verified,Outflow clear of debris,False,Resolved
+RES-00069,INC-022,3,Verified throughput on secondary switch node,Network Ops,2026-03-19 09:00:00,Inspection,Successful,True,1.0,Verified,1Gbps full duplex achieved,False,Resolved
+RES-00070,INC-028,3,Calibrated ambient room humidity sensors,HVAC Support,2026-04-07 11:00:00,Configuration Change,Successful,True,1.5,Verified,Telemetry matched manual gauge,False,Resolved
+RES-00071,INC-034,3,Inspected junction box insulation resistance,Electrical,2026-04-22 10:00:00,Inspection,Successful,True,2.0,Verified,Resistance readings within normal parameters,False,Resolved
+RES-00072,INC-003,3,Verified main line flow rate with pressure transducer,Plumbing Dept,2026-01-21 11:00:00,Inspection,Successful,True,1.5,Verified,Flow rate optimal,False,Resolved
+RES-00073,INC-007,3,Conducted load test on elevator car,Vendor Tech,2026-02-02 10:00:00,Inspection,Successful,True,3.0,Verified,Safety drop and door cycles verified,False,Resolved
+RES-00074,INC-016,3,Conducted indoor air quality testing,Sanitation,2026-03-01 10:00:00,Inspection,Successful,True,2.0,Verified,Zero mold spores detected,False,Resolved
+RES-00075,INC-025,3,Camera inspection of main sewer junction,Plumbing Dept,2026-03-28 09:00:00,Inspection,Successful,True,2.0,Verified,Pipes completely clear,False,Resolved
