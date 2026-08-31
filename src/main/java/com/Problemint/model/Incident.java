@@ -20,6 +20,10 @@ public class Incident {
     private String location;
     private String department;
     private int complaintCount;
+    private String title;
+    private String possibleRootCause;
+    private double rootCauseConfidence;
+    private String patternDetected;
 
     public Incident() {}
 
@@ -71,6 +75,9 @@ public class Incident {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
+    public String getResolutionStatus() { return resolutionId; }
+    public void setResolutionStatus(String resolutionStatus) { this.resolutionId = resolutionStatus; }
+
     public String getResolutionId() { return resolutionId; }
     public void setResolutionId(String resolutionId) { this.resolutionId = resolutionId; }
 
@@ -85,6 +92,18 @@ public class Incident {
 
     public int getComplaintCount() { return complaintCount; }
     public void setComplaintCount(int complaintCount) { this.complaintCount = complaintCount; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getPossibleRootCause() { return possibleRootCause; }
+    public void setPossibleRootCause(String possibleRootCause) { this.possibleRootCause = possibleRootCause; }
+
+    public double getRootCauseConfidence() { return rootCauseConfidence; }
+    public void setRootCauseConfidence(double rootCauseConfidence) { this.rootCauseConfidence = rootCauseConfidence; }
+
+    public String getPatternDetected() { return patternDetected; }
+    public void setPatternDetected(String patternDetected) { this.patternDetected = patternDetected; }
 
     @Override
     public boolean equals(Object o) {

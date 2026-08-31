@@ -1,9 +1,6 @@
 package com.Problemint.ai;
 
-import com.Problemint.model.Complaint;
-import com.Problemint.model.Incident;
-import com.Problemint.repository.DatabaseInitializer;
-import java.util.*;
+
 
 public class AIAssistantEngine {
 

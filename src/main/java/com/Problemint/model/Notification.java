@@ -75,6 +75,9 @@ public class Notification {
     public int getSourceEntityId() { return sourceEntityId; }
     public void setSourceEntityId(int sourceEntityId) { this.sourceEntityId = sourceEntityId; }
 
+    public String getTimestamp() { return timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -3,25 +3,25 @@ package com.Problemint.repository;
 import com.Problemint.model.PreventionRecommendation;
 import com.Problemint.model.Complaint;
 import com.Problemint.model.Incident;
+import com.Problemint.model.KnowledgeItem;
+import com.Problemint.model.Notification;
+import com.Problemint.model.Resolution;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 public class DatabaseInitializer {
 
     public static final Map<Integer, Object> DATA_STORE = new ConcurrentHashMap<>();
     private static final List<PreventionRecommendation> PREVENTION_RECOMMENDATIONS = new CopyOnWriteArrayList<>();
-    private static final List<?> KNOWLEDGE_ITEMS = new CopyOnWriteArrayList<>();
+    private static final Map<String, KnowledgeItem> KNOWLEDGE_ITEMS = new ConcurrentHashMap<>();
     private static final Map<String, Complaint> COMPLAINTS = new ConcurrentHashMap<>();
     private static final Map<String, Incident> INCIDENTS = new ConcurrentHashMap<>();
-    private static final Map<String, Object> RESOLUTIONS = new ConcurrentHashMap<>();
-    private static final List<?> NOTIFICATIONS = new CopyOnWriteArrayList<>();
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final Map<String, Resolution> RESOLUTIONS = new ConcurrentHashMap<>();
+    private static final List<Notification> NOTIFICATIONS = new CopyOnWriteArrayList<>();
+
 
     public static void initialize() {
         try {
@@ -87,8 +87,14 @@ public class DatabaseInitializer {
         PREVENTION_RECOMMENDATIONS.add(rec);
     }
 
-    public static List<?> getKnowledgeItems() {
+    public static Map<String, KnowledgeItem> getKnowledgeItems() {
         return KNOWLEDGE_ITEMS;
+    }
+
+    public static void saveKnowledgeItem(KnowledgeItem item) {
+        if (item != null && item.getKnowledgeId() != null) {
+            KNOWLEDGE_ITEMS.put(item.getKnowledgeId(), item);
+        }
     }
 
     public static Map<String, Complaint> getComplaints() {
@@ -119,23 +125,24 @@ public class DatabaseInitializer {
         return INCIDENTS.values().stream().filter(i -> i.getId() == id).findFirst().orElse(null);
     }
 
-    public static Map<String, Object> getResolutions() {
+    public static Map<String, Resolution> getResolutions() {
         return RESOLUTIONS;
     }
 
-    public static List<?> getNotifications() {
+    public static List<Notification> getNotifications() {
         return NOTIFICATIONS;
     }
 
-    public static void saveResolution(Object resolution) {
+    public static void saveResolution(Resolution resolution) {
         String id = "RES-" + RESOLUTIONS.size();
-        RESOLUTIONS.put(id, resolution);
+        if (resolution != null && resolution.getResolutionId() != null) {
+            RESOLUTIONS.put(resolution.getResolutionId(), resolution);
+        } else {
+            RESOLUTIONS.put(id, resolution);
+        }
     }
 
-    public static void saveNotification(Object notification) {
-        // Add notification to list
-        if (NOTIFICATIONS instanceof List) {
-            ((List<?>) NOTIFICATIONS).add(notification);
-        }
+    public static void saveNotification(Notification notification) {
+        NOTIFICATIONS.add(notification);
     }
 }

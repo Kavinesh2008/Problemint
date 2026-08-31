@@ -63,6 +63,7 @@ public class Complaint {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public void setCreatedAt(String createdAt) { this.createdAtStr = createdAt; }
+    public String getCreatedAtStr() { return createdAtStr; }
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }

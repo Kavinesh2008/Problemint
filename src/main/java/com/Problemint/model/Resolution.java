@@ -22,6 +22,7 @@ public class Resolution {
     private double resolutionTimeHours;
     private String performedAt;
     private String resolutionStatus;
+    private String resolutionId;
 
     public Resolution() {}
 
@@ -92,8 +93,8 @@ public class Resolution {
     public String getResolutionStatus() { return resolutionStatus; }
     public void setResolutionStatus(String resolutionStatus) { this.resolutionStatus = resolutionStatus; }
 
-    public int getEffectivenessScore() { return effectivenessScore; }
-    public void setEffectivenessScore(int effectivenessScore) { this.effectivenessScore = effectivenessScore; }
+    public String getResolutionId() { return resolutionId; }
+    public void setResolutionId(String resolutionId) { this.resolutionId = resolutionId; }
 
     @Override
     public boolean equals(Object o) {

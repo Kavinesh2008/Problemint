@@ -302,7 +302,7 @@ public class ApiController implements HttpHandler {
     }
 
     private void handleGetPrevention(HttpExchange exchange) throws IOException {
-        List<PreventionRecommendation> list = new ArrayList<>(DatabaseInitializer.getPreventionRecommendations().values());
+        List<PreventionRecommendation> list = new ArrayList<>(DatabaseInitializer.getPreventionRecommendations());
         sendJsonResponse(exchange, 200, list);
     }
 
@@ -332,7 +332,7 @@ public class ApiController implements HttpHandler {
     }
 
     private void handleGetNotifications(HttpExchange exchange) throws IOException {
-        List<Notification> list = new ArrayList<>(DatabaseInitializer.getNotifications().values());
+        List<Notification> list = new ArrayList<>(DatabaseInitializer.getNotifications());
         sendJsonResponse(exchange, 200, list);
     }
 
