@@ -1,4 +1,4 @@
-System.err ? System.err.println(e) : console.error('API GET Error:', e);// API Client for PROBLEMINT Java Backend
+// API Client for PROBLEMINT Backend
 const API_BASE = '/api';
 
 const Api = {
