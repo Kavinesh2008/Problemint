@@ -30,6 +30,15 @@ const Api = {
     },
 
     // Specific domain API calls
+    getUsers() { return this.get('/users'); },
+    getMe() { return this.get('/me'); },
+    login(credentials) {
+        if (typeof credentials === 'object') return this.post('/login', credentials);
+        return this.post('/login', { userId: credentials });
+    },
+    logout() { return this.post('/logout'); },
+
+
     getDashboardStats() { return this.get('/dashboard/stats'); },
     getComplaints() { return this.get('/complaints'); },
     getComplaintById(id) { return this.get(`/complaints/${id}`); },
@@ -50,3 +59,4 @@ const Api = {
     askCopilot(query) { return this.post('/copilot', { query }); },
     getNotifications() { return this.get('/notifications'); }
 };
+

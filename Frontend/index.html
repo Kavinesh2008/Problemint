@@ -93,7 +93,7 @@
                 </a>
                 <div class="footer-links">
                     <a href="#help"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Help Center</a>
-                    <a href="#logout"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg> Logout</a>
+                    <a href="#login" onclick="app.logout()"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg> Logout</a>
                 </div>
             </div>
         </aside>
@@ -136,10 +136,23 @@
                     <!-- New Analysis Button -->
                     <a href="#submit-problem" class="btn-header-primary">New Analysis</a>
 
-                    <!-- User Profile -->
-                    <div class="user-profile">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User Profile" class="avatar">
+                    <!-- User Profile Badge & Logout Dropdown -->
+                    <div class="user-profile-wrapper" style="position:relative;">
+                        <button class="btn-copilot-toggle" id="switch-account-btn" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; font-weight:600; display:flex; align-items:center; gap:8px;">
+                            <span id="current-user-role-badge" style="background:#6366f1; color:white; font-size:10px; padding:2px 6px; border-radius:10px; font-weight:700;">User</span>
+                            <span id="current-user-name">Student User</span>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+
+                        <div class="notification-dropdown hidden" id="account-dropdown" style="right:0; width:220px; padding:14px;">
+                            <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:10px;">Active Session Profile</div>
+                            <button onclick="app.logout()" style="width:100%; padding:10px 14px; background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                Log Out
+                            </button>
+                        </div>
                     </div>
+
                 </div>
             </header>
 

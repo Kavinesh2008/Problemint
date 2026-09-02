@@ -1,0 +1,228 @@
+{
+  "organization_name": "ABC Engineering College",
+  "locations": [
+    "Main Academic Block",
+    "Block A",
+    "Block B",
+    "Block C",
+    "Hostel Block A",
+    "Hostel Block B",
+    "Library",
+    "Central Laboratory",
+    "Cafeteria / Mess",
+    "Auditorium",
+    "Sports Ground",
+    "Campus Parking",
+    "Administrative Block"
+  ],
+  "categories": [
+    "Hostel Food/Mess",
+    "Cafeteria/Canteen",
+    "Water Supply",
+    "Electricity",
+    "Lift/Elevator",
+    "Internet/Wi-Fi",
+    "Sanitization/Cleanliness",
+    "Restrooms",
+    "Garden/Landscaping",
+    "Building/Infrastructure",
+    "Classroom Facilities",
+    "Laboratory",
+    "Library",
+    "Staff/Faculty",
+    "Academic",
+    "Student-related",
+    "Transport",
+    "Parking",
+    "Security",
+    "CCTV/Surveillance",
+    "Hostel Facilities",
+    "Hostel Maintenance",
+    "Medical/First Aid",
+    "Sports",
+    "Auditorium/Event Facilities",
+    "Computer/IT Facilities",
+    "Printing/Digital Services",
+    "Communication/Notices",
+    "Fees/Finance",
+    "ID Card/Documents",
+    "Examination",
+    "Plumbing",
+    "Waste Management",
+    "Noise/Disturbance",
+    "Administrative Services",
+    "Placement/Career Services",
+    "Research/Project Facilities",
+    "Accessibility",
+    "Environmental Issues"
+  ],
+  "routing_rules": {
+    "Hostel Food/Mess": {
+      "department": "Mess / Food Administration",
+      "assigned_person": "Mess Manager"
+    },
+    "Cafeteria/Canteen": {
+      "department": "Mess / Food Administration",
+      "assigned_person": "Cafeteria Supervisor"
+    },
+    "Water Supply": {
+      "department": "Water & Maintenance Dept",
+      "assigned_person": "Maintenance Admin"
+    },
+    "Electricity": {
+      "department": "Electrical Maintenance",
+      "assigned_person": "Chief Electrician"
+    },
+    "Lift/Elevator": {
+      "department": "Lift Maintenance Dept",
+      "assigned_person": "Lift Maintenance Officer"
+    },
+    "Internet/Wi-Fi": {
+      "department": "Network Administration",
+      "assigned_person": "Network Admin"
+    },
+    "Sanitization/Cleanliness": {
+      "department": "Housekeeping Dept",
+      "assigned_person": "Housekeeping Supervisor"
+    },
+    "Restrooms": {
+      "department": "Housekeeping Dept",
+      "assigned_person": "Housekeeping Supervisor"
+    },
+    "Garden/Landscaping": {
+      "department": "Campus Maintenance",
+      "assigned_person": "Garden Supervisor"
+    },
+    "Building/Infrastructure": {
+      "department": "Civil & Infrastructure",
+      "assigned_person": "Estate Officer"
+    },
+    "Classroom Facilities": {
+      "department": "Academic Infrastructure",
+      "assigned_person": "Facility Coordinator"
+    },
+    "Laboratory": {
+      "department": "Lab Administration",
+      "assigned_person": "Lab Administrator"
+    },
+    "Library": {
+      "department": "Library Services",
+      "assigned_person": "Librarian"
+    },
+    "Staff/Faculty": {
+      "department": "Academic Administration",
+      "assigned_person": "HOD / Academic Admin"
+    },
+    "Academic": {
+      "department": "Academic Administration",
+      "assigned_person": "Academic Dean"
+    },
+    "Student-related": {
+      "department": "Student Affairs",
+      "assigned_person": "Student Affairs Officer"
+    },
+    "Transport": {
+      "department": "Transport Dept",
+      "assigned_person": "Transport Admin"
+    },
+    "Parking": {
+      "department": "Security & Parking",
+      "assigned_person": "Security Officer"
+    },
+    "Security": {
+      "department": "Security & Parking",
+      "assigned_person": "Security Officer"
+    },
+    "CCTV/Surveillance": {
+      "department": "Security & Parking",
+      "assigned_person": "Surveillance Admin"
+    },
+    "Hostel Facilities": {
+      "department": "Hostel Management",
+      "assigned_person": "Hostel Warden"
+    },
+    "Hostel Maintenance": {
+      "department": "Hostel Management",
+      "assigned_person": "Hostel Maintenance Officer"
+    },
+    "Medical/First Aid": {
+      "department": "Health & Medical Cell",
+      "assigned_person": "Medical Officer"
+    },
+    "Sports": {
+      "department": "Sports & Physical Education",
+      "assigned_person": "Sports Director"
+    },
+    "Auditorium/Event Facilities": {
+      "department": "Events & Campus Facilities",
+      "assigned_person": "Events Coordinator"
+    },
+    "Computer/IT Facilities": {
+      "department": "IT Support Cell",
+      "assigned_person": "IT Support Engineer"
+    },
+    "Printing/Digital Services": {
+      "department": "IT Support Cell",
+      "assigned_person": "Digital Services Incharge"
+    },
+    "Communication/Notices": {
+      "department": "Public Relations & Comms",
+      "assigned_person": "PR Officer"
+    },
+    "Fees/Finance": {
+      "department": "Finance & Accounts",
+      "assigned_person": "Finance Officer"
+    },
+    "ID Card/Documents": {
+      "department": "Administrative Office",
+      "assigned_person": "Admin Assistant"
+    },
+    "Examination": {
+      "department": "Examination Cell",
+      "assigned_person": "Controller of Examinations"
+    },
+    "Plumbing": {
+      "department": "Water & Maintenance Dept",
+      "assigned_person": "Plumbing Supervisor"
+    },
+    "Waste Management": {
+      "department": "Housekeeping Dept",
+      "assigned_person": "Waste Management Incharge"
+    },
+    "Noise/Disturbance": {
+      "department": "Security & Parking",
+      "assigned_person": "Campus Discipline Incharge"
+    },
+    "Administrative Services": {
+      "department": "Administrative Office",
+      "assigned_person": "Admin Manager"
+    },
+    "Placement/Career Services": {
+      "department": "Training & Placement Cell",
+      "assigned_person": "Placement Officer"
+    },
+    "Research/Project Facilities": {
+      "department": "Research & Development Cell",
+      "assigned_person": "R&D Coordinator"
+    },
+    "Accessibility": {
+      "department": "Civil & Infrastructure",
+      "assigned_person": "Accessibility Officer"
+    },
+    "Environmental Issues": {
+      "department": "Campus Maintenance",
+      "assigned_person": "Eco Cell Officer"
+    }
+  },
+  "escalation_chain": {
+    "Mess / Food Administration": ["Mess Manager", "Hostel Warden", "College Admin"],
+    "Water & Maintenance Dept": ["Maintenance Admin", "Maintenance Head", "College Admin"],
+    "Electrical Maintenance": ["Chief Electrician", "Maintenance Head", "College Admin"],
+    "Lift Maintenance Dept": ["Lift Maintenance Officer", "Maintenance Head", "College Admin"],
+    "Network Administration": ["Network Admin", "IT Head", "College Admin"],
+    "Housekeeping Dept": ["Housekeeping Supervisor", "Estate Officer", "College Admin"],
+    "Security & Parking": ["Security Officer", "Chief Security Officer", "College Admin"],
+    "Academic Administration": ["Academic Admin", "Dean Academics", "College Admin"],
+    "Transport Dept": ["Transport Admin", "Transport Manager", "College Admin"]
+  }
+}

@@ -6,6 +6,7 @@ const app = {
         this.bindNavigation();
         this.bindCopilot();
         this.bindNotifications();
+        this.bindAccountSwitcher();
         this.handleHashChange();
         window.addEventListener('hashchange', () => this.handleHashChange());
     },
@@ -111,10 +112,116 @@ const app = {
         }
     },
 
+    bindAccountSwitcher() {
+        const btn = document.getElementById('switch-account-btn');
+        const dropdown = document.getElementById('account-dropdown');
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('hidden');
+            });
+        }
+        document.addEventListener('click', (e) => {
+            if (dropdown && !dropdown.contains(e.target) && btn && !btn.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+        this.updateCurrentUserDisplay();
+    },
+
+
+    async updateCurrentUserDisplay() {
+        try {
+            const me = await Api.getMe();
+            this.currentUser = me;
+            if (me) {
+                const nameEl = document.getElementById('current-user-name');
+                const badgeEl = document.getElementById('current-user-role-badge');
+                if (nameEl) nameEl.textContent = `${me.name} (${me.department})`;
+                if (badgeEl) {
+                    badgeEl.textContent = me.role;
+                    badgeEl.style.background = me.role === 'Organization Admin' ? '#dc2626' : (me.role === 'Department Admin' ? '#059669' : '#6366f1');
+                }
+                this.applyRoleNavigationVisibility(me.role);
+            }
+        } catch(e) {}
+    },
+
+    applyRoleNavigationVisibility(role) {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const view = item.getAttribute('data-view');
+            if (role === 'User') {
+                if (['dashboard', 'submit-problem', 'my-complaints', 'settings'].includes(view)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            } else if (role === 'Department Admin') {
+                if (['dashboard', 'my-complaints', 'incidents', 'knowledge-base', 'settings'].includes(view)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            } else {
+                item.style.display = 'flex';
+            }
+        });
+    },
+
+
+
+    async loadAccountList() {
+        const list = document.getElementById('account-list');
+        list.innerHTML = '<div style="padding:12px; font-size:12px; color:#6b7280;">Loading demo accounts...</div>';
+        try {
+            const users = await Api.getUsers();
+            list.innerHTML = users.map(u => `
+                <div class="notif-item" onclick="app.switchUser(${u.id})" style="cursor:pointer; padding:10px 14px; border-bottom:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div style="font-weight:700; font-size:13px; color:#1e293b;">${u.name}</div>
+                        <div style="font-size:11px; color:#64748b;">${u.email} • ${u.department}</div>
+                    </div>
+                    <span class="tag" style="font-size:10px; padding:2px 8px; font-weight:700; background:${u.role === 'Organization Admin' ? '#fee2e2; color:#991b1b;' : (u.role === 'Department Admin' ? '#d1fae5; color:#065f46;' : '#e0e7ff; color:#3730a3;')}">${u.role}</span>
+                </div>
+            `).join('');
+        } catch(e) {
+            list.innerHTML = '<div style="padding:12px; font-size:12px; color:#ef4444;">Failed to load accounts.</div>';
+        }
+    },
+
+    async switchUser(userId) {
+        try {
+            const res = await Api.login(userId);
+            const dropdown = document.getElementById('account-dropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+            this.updateCurrentUserDisplay();
+            this.handleHashChange();
+        } catch(e) {
+            alert('Failed to switch user.');
+        }
+    },
+
+
+    async logout() {
+        try {
+            await Api.logout();
+            this.isLoggedIn = false;
+            window.location.hash = '#login';
+        } catch(e) {
+            this.isLoggedIn = false;
+            window.location.hash = '#login';
+        }
+    },
+
     handleHashChange() {
         let hash = window.location.hash.replace('#', '');
-        if (!hash) hash = 'dashboard';
+        if (!hash) hash = 'login';
         
+        if (!this.isLoggedIn && hash !== 'login') {
+            window.location.hash = '#login';
+            return;
+        }
+
         let viewName = hash;
         let param = null;
         if (hash.includes('/')) {
@@ -130,6 +237,9 @@ const app = {
         container.innerHTML = `<div style="padding:40px; text-align:center; color:#6b7280;">Loading view...</div>`;
 
         switch (viewName) {
+            case 'login':
+                this.renderLogin(container);
+                break;
             case 'dashboard':
                 this.renderDashboard(container);
                 break;
@@ -162,9 +272,134 @@ const app = {
                 this.renderSettings(container);
                 break;
             default:
-                this.renderDashboard(container);
+                this.renderLogin(container);
         }
     },
+
+    async renderLogin(container) {
+        try {
+            const users = await Api.getUsers();
+            
+            const regularUsers = users.filter(u => u.role === 'User');
+            const deptAdmins = users.filter(u => u.role === 'Department Admin');
+            const orgAdmins = users.filter(u => u.role === 'Organization Admin');
+
+            container.innerHTML = `
+                <div style="max-width:900px; margin:20px auto; padding:32px; background:white; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 10px 25px -5px rgba(0,0,0,0.05);">
+                    <div style="text-align:center; margin-bottom:28px;">
+                        <div style="display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; background:#e0e7ff; border-radius:16px; margin-bottom:12px;">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h1 style="font-size:26px; font-weight:800; color:#0f172a; margin-bottom:6px;">PROBLEMINT User Portal Sign In</h1>
+                        <p style="font-size:14px; color:#64748b;">Sign in with your user credentials or select a specific user account below</p>
+                    </div>
+
+                    <!-- Interactive Email / Password Credentials Form -->
+                    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:24px; border-radius:14px; margin-bottom:32px;">
+                        <h3 style="font-size:15px; font-weight:800; color:#1e293b; margin-bottom:16px;">🔑 Account Sign In</h3>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                            <div>
+                                <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:6px;">Login ID / Email Address:</label>
+                                <input type="email" id="input-login-email" value="student@college.edu" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid #cbd5e1; outline:none; font-size:14px;" placeholder="e.g. student@college.edu">
+                            </div>
+                            <div>
+                                <label style="font-size:12px; font-weight:700; color:#475569; display:block; margin-bottom:6px;">Password:</label>
+                                <input type="password" id="input-login-password" value="student123" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid #cbd5e1; outline:none; font-size:14px;" placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div style="font-size:12px; color:#64748b;">Select an account from below to auto-fill credentials</div>
+                            <button class="btn-header-primary" style="padding:12px 28px; font-size:14px; font-weight:700;" onclick="app.submitCredentialsForm()">Sign In →</button>
+                        </div>
+                    </div>
+
+                    <!-- Role-Based Credentials Directory -->
+                    <h3 style="font-size:16px; font-weight:800; color:#1e293b; margin-bottom:16px;">📋 User Credentials Reference & Quick Login</h3>
+
+                    <!-- Regular Users -->
+                    <div style="margin-bottom:24px;">
+                        <h4 style="font-size:14px; font-weight:800; color:#475569; margin-bottom:10px;">👤 Regular Users (Students, Faculty, Staff)</h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
+                            ${regularUsers.map(u => `
+                                <div onclick="app.fillAndLogin('${u.email}', '${u.password}', ${u.id})" style="border:1.5px solid #e2e8f0; padding:14px; border-radius:10px; cursor:pointer; background:white; transition:all 0.2s;" class="login-role-card">
+                                    <div style="font-weight:700; font-size:14px; color:#1e293b;">${u.name}</div>
+                                    <div style="font-size:11px; color:#4f46e5; font-weight:600; margin-top:2px;">Login ID: ${u.email}</div>
+                                    <div style="font-size:11px; color:#059669; font-weight:600;">Password: <code>${u.password}</code></div>
+                                    <div style="font-size:11px; color:#64748b; margin-top:6px; font-weight:600;">Click to Auto-fill & Login →</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Department Admins -->
+                    <div style="margin-bottom:24px;">
+                        <h4 style="font-size:14px; font-weight:800; color:#475569; margin-bottom:10px;">🛠️ Department Administrators</h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
+                            ${deptAdmins.map(u => `
+                                <div onclick="app.fillAndLogin('${u.email}', '${u.password}', ${u.id})" style="border:1.5px solid #e2e8f0; padding:14px; border-radius:10px; cursor:pointer; background:white; transition:all 0.2s;" class="login-role-card">
+                                    <div style="font-weight:700; font-size:14px; color:#1e293b;">${u.name}</div>
+                                    <div style="font-size:11px; color:#64748b;">${u.department}</div>
+                                    <div style="font-size:11px; color:#4f46e5; font-weight:600; margin-top:2px;">Login ID: ${u.email}</div>
+                                    <div style="font-size:11px; color:#059669; font-weight:600;">Password: <code>${u.password}</code></div>
+                                    <div style="font-size:11px; color:#059669; margin-top:6px; font-weight:600;">Click to Auto-fill & Login →</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Organization Admin -->
+                    <div>
+                        <h4 style="font-size:14px; font-weight:800; color:#475569; margin-bottom:10px;">🏛️ Organization Administrator</h4>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
+                            ${orgAdmins.map(u => `
+                                <div onclick="app.fillAndLogin('${u.email}', '${u.password}', ${u.id})" style="border:1.5px solid #fca5a5; padding:14px; border-radius:10px; cursor:pointer; background:#fef2f2; transition:all 0.2s;" class="login-role-card">
+                                    <div style="font-weight:700; font-size:14px; color:#991b1b;">${u.name}</div>
+                                    <div style="font-size:11px; color:#7f1d1d;">${u.department}</div>
+                                    <div style="font-size:11px; color:#4f46e5; font-weight:600; margin-top:2px;">Login ID: ${u.email}</div>
+                                    <div style="font-size:11px; color:#059669; font-weight:600;">Password: <code>${u.password}</code></div>
+                                    <div style="font-size:11px; color:#dc2626; margin-top:6px; font-weight:600;">Click to Auto-fill & Login →</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        } catch(e) {
+            container.innerHTML = `<div style="color:red; text-align:center; padding:40px;">Error loading login page: ${e.message}</div>`;
+        }
+    },
+
+    fillAndLogin(email, password, userId) {
+        document.getElementById('input-login-email').value = email;
+        document.getElementById('input-login-password').value = password;
+        this.quickLoginUser(userId);
+    },
+
+    async submitCredentialsForm() {
+        const email = document.getElementById('input-login-email').value.trim();
+        const password = document.getElementById('input-login-password').value.trim();
+
+        if (!email || !password) {
+            alert('Please enter both Login ID / Email and Password.');
+            return;
+        }
+
+        try {
+            const res = await Api.login({ email, password });
+            this.isLoggedIn = true;
+            this.updateCurrentUserDisplay();
+            window.location.hash = '#dashboard';
+        } catch(e) {
+            alert(e.error || 'Invalid Login ID or Password');
+        }
+    },
+
+
+
 
     updateActiveNav(viewName) {
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -409,11 +644,62 @@ const app = {
                 hasEvidence: true
             });
 
-            alert(`Complaint ${res.complaint.complaintId} created successfully! Associated with common incident INC-016.`);
-            window.location.hash = '#my-complaints';
+            this.showForwardedPopupModal(res);
         } catch (e) {
-            alert('Failed to submit complaint: ' + e.message);
+            alert('Failed to submit complaint: ' + (e.message || JSON.stringify(e)));
         }
+    },
+
+    showForwardedPopupModal(res) {
+        const tickets = res.all_tickets || [res.complaint];
+        const modalId = 'forwarded-popup-modal';
+
+        let existing = document.getElementById(modalId);
+        if (existing) existing.remove();
+
+        const firstTicket = tickets[0];
+        const dept = firstTicket.department;
+        const officer = firstTicket.assignedPerson;
+
+        const modalHtml = `
+            <div id="${modalId}" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px;">
+                <div style="background:white; max-width:650px; width:100%; border-radius:18px; padding:28px; border:1px solid #e2e8f0; box-shadow:0 20px 30px -10px rgba(0,0,0,0.2); animation:popIn 0.3s ease-out;">
+                    <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px; border-bottom:1px solid #f1f5f9; padding-bottom:16px;">
+                        <div style="width:48px; height:48px; background:#ecfdf5; border-radius:12px; display:flex; align-items:center; justify-content:center; color:#059669; font-size:24px; font-weight:800;">🚀</div>
+                        <div>
+                            <h2 style="font-size:20px; font-weight:800; color:#0f172a; margin-bottom:2px;">Complaint Forwarded Successfully!</h2>
+                            <p style="font-size:13px; color:#64748b;">AI engine split your report into ${tickets.length} actionable ticket(s) and routed them to responsible admins.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:12px; max-height:300px; overflow-y:auto; margin-bottom:24px;">
+                        ${tickets.map(t => `
+                            <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:14px 18px; border-radius:12px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                    <span style="font-weight:800; color:#4f46e5; font-size:14px;">Ticket #${t.complaintId}</span>
+                                    <span style="background:#d1fae5; color:#065f46; font-size:10px; font-weight:700; padding:3px 8px; border-radius:10px;">FORWARDED</span>
+                                </div>
+                                <div style="font-size:13px; font-weight:700; color:#1e293b; margin-bottom:6px;">"${t.complaintText}"</div>
+                                <div style="display:flex; justify-content:space-between; font-size:12px; color:#475569; background:white; padding:8px 12px; border-radius:8px; border:1px solid #cbd5e1;">
+                                    <div><strong>Category:</strong> ${t.category}</div>
+                                    <div><strong>Forwarded To:</strong> <span style="color:#059669; font-weight:700;">${t.assignedPerson} (${t.department})</span></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div style="background:#fffbe8; border:1px solid #fde68a; padding:12px 16px; border-radius:10px; font-size:12px; color:#92400e; margin-bottom:24px; font-weight:600; display:flex; align-items:center; gap:8px;">
+                        <span>👁️</span> <span><strong>Transparency Telemetry Active:</strong> You will see an immediate timestamped alert when <strong>${officer}</strong> opens and views this complaint.</span>
+                    </div>
+
+                    <div style="display:flex; gap:12px; justify-content:flex-end;">
+                        <button class="btn-header-primary" style="padding:10px 20px; font-size:13px;" onclick="document.getElementById('${modalId}').remove(); window.location.hash='#my-complaints';">Go to My Complaints &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
     },
 
     // ==========================================
@@ -426,7 +712,7 @@ const app = {
                 <div class="view-header">
                     <div>
                         <h1>My Submitted Complaints</h1>
-                        <p>Track progress, review Complaint DNA, and verify resolution status</p>
+                        <p>Track live routing, admin view timestamps (Seen / Not Seen), and resolution timelines</p>
                     </div>
                     <a href="#submit-problem" class="btn-header-primary">+ Submit New Problem</a>
                 </div>
@@ -435,30 +721,36 @@ const app = {
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Complaint ID</th>
+                                <th>Ticket ID</th>
                                 <th>Description</th>
                                 <th>Category & Location</th>
-                                <th>Severity</th>
-                                <th>Status Progression</th>
-                                <th>Verification</th>
+                                <th>Forwarded To Admin</th>
+                                <th>Transparency (Seen Status)</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${complaints.slice(0, 15).map(c => `
+                            ${complaints.slice(0, 20).map(c => `
                                 <tr>
                                     <td><strong>${c.complaintId}</strong></td>
-                                    <td style="max-width:300px;">${c.complaintText}</td>
+                                    <td style="max-width:280px; font-weight:600;">${c.complaintText}</td>
                                     <td>${c.category} <br><span style="font-size:11px; color:#6b7280;">${c.location}</span></td>
-                                    <td><span class="tag tag-urgent">${c.severity}</span></td>
                                     <td>
-                                        <span class="tag" style="background:#e0e7ff; color:#3730a3; font-weight:700;">${c.status}</span>
-                                        ${c.incidentId ? `<br><a href="#incidents/${c.incidentId}" style="font-size:11px; color:#4f46e5;">Link: ${c.incidentId}</a>` : ''}
+                                        <strong style="color:#0f172a;">${c.assignedPerson}</strong><br>
+                                        <span style="font-size:11px; color:#059669; font-weight:600;">${c.department}</span>
                                     </td>
                                     <td>
-                                        ${c.userVerified ? 
-                                            `<span style="color:#10b981; font-weight:700; font-size:12px;">✅ Verified Fixed</span>` :
-                                            `<button class="quick-action-btn" onclick="app.showVerificationModal('${c.complaintId}')">Verify Fix</button>`
+                                        ${c.seen ? 
+                                            `<span style="background:#d1fae5; color:#065f46; font-size:11px; font-weight:800; padding:4px 10px; border-radius:12px; display:inline-block;">👁️ Viewed by ${c.seenBy || c.assignedPerson}</span><br><span style="font-size:10px; color:#64748b;">at ${c.seenAt}</span>` :
+                                            `<span style="background:#fef3c7; color:#92400e; font-size:11px; font-weight:800; padding:4px 10px; border-radius:12px; display:inline-block;">⏳ Pending Admin Review (Not Seen)</span>`
                                         }
+                                    </td>
+                                    <td>
+                                        <span class="tag" style="background:#e0e7ff; color:#3730a3; font-weight:700;">${c.status}</span>
+                                    </td>
+                                    <td>
+                                        <button class="quick-action-btn" style="padding:6px 12px; font-size:12px;" onclick="app.viewTicketTimelineModal('${c.complaintId}')">Timeline & Details</button>
                                     </td>
                                 </tr>
                             `).join('')}
@@ -467,9 +759,64 @@ const app = {
                 </div>
             `;
         } catch (e) {
-            container.innerHTML = `<div style="color:red;">Error loading complaints</div>`;
+            container.innerHTML = `<div style="color:red; padding:20px;">Error loading complaints: ${e.message}</div>`;
         }
     },
+
+    async viewTicketTimelineModal(complaintId) {
+        try {
+            const data = await Api.getComplaintById(complaintId);
+            const modalId = 'ticket-timeline-modal';
+
+            let existing = document.getElementById(modalId);
+            if (existing) existing.remove();
+
+            const modalHtml = `
+                <div id="${modalId}" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(15,23,42,0.6); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px;">
+                    <div style="background:white; max-width:650px; width:100%; border-radius:18px; padding:28px; border:1px solid #e2e8f0; box-shadow:0 20px 30px -10px rgba(0,0,0,0.2);">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; border-bottom:1px solid #f1f5f9; padding-bottom:12px;">
+                            <div>
+                                <h2 style="font-size:18px; font-weight:800; color:#0f172a;">Ticket Telemetry: #${data.complaintId}</h2>
+                                <p style="font-size:12px; color:#64748b;">Forwarded to <strong>${data.assignedPerson} (${data.department})</strong></p>
+                            </div>
+                            <button onclick="document.getElementById('${modalId}').remove()" style="border:none; background:none; font-size:20px; cursor:pointer; color:#64748b;">&times;</button>
+                        </div>
+
+                        <div style="background:#f8fafc; padding:14px; border-radius:10px; font-size:13px; color:#1e293b; margin-bottom:20px; border:1px solid #e2e8f0;">
+                            <strong>Description:</strong> "${data.complaintText}"<br>
+                            <span style="font-size:12px; color:#64748b;">Category: ${data.category} | Location: ${data.location} | Priority: ${data.severity}</span>
+                        </div>
+
+                        <h3 style="font-size:14px; font-weight:800; color:#334155; margin-bottom:12px;">Visual Resolution Lifecycle Timeline</h3>
+                        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; padding-left:8px; border-left:2px solid #e0e7ff;">
+                            ${data.timeline ? data.timeline.map(t => `
+                                <div style="position:relative; padding-left:14px;">
+                                    <div style="position:absolute; left:-21px; top:4px; width:12px; height:12px; border-radius:50%; background:${t.status === 'Seen' ? '#059669' : (t.status === 'Resolved' ? '#10b981' : '#6366f1')}; border:2px solid white;"></div>
+                                    <div style="font-weight:700; font-size:13px; color:#1e293b;">${t.status} <span style="font-weight:500; font-size:11px; color:#64748b;">by ${t.updatedBy} at ${t.timestamp}</span></div>
+                                    <div style="font-size:12px; color:#475569;">${t.description}</div>
+                                </div>
+                            `).join('') : '<div style="font-size:12px; color:#6b7280;">No timeline events recorded.</div>'}
+                        </div>
+
+                        ${data.resolutionNote ? `
+                            <div style="background:#ecfdf5; border:1px solid #a7f3d0; padding:14px; border-radius:10px; font-size:12px; color:#065f46; margin-bottom:20px;">
+                                <strong>Resolution Note from Admin:</strong><br>${data.resolutionNote}
+                            </div>
+                        ` : ''}
+
+                        <div style="display:flex; justify-content:flex-end;">
+                            <button class="quick-action-btn" onclick="document.getElementById('${modalId}').remove()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        } catch(e) {
+            alert('Failed to load ticket timeline.');
+        }
+    },
+
 
     showVerificationModal(complaintId) {
         const answer = prompt(`Verification for Complaint ${complaintId}:\nIs the problem actually solved?\n\nOptions: Yes / No / Partially`, "Yes");
@@ -831,32 +1178,91 @@ const app = {
     },
 
     renderSettings(container) {
+        const u = this.currentUser || { name: 'User', role: 'User', email: 'user@college.edu', department: 'General' };
+        
         container.innerHTML = `
             <div class="view-header">
                 <div>
-                    <h1>Platform Settings</h1>
-                    <p>System configuration, AI thresholds, and integration preferences</p>
+                    <h1>Settings & Preferences</h1>
+                    <p>Manage profile options, notification telemetry, and role-specific configurations</p>
                 </div>
             </div>
 
-            <div class="card" style="max-width:600px;">
-                <div style="display:flex; flex-direction:column; gap:16px;">
-                    <div>
-                        <label style="font-size:13px; font-weight:700;">AI Similarity Match Threshold</label>
-                        <input type="range" min="50" max="95" value="75" style="width:100%;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px; max-width:950px;">
+                <!-- Account Profile Card -->
+                <div class="card">
+                    <div style="font-weight:800; font-size:16px; color:#0f172a; margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+                        <span>👤 User Account Profile</span>
+                        <span class="tag" style="font-size:10px; font-weight:700; background:${u.role === 'Organization Admin' ? '#fee2e2; color:#991b1b;' : (u.role === 'Department Admin' ? '#d1fae5; color:#065f46;' : '#e0e7ff; color:#3730a3;')}">${u.role}</span>
                     </div>
-                    <div>
-                        <label style="font-size:13px; font-weight:700;">Auto Incident Clustering</label>
-                        <select style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1;"><option>Enabled (Spatial & Temporal)</option></select>
-                    </div>
-                    <div>
-                        <label style="font-size:13px; font-weight:700;">Failed Solution Memory Enforcement</label>
-                        <select style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1;"><option>Strict (Block repeating failed actions)</option></select>
+
+                    <div style="display:flex; flex-direction:column; gap:12px; font-size:13px;">
+                        <div>
+                            <label style="font-weight:700; color:#475569; display:block; margin-bottom:4px;">Full Name</label>
+                            <input type="text" value="${u.name}" style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1; outline:none; background:#f8fafc;" readonly>
+                        </div>
+                        <div>
+                            <label style="font-weight:700; color:#475569; display:block; margin-bottom:4px;">Login ID / Email</label>
+                            <input type="text" value="${u.email}" style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1; outline:none; background:#f8fafc;" readonly>
+                        </div>
+                        <div>
+                            <label style="font-weight:700; color:#475569; display:block; margin-bottom:4px;">Department / Organization</label>
+                            <input type="text" value="${u.department}" style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1; outline:none; background:#f8fafc;" readonly>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Notification & Telemetry Preferences -->
+                <div class="card">
+                    <div style="font-weight:800; font-size:16px; color:#0f172a; margin-bottom:16px;">🔔 Notification & Alert Telemetry</div>
+                    <div style="display:flex; flex-direction:column; gap:14px; font-size:13px;">
+                        <label style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+                            <span>Real-Time Forwarding Pop-up Alerts</span>
+                            <input type="checkbox" checked style="width:18px; height:18px;">
+                        </label>
+                        <label style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+                            <span>Admin Seen Timestamp Notifications</span>
+                            <input type="checkbox" checked style="width:18px; height:18px;">
+                        </label>
+                        <label style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+                            <span>Resolution Confirmation Alerts</span>
+                            <input type="checkbox" checked style="width:18px; height:18px;">
+                        </label>
+                        <label style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+                            <span>Escalation SLA Warning Alerts</span>
+                            <input type="checkbox" checked style="width:18px; height:18px;">
+                        </label>
+                    </div>
+                </div>
+
+                ${u.role !== 'User' ? `
+                    <!-- Admin System Controls -->
+                    <div class="card" style="grid-column: span 2;">
+                        <div style="font-weight:800; font-size:16px; color:#0f172a; margin-bottom:16px;">⚙️ System SLA & Intelligence Controls (${u.role})</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                            <div>
+                                <label style="font-size:13px; font-weight:700; color:#334155;">AI Match Similarity Threshold (75%)</label>
+                                <input type="range" min="50" max="95" value="75" style="width:100%; margin-top:8px;">
+                            </div>
+                            <div>
+                                <label style="font-size:13px; font-weight:700; color:#334155;">SLA Response Window</label>
+                                <select style="width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e1; margin-top:6px;">
+                                    <option>24 Hours (Standard)</option>
+                                    <option>12 Hours (High Priority)</option>
+                                    <option>48 Hours (Low Priority)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+
+            <div style="margin-top:20px;">
+                <button class="btn-header-primary" style="padding:12px 28px; font-size:14px;" onclick="alert('Settings saved successfully!')">Save Preferences</button>
             </div>
         `;
     }
+
 };
 
 document.addEventListener('DOMContentLoaded', () => app.init());
