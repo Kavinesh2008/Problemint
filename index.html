@@ -3,24 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROBLEMINT - AI Complaint Intelligence & Resolution Platform</title>
-    <!-- Inter Font & Phosphor / Lucide Icons -->
+    <title>PROBLEMINT — Every Problem Deserves a Solution</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="app-body">
-    <!-- App Container -->
-    <div class="app-container">
+
+    <!-- ========================================================== -->
+    <!-- PUBLIC HOMEPAGE — Shown by default                          -->
+    <!-- ========================================================== -->
+    <div id="public-home">
+
+        <!-- Public Navbar -->
+        <nav class="public-nav">
+            <div class="public-nav-inner">
+                <a href="#" class="pub-logo" onclick="app.showPublicHome(); history.replaceState(null, '', window.location.pathname); return false;">
+                    <div class="pub-logo-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="pub-logo-name">PROBLEMINT</span>
+                </a>
+                <div class="pub-nav-links">
+                    <a href="#how-it-works-section" class="pub-nav-link" onclick="document.getElementById('how-it-works-section').scrollIntoView({behavior:'smooth'}); return false;">How It Works</a>
+                    <a href="#features-section" class="pub-nav-link" onclick="document.getElementById('features-section').scrollIntoView({behavior:'smooth'}); return false;">Features</a>
+                    <a href="#trust-section" class="pub-nav-link" onclick="document.getElementById('trust-section').scrollIntoView({behavior:'smooth'}); return false;">About</a>
+                    <div id="pub-nav-auth-buttons" style="display:inline-flex; align-items:center; gap:8px;">
+                        <button class="pub-signin-btn" onclick="app.showRoleSelection()">Sign In</button>
+                        <button class="pub-cta-btn" onclick="app.handleReportProblemClick()">Report a Problem</button>
+                    </div>
+                </div>
+                <button class="pub-mobile-menu-btn" onclick="app.toggleMobileMenu()" aria-label="Menu">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+            <div class="pub-mobile-menu hidden" id="pub-mobile-menu">
+                <a href="#" class="pub-mobile-link" onclick="document.getElementById('how-it-works-section').scrollIntoView({behavior:'smooth'}); app.toggleMobileMenu();">How It Works</a>
+                <a href="#" class="pub-mobile-link" onclick="document.getElementById('features-section').scrollIntoView({behavior:'smooth'}); app.toggleMobileMenu();">Features</a>
+                <a href="#" class="pub-mobile-link" onclick="document.getElementById('trust-section').scrollIntoView({behavior:'smooth'}); app.toggleMobileMenu();">About</a>
+                <button class="pub-mobile-cta" onclick="app.showRoleSelection()">Sign In / Report a Problem</button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="hero-badge-dot"></span>
+                        AI-Powered Institutional Platform
+                    </div>
+                    <h1 class="hero-headline">Every Problem<br>Deserves a<br><span class="hero-highlight">Solution.</span></h1>
+                    <p class="hero-subtext">An intelligent platform that helps your institution understand problems, coordinate solutions and prevent issues from recurring — so students and staff can focus on what matters most.</p>
+                    <div class="hero-actions">
+                        <button class="hero-primary-btn" onclick="app.handleReportProblemClick()">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            Report a Problem
+                        </button>
+                        <button class="hero-secondary-btn" onclick="document.getElementById('how-it-works-section').scrollIntoView({behavior:'smooth'})">
+                            Explore How It Works
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                    </div>
+                    <div class="hero-trust-row">
+                        <div class="hero-trust-item">
+                            <svg width="16" height="16" fill="none" stroke="#10b981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            AI-assisted pre-resolution
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg width="16" height="16" fill="none" stroke="#10b981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Real-time complaint tracking
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg width="16" height="16" fill="none" stroke="#10b981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Automatic escalation alerts
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- Problem Journey Illustration -->
+                    <div class="journey-illustration">
+                        <div class="journey-card journey-card--submit">
+                            <div class="journey-card-icon" style="background:#eef2ff;">
+                                <svg width="20" height="20" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                            </div>
+                            <div>
+                                <div class="journey-card-label">1. Report</div>
+                                <div class="journey-card-text">Describe your problem naturally</div>
+                            </div>
+                        </div>
+                        <div class="journey-arrow">↓</div>
+                        <div class="journey-card journey-card--ai">
+                            <div class="journey-card-icon" style="background:#f0fdf4;">
+                                <svg width="20" height="20" fill="none" stroke="#10b981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                            </div>
+                            <div>
+                                <div class="journey-card-label">2. AI Assists</div>
+                                <div class="journey-card-text">Instant solutions from verified previous fixes</div>
+                            </div>
+                        </div>
+                        <div class="journey-arrow">↓</div>
+                        <div class="journey-card journey-card--route">
+                            <div class="journey-card-icon" style="background:#fff7ed;">
+                                <svg width="20" height="20" fill="none" stroke="#f59e0b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="journey-card-label">3. Auto-Routed</div>
+                                <div class="journey-card-text">Smart department assignment</div>
+                            </div>
+                        </div>
+                        <div class="journey-arrow">↓</div>
+                        <div class="journey-card journey-card--resolved">
+                            <div class="journey-card-icon" style="background:#ecfdf5;">
+                                <svg width="20" height="20" fill="none" stroke="#059669" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="journey-card-label">4. Resolved</div>
+                                <div class="journey-card-text">You confirm the fix works</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="hiw-section" id="how-it-works-section">
+            <div class="section-inner">
+                <div class="section-label">Simple Process</div>
+                <h2 class="section-title">How PROBLEMINT Works</h2>
+                <p class="section-sub">From describing your problem to confirming it's fixed — four clear steps.</p>
+                <div class="hiw-grid">
+                    <div class="hiw-step">
+                        <div class="hiw-step-number">1</div>
+                        <div class="hiw-step-icon">
+                            <svg width="28" height="28" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        </div>
+                        <h3>Tell Us Your Problem</h3>
+                        <p>Type naturally — describe what's wrong in your own words. No complicated forms.</p>
+                    </div>
+                    <div class="hiw-connector">→</div>
+                    <div class="hiw-step">
+                        <div class="hiw-step-number">2</div>
+                        <div class="hiw-step-icon">
+                            <svg width="28" height="28" fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <h3>Get Instant AI Assistance</h3>
+                        <p>Our AI checks verified previous resolutions and suggests safe solutions that worked before.</p>
+                    </div>
+                    <div class="hiw-connector">→</div>
+                    <div class="hiw-step">
+                        <div class="hiw-step-number">3</div>
+                        <div class="hiw-step-icon">
+                            <svg width="28" height="28" fill="none" stroke="#059669" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        </div>
+                        <h3>Track Your Complaint</h3>
+                        <p>See exactly where your complaint is, who's handling it, and get notified on every update.</p>
+                    </div>
+                    <div class="hiw-connector">→</div>
+                    <div class="hiw-step">
+                        <div class="hiw-step-number">4</div>
+                        <div class="hiw-step-icon">
+                            <svg width="28" height="28" fill="none" stroke="#d97706" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3>Confirm Your Resolution</h3>
+                        <p>When the department marks it resolved, you confirm whether it's actually fixed.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features-section">
+            <div class="section-inner">
+                <div class="section-label">Built for Institutions</div>
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-sub">Designed so students and staff get help fast, administrators stay organized, and problems don't repeat.</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--indigo">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <h3>AI-Assisted Problem Solving</h3>
+                        <p>Before submitting, get instant suggestions from verified previous solutions. Many common issues can be solved immediately without waiting.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--violet">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3>Smart Department Routing</h3>
+                        <p>Problems are automatically assigned to the right department and person. No more chasing down who to contact.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--emerald">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        </div>
+                        <h3>Transparent Complaint Tracking</h3>
+                        <p>See exactly when your complaint was seen by the admin, who's working on it, and every step of the journey.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--amber">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </div>
+                        <h3>Automatic Escalation</h3>
+                        <p>If a department doesn't respond within the deadline, the problem is automatically escalated to senior management.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--rose">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3>Verified Resolution</h3>
+                        <p>You confirm whether the solution actually worked. No more closed tickets that weren't really fixed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon--sky">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3>Prevention Intelligence</h3>
+                        <p>Patterns in complaints create prevention recommendations, helping the institution fix root causes before they affect everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Transparency Section -->
+        <section class="trust-section" id="trust-section">
+            <div class="section-inner">
+                <div class="trust-grid">
+                    <div class="trust-content">
+                        <div class="section-label">Privacy & Transparency</div>
+                        <h2 class="section-title" style="font-size:clamp(28px,4vw,40px);">Your Information is<br>Handled With Care</h2>
+                        <div class="trust-points">
+                            <div class="trust-point">
+                                <div class="trust-point-icon">
+                                    <svg width="18" height="18" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                </div>
+                                <div>
+                                    <strong>Secure Authentication</strong>
+                                    <p>Your password is hashed and never stored in plain text. Sessions expire on logout.</p>
+                                </div>
+                            </div>
+                            <div class="trust-point">
+                                <div class="trust-point-icon">
+                                    <svg width="18" height="18" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </div>
+                                <div>
+                                    <strong>Full Visibility</strong>
+                                    <p>You can see exactly who viewed your complaint and when — complete transparency at every step.</p>
+                                </div>
+                            </div>
+                            <div class="trust-point">
+                                <div class="trust-point-icon">
+                                    <svg width="18" height="18" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                </div>
+                                <div>
+                                    <strong>Role-Based Access</strong>
+                                    <p>Each user sees only what they need. Students see their own complaints; admins see their department.</p>
+                                </div>
+                            </div>
+                            <div class="trust-point">
+                                <div class="trust-point-icon">
+                                    <svg width="18" height="18" fill="none" stroke="#4f46e5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                                </div>
+                                <div>
+                                    <strong>Real Data Only</strong>
+                                    <p>Every statistic, timestamp, and AI response is based on actual records — no fabricated data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trust-visual">
+                        <div class="trust-stats-card">
+                            <div class="trust-stat">
+                                <div class="trust-stat-value">100%</div>
+                                <div class="trust-stat-label">Transparent Tracking</div>
+                            </div>
+                            <div class="trust-stat">
+                                <div class="trust-stat-value">AI</div>
+                                <div class="trust-stat-label">Pre-Resolution Assistance</div>
+                            </div>
+                            <div class="trust-stat">
+                                <div class="trust-stat-value">Auto</div>
+                                <div class="trust-stat-label">Escalation on Breach</div>
+                            </div>
+                            <div class="trust-stat">
+                                <div class="trust-stat-value">SLA</div>
+                                <div class="trust-stat-label">Response Deadlines</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="section-inner" style="text-align:center;">
+                <h2 class="cta-title">Ready to Report a Problem?</h2>
+                <p class="cta-sub">Join your institution on PROBLEMINT. Select your role and sign in to get started.</p>
+                <button class="cta-main-btn" onclick="app.handleReportProblemClick()">Get Started — Report a Problem</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="public-footer">
+            <div class="section-inner">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="pub-logo" style="margin-bottom:12px;">
+                            <div class="pub-logo-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span class="pub-logo-name">PROBLEMINT</span>
+                        </div>
+                        <p style="font-size:13px; color:#94a3b8; line-height:1.6;">AI-Powered Organizational Problem Intelligence and Prevention Platform.</p>
+                        <p style="font-size:12px; color:#64748b; margin-top:8px;">Every problem deserves a solution — and every solution should help prevent the next problem.</p>
+                    </div>
+                    <div>
+                        <div class="footer-heading">Platform</div>
+                        <div class="footer-links-list">
+                            <a href="#" onclick="app.showRoleSelection()">Report a Problem</a>
+                            <a href="#" onclick="document.getElementById('how-it-works-section').scrollIntoView({behavior:'smooth'}); return false;">How It Works</a>
+                            <a href="#" onclick="document.getElementById('features-section').scrollIntoView({behavior:'smooth'}); return false;">Features</a>
+                            <a href="#" onclick="app.showRoleSelection()">Sign In</a>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="footer-heading">For Users</div>
+                        <div class="footer-links-list">
+                            <a href="#">Students</a>
+                            <a href="#">Teaching Staff</a>
+                            <a href="#">Non-Teaching Staff</a>
+                            <a href="#">Department Admins</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>© 2026 PROBLEMINT. Built for institutional problem intelligence.</span>
+                    <span>Every Problem Deserves a Solution.</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- ROLE SELECTION + LOGIN — Shown when clicking Sign In / CTA  -->
+    <!-- ========================================================== -->
+    <div id="auth-layout" class="hidden">
+        <!-- Role Selection View -->
+        <div id="role-selection-view" class="role-selection-layout">
+            <div class="role-sel-header">
+                <button class="role-back-to-home" onclick="app.showPublicHome()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back to home
+                </button>
+                <div class="pub-logo" style="justify-content:center;">
+                    <div class="pub-logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="pub-logo-name">PROBLEMINT</span>
+                </div>
+            </div>
+            <div class="role-sel-content">
+                <h1 class="role-sel-title">Welcome to PROBLEMINT</h1>
+                <p class="role-sel-sub">Choose how you belong to our institution to continue.</p>
+                <div class="role-cards-grid" id="role-cards-grid">
+                    <div class="role-card" onclick="app.selectRole('Student','🎓','student')">
+                        <div class="role-card-emoji">🎓</div>
+                        <div class="role-card-title">Student</div>
+                        <div class="role-card-desc">UG, PG & Research scholars</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Teaching Staff','👨‍🏫','teaching')">
+                        <div class="role-card-emoji">👨‍🏫</div>
+                        <div class="role-card-title">Teaching Staff</div>
+                        <div class="role-card-desc">Professors & Lecturers</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Non-Teaching Staff','🏢','non-teaching')">
+                        <div class="role-card-emoji">🏢</div>
+                        <div class="role-card-title">Non-Teaching Staff</div>
+                        <div class="role-card-desc">Administrative personnel</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Research Staff','🔬','research')">
+                        <div class="role-card-emoji">🔬</div>
+                        <div class="role-card-title">Research Staff</div>
+                        <div class="role-card-desc">Research scholars & fellows</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Lab Technician','⚗️','lab')">
+                        <div class="role-card-emoji">⚗️</div>
+                        <div class="role-card-title">Lab Technician</div>
+                        <div class="role-card-desc">Laboratory support staff</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Maintenance Worker','🔧','maintenance')">
+                        <div class="role-card-emoji">🔧</div>
+                        <div class="role-card-title">Maintenance Worker</div>
+                        <div class="role-card-desc">Campus maintenance crew</div>
+                    </div>
+                    <div class="role-card" onclick="app.selectRole('Housekeeping Staff','🧹','housekeeping')">
+                        <div class="role-card-emoji">🧹</div>
+                        <div class="role-card-title">Housekeeping Staff</div>
+                        <div class="role-card-desc">Sanitation & cleaning team</div>
+                    </div>
+                    <div class="role-card role-card--admin" onclick="app.selectRole('Department Administrator','🏛️','dept-admin')">
+                        <div class="role-card-emoji">🏛️</div>
+                        <div class="role-card-title">Department Admin</div>
+                        <div class="role-card-desc">Manage department complaints</div>
+                    </div>
+                    <div class="role-card role-card--org-admin" onclick="app.selectRole('College Administrator','⭐','org-admin')">
+                        <div class="role-card-emoji">⭐</div>
+                        <div class="role-card-title">College Administrator</div>
+                        <div class="role-card-desc">Institution-wide oversight</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Form View (shown after role selection) -->
+        <div id="login-form-view" class="login-form-layout hidden">
+            <div class="login-split-left">
+                <div class="login-left-inner">
+                    <div class="auth-illustration">
+                        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="auth-svg">
+                            <circle cx="200" cy="200" r="150" fill="rgba(99,102,241,0.04)"/>
+                            <circle cx="200" cy="200" r="100" fill="rgba(99,102,241,0.06)"/>
+                            <line x1="200" y1="200" x2="100" y2="120" stroke="rgba(165,180,252,0.4)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                            <line x1="200" y1="200" x2="300" y2="110" stroke="rgba(165,180,252,0.4)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                            <line x1="200" y1="200" x2="320" y2="240" stroke="rgba(165,180,252,0.4)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                            <line x1="200" y1="200" x2="110" y2="290" stroke="rgba(165,180,252,0.4)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                            <circle cx="100" cy="120" r="10" fill="rgba(129,140,248,0.5)" stroke="rgba(165,180,252,0.8)" stroke-width="1.5"/>
+                            <circle cx="300" cy="110" r="14" fill="rgba(239,68,68,0.3)" stroke="rgba(252,165,165,0.8)" stroke-width="1.5"/>
+                            <circle cx="320" cy="240" r="10" fill="rgba(16,185,129,0.3)" stroke="rgba(110,231,183,0.8)" stroke-width="1.5"/>
+                            <circle cx="110" cy="290" r="12" fill="rgba(245,158,11,0.3)" stroke="rgba(253,211,77,0.8)" stroke-width="1.5"/>
+                            <circle cx="200" cy="200" r="32" fill="rgba(79,70,229,0.15)" stroke="rgba(129,140,248,0.5)" stroke-width="2"/>
+                            <circle cx="200" cy="200" r="18" fill="rgba(79,70,229,0.45)" stroke="rgba(165,180,252,0.9)" stroke-width="1.5"/>
+                            <path d="M200 190L190 195L200 200L210 195L200 190Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M190 198L200 203L210 198" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="200" cy="200" r="44" stroke="rgba(99,102,241,0.15)" stroke-width="1" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="auth-brand-content">
+                        <div class="pub-logo" style="margin-bottom:20px;">
+                            <div class="pub-logo-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                            <span class="pub-logo-name">PROBLEMINT</span>
+                        </div>
+                        <h2 class="auth-headline" style="font-size:clamp(26px,3vw,38px);">Turn Every<br>Problem Into<br>Progress.</h2>
+                        <p class="auth-subtext">Intelligent problem tracking, AI-powered pre-resolution and prevention intelligence for your institution.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="login-split-right">
+                <div class="auth-card">
+                    <button class="role-back-btn" onclick="app.showRoleSelection()" style="margin-bottom:20px;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        Choose a different role
+                    </button>
+
+                    <div id="selected-role-badge" class="selected-role-badge hidden">
+                        <span id="selected-role-emoji">🎓</span>
+                        <span id="selected-role-name">Student Sign In</span>
+                    </div>
+
+                    <div class="auth-card-header">
+                        <h2 class="auth-card-title" id="login-title">Sign In</h2>
+                        <p class="auth-card-subtitle">Enter your institutional credentials to continue.</p>
+                    </div>
+
+                    <form id="login-form" class="auth-form" onsubmit="return false;">
+                        <div class="auth-field-group">
+                            <label class="auth-label" for="auth-email">Institutional Email</label>
+                            <div class="auth-input-wrapper">
+                                <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                <input type="email" id="auth-email" class="auth-input" placeholder="you@college.edu" autocomplete="email" required>
+                            </div>
+                            <div class="auth-field-error hidden" id="email-error">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="auth-field-group">
+                            <label class="auth-label" for="auth-password">Password</label>
+                            <div class="auth-input-wrapper">
+                                <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                <input type="password" id="auth-password" class="auth-input auth-input--password" placeholder="Enter your password" autocomplete="current-password" required>
+                                <button type="button" class="auth-pw-toggle" id="pw-toggle-btn" aria-label="Toggle password visibility">
+                                    <svg id="pw-show-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                    <svg id="pw-hide-icon" class="hidden" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+                                </button>
+                            </div>
+                            <div class="auth-field-error hidden" id="password-error">Password is required.</div>
+                        </div>
+
+                        <div class="auth-capslock-warning hidden" id="capslock-warning">
+                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                            Caps Lock is on
+                        </div>
+
+                        <div class="auth-error-banner hidden" id="auth-error-banner">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span id="auth-error-text">Invalid email or password. Please try again.</span>
+                        </div>
+
+                        <div id="role-mismatch-notice" class="role-mismatch-notice hidden"></div>
+
+                        <button type="submit" class="auth-submit-btn" id="auth-submit-btn" onclick="app.handleLogin()">
+                            <span id="auth-btn-text">Sign In</span>
+                            <div class="auth-btn-spinner hidden" id="auth-btn-spinner">
+                                <svg class="auth-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+                                Signing in...
+                            </div>
+                        </button>
+                    </form>
+
+                    <p class="auth-footer-note">Use your institutional email and password. Your actual role is verified securely — selecting a different category above does not grant extra access.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- APP LAYOUT — Shown only when authenticated                  -->
+    <!-- ========================================================== -->
+    <div class="app-container hidden" id="app-container">
 
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <!-- Brand Logo -->
+        <aside class="sidebar" id="app-sidebar">
             <div class="brand">
                 <div class="brand-logo-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                         <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -28,72 +548,89 @@
                 </div>
                 <div class="brand-text">
                     <span class="brand-name">PROBLEMINT</span>
-                    <span class="brand-tagline">High-Fidelity Intelligence</span>
+                    <span class="brand-tagline">Problem Intelligence</span>
                 </div>
             </div>
 
-            <!-- Navigation Links -->
+            <!-- User Section in sidebar -->
+            <div class="sidebar-user" id="sidebar-user-section">
+                <div id="sidebar-user-avatar" class="sidebar-user-avatar">SU</div>
+                <div class="sidebar-user-info">
+                    <div id="sidebar-user-name" class="sidebar-user-name">Loading...</div>
+                    <div id="sidebar-user-role" class="sidebar-user-role">—</div>
+                </div>
+            </div>
+
             <nav class="nav-menu">
-                <a href="#dashboard" class="nav-item active" data-view="dashboard">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-                    <span>Dashboard</span>
+                <a href="#" class="nav-item" onclick="app.showPublicHome(); history.replaceState(null, '', window.location.pathname); return false;" style="color:#818cf8; font-weight:600;">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    <span>Public Website</span>
                 </a>
-
+                <a href="#home" class="nav-item" data-view="home">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Home</span>
+                </a>
                 <a href="#submit-problem" class="nav-item" data-view="submit-problem">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    <span>Submit Problem</span>
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Report a Problem</span>
                 </a>
-
                 <a href="#my-complaints" class="nav-item" data-view="my-complaints">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    <span>My Complaints</span>
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                    <span>My Problems</span>
                 </a>
-
-                <a href="#incidents" class="nav-item" data-view="incidents">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <a href="#ai-assistant" class="nav-item" data-view="ai-assistant" id="nav-ai-assistant">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <span>AI Assistant</span>
+                </a>
+                <!-- Admin-only items (shown via JS) -->
+                <a href="#dashboard" class="nav-item hidden" data-view="dashboard" id="nav-dashboard">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    <span>Workspace</span>
+                </a>
+                <a href="#incidents" class="nav-item hidden" data-view="incidents" id="nav-incidents">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     <span>Incidents</span>
                 </a>
-
-                <a href="#problem-intelligence" class="nav-item" data-view="problem-intelligence">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                <a href="#problem-intelligence" class="nav-item hidden" data-view="problem-intelligence" id="nav-problem-intelligence">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                     <span>Problem Intelligence</span>
                 </a>
-
-                <a href="#emerging-problems" class="nav-item" data-view="emerging-problems">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                    <span>Emerging Problems</span>
+                <a href="#emerging-problems" class="nav-item hidden" data-view="emerging-problems" id="nav-emerging-problems">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    <span>Emerging Patterns</span>
                 </a>
-
-                <a href="#knowledge-base" class="nav-item" data-view="knowledge-base">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                    <span>Knowledge Base</span>
-                </a>
-
-                <a href="#prevention-center" class="nav-item" data-view="prevention-center">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <a href="#prevention-center" class="nav-item hidden" data-view="prevention-center" id="nav-prevention-center">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     <span>Prevention Center</span>
                 </a>
-
-                <a href="#analytics" class="nav-item" data-view="analytics">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                <a href="#analytics" class="nav-item hidden" data-view="analytics" id="nav-analytics">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                     <span>Analytics</span>
                 </a>
-
+                <a href="#admin-users" class="nav-item hidden" data-view="admin-users" id="nav-item-admin-users">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <span>User Accounts</span>
+                </a>
                 <a href="#settings" class="nav-item" data-view="settings">
-                    <svg class="nav-icon" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span>Settings</span>
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span>Profile & Settings</span>
                 </a>
             </nav>
 
-            <!-- Sidebar Footer -->
             <div class="sidebar-footer">
                 <a href="#submit-problem" class="btn-primary-block">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                    <span>Submit Problem</span>
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    <span>Report a Problem</span>
                 </a>
                 <div class="footer-links">
-                    <a href="#help"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Help Center</a>
-                    <a href="#login" onclick="app.logout()"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg> Logout</a>
+                    <a href="#ai-assistant">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Help
+                    </a>
+                    <a href="#" onclick="app.logout(); return false;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        Logout
+                    </a>
                 </div>
             </div>
         </aside>
@@ -103,9 +640,13 @@
             <!-- Top Header -->
             <header class="top-header">
                 <div class="header-left">
+                    <!-- Mobile hamburger -->
+                    <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" onclick="app.toggleSidebar()" aria-label="Toggle menu">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
                     <div class="search-box">
-                        <svg class="search-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        <input type="text" id="global-search" placeholder="Search insights, complaints, incidents...">
+                        <svg class="search-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" id="global-search" placeholder="Search problems, solutions...">
                     </div>
                 </div>
 
@@ -113,46 +654,30 @@
                     <!-- Notification Bell -->
                     <div class="nav-action-item notification-wrapper" id="notification-btn">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9"/></svg>
-                        <span class="notification-badge" id="notif-badge">4</span>
-
-                        <!-- Notification Dropdown -->
+                        <span class="notification-badge" id="notif-badge">—</span>
                         <div class="notification-dropdown hidden" id="notif-dropdown">
                             <div class="dropdown-header">
                                 <h3>Notifications</h3>
-                                <span class="mark-read">Mark all as read</span>
+                                <span class="mark-read">Mark all read</span>
                             </div>
-                            <div class="dropdown-list" id="notif-list">
-                                <!-- Populated dynamically -->
-                            </div>
+                            <div class="dropdown-list" id="notif-list"></div>
                         </div>
                     </div>
 
-                    <!-- AI Copilot Toggle -->
+                    <!-- AI Co-pilot Toggle -->
                     <button class="btn-copilot-toggle" id="copilot-toggle-btn">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        <span>AI Co-pilot</span>
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        <span>AI Assistant</span>
                     </button>
 
-                    <!-- New Analysis Button -->
-                    <a href="#submit-problem" class="btn-header-primary">New Analysis</a>
-
-                    <!-- User Profile Badge & Logout Dropdown -->
-                    <div class="user-profile-wrapper" style="position:relative;">
-                        <button class="btn-copilot-toggle" id="switch-account-btn" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; font-weight:600; display:flex; align-items:center; gap:8px;">
-                            <span id="current-user-role-badge" style="background:#6366f1; color:white; font-size:10px; padding:2px 6px; border-radius:10px; font-weight:700;">User</span>
-                            <span id="current-user-name">Student User</span>
-                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </button>
-
-                        <div class="notification-dropdown hidden" id="account-dropdown" style="right:0; width:220px; padding:14px;">
-                            <div style="font-size:12px; font-weight:700; color:#475569; margin-bottom:10px;">Active Session Profile</div>
-                            <button onclick="app.logout()" style="width:100%; padding:10px 14px; background:#fee2e2; color:#dc2626; border:1px solid #fca5a5; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                                Log Out
-                            </button>
+                    <!-- User Identity -->
+                    <div class="user-identity-chip" id="user-identity-display">
+                        <div id="user-avatar-initials" class="user-avatar-initials">SU</div>
+                        <div class="user-identity-info">
+                            <span id="current-user-name" class="user-identity-name">Student User</span>
+                            <span id="current-user-role-badge" class="user-identity-role">User</span>
                         </div>
                     </div>
-
                 </div>
             </header>
 
@@ -162,40 +687,35 @@
             </div>
         </main>
 
-        <!-- Right Side AI Co-pilot Drawer Panel -->
+        <!-- Right Side AI Co-pilot Drawer -->
         <aside class="copilot-drawer hidden" id="copilot-drawer">
             <div class="copilot-header">
                 <div class="copilot-title">
-                    <svg width="20" height="20" fill="none" stroke="#6366f1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    <h3>AI Co-pilot</h3>
+                    <svg width="18" height="18" fill="none" stroke="#6366f1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <h3>PROBLEMINT Assistant</h3>
                 </div>
-                <button class="copilot-close" id="copilot-close-btn">&times;</button>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <button id="copilot-clear-btn" title="Clear chat" class="copilot-clear-btn">Clear</button>
+                    <button class="copilot-close" id="copilot-close-btn">&times;</button>
+                </div>
             </div>
 
             <div class="copilot-content">
                 <div class="copilot-message-box">
-                    <p id="copilot-intro-text">I've analyzed recent incoming reports. There are <strong>3 emerging problems</strong> that may require immediate attention to prevent SLA breaches.</p>
-                    <div class="copilot-quick-actions">
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Review Water Supply (Block B)')">Review Water Supply (Block B) &rarr;</button>
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Check Network Logs (Block C)')">Check Network Logs (Block C) &rarr;</button>
+                    <p id="copilot-intro-text">I can help you track your complaints, understand your problem's status, or find self-service solutions. Ask me anything about your issues.</p>
+                    <div class="copilot-quick-actions" id="copilot-suggestions">
+                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Where is my complaint?')">Where is my complaint? →</button>
+                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('What complaints are pending?')">Pending complaints →</button>
+                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Which department handles Wi-Fi problems?')">Who handles Wi-Fi? →</button>
+                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('How do I report a water supply issue?')">Report water issue →</button>
                     </div>
                 </div>
 
-                <div class="copilot-section-title">RECENTLY EXTRACTED CONTEXT</div>
-                <div class="context-tags">
-                    <span class="context-tag"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L5.6 15.11a2 2 0 01-1.022-.547l-.95-.95a2 2 0 010-2.828l9.9-9.9a2 2 0 012.828 0l.95.95a2 2 0 010 2.828l-5.6 5.6a2 2 0 00-.547 1.022l-.477 2.387a2 2 0 002.387 2.387l2.387-.477a2 2 0 001.022-.547l5.6-5.6a2 2 0 000-2.828l-.95-.95z"/></svg> Water Pressure</span>
-                    <span class="context-tag"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg> Connectivity</span>
-                    <span class="context-tag"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Evening Shift</span>
-                    <span class="context-tag tag-urgent"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg> High Urgency</span>
-                </div>
-
-                <div class="copilot-chat-history" id="copilot-chat-history">
-                    <!-- Dynamic chat messages -->
-                </div>
+                <div class="copilot-chat-history" id="copilot-chat-history"></div>
             </div>
 
             <div class="copilot-input-area">
-                <input type="text" id="copilot-input" placeholder="Ask AI about problems...">
+                <input type="text" id="copilot-input" placeholder="Ask about your complaints or get help...">
                 <button class="btn-copilot-send" id="copilot-send-btn">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </button>
