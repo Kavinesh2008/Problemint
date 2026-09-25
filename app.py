@@ -12,7 +12,7 @@ from services.routing import routeComplaint
 from services.escalation import checkEscalation
 
 app = Flask(__name__, static_folder='.', static_url_path='')
-app.secret_key = 'smart_complaint_secret_key_antigravity'
+app.secret_key = os.environ["SECRET_KEY"]
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config.json')
 
