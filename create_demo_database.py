@@ -245,7 +245,7 @@ def build_demo_db():
         ("Network Admin", "network.admin@college.edu", "networkpass", "Department Admin", "Department admin", None, "ADM-IT01", "Head of IT Network", 1, "Network Administration"),
         ("Mess Manager", "mess.manager@college.edu", "messpass", "Department Admin", "Department admin", None, "ADM-MS01", "Chief Mess Supervisor", 1, "Mess / Food Administration"),
         ("Maintenance Admin", "maintenance.admin@college.edu", "maintpass", "Department Admin", "Department admin", None, "ADM-MT01", "Estate Maintenance Director", 1, "Water & Maintenance Dept"),
-        ("Housekeeping Supervisor", "housekeeping@college.edu", "cleanpass", "Department Admin", "Department admin", None, "ADM-HK01", "Chief Housekeeping Officer", 1, "Housekeeping Dept"),
+        ("Housekeeping Supervisor", "housekeeping@college.edu", "cleanpass", "User", "Housekeeping worker", None, "ADM-HK01", "Housekeeping Supervisor", 1, "Housekeeping Dept"),
         ("Security Officer", "security@college.edu", "secpass", "Department Admin", "Department admin", None, "ADM-SC01", "Chief Security Officer", 1, "Security & Parking"),
         ("Lift Maintenance Officer", "lift.officer@college.edu", "liftpass", "Department Admin", "Department admin", None, "ADM-LF01", "Lead Lift Safety Officer", 1, "Lift Maintenance Dept"),
         ("College Admin", "admin@college.edu", "admin123", "Organization Admin", "Organization admin", None, "ADM-ORG01", "Director / Principal", 1, "Central Administration")

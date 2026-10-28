@@ -67,6 +67,31 @@ const Api = {
         return this.post('/login', { userId: credentials });
     },
     logout() { return this.post('/logout'); },
+    register(userData) { return this.post('/register', userData); },
+    forgotPassword(email) { return this.post('/forgot-password', { email }); },
+    resetPassword(data) { return this.post('/reset-password', data); },
+
+    // Google OAuth
+    getGoogleConfig() { return this.get('/auth/google/config'); },
+    getGoogleAuthUrl() { return this.get('/auth/google/url'); },
+    verifyGoogleToken(credential) { return this.post('/auth/google/verify', { credential }); },
+    demoGoogleLogin(data) { return this.post('/auth/google/demo', data || {}); },
+
+    // Photo Upload & Attachments
+    async uploadPhotos(formData) {
+        try {
+            const res = await fetch(`${API_BASE}/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            const json = await res.json();
+            if (!res.ok) throw json;
+            return json;
+        } catch (e) {
+            console.error('API Upload Error:', e);
+            throw e;
+        }
+    },
 
     // Settings & Security
     getSettings() { return this.get('/settings'); },
@@ -83,6 +108,8 @@ const Api = {
 
     // Dashboard & Analytics
     getDashboardStats() { return this.get('/dashboard/stats'); },
+    getAnalytics() { return this.get('/analytics'); },
+    getAnalytics() { return this.get('/analytics'); },
 
     // Complaints & Pre-Submission Troubleshooting
     getComplaints(params = '') { return this.get(`/complaints${params ? '?' + params : ''}`); },
@@ -94,6 +121,7 @@ const Api = {
     findSimilar(text, category, location) { return this.post('/complaints/similar', { text, category, location }); },
     createComplaint(complaintData) { return this.post('/complaints', complaintData); },
     acknowledgeComplaint(id) { return this.post(`/complaints/${id}/acknowledge`, {}); },
+    updateComplaintStatus(id, data) { return this.post(`/complaints/${id}/update-status`, data); },
 
     // Escalations
     checkEscalations() { return this.post('/admin/escalation-check', {}); },
@@ -113,6 +141,7 @@ const Api = {
 
     // Copilot & Notifications
     askCopilot(query) { return this.post('/copilot', { query }); },
-    getNotifications() { return this.get('/notifications'); }
+    getNotifications() { return this.get('/notifications'); },
+    markNotificationsRead(ids) { return this.post('/notifications/read', ids ? { ids } : {}); }
 };
 

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css?v=20261028_adminmetrics">
 </head>
 <body class="app-body">
 
@@ -35,7 +35,8 @@
                     <a href="#features-section" class="pub-nav-link" onclick="document.getElementById('features-section').scrollIntoView({behavior:'smooth'}); return false;">Features</a>
                     <a href="#trust-section" class="pub-nav-link" onclick="document.getElementById('trust-section').scrollIntoView({behavior:'smooth'}); return false;">About</a>
                     <div id="pub-nav-auth-buttons" style="display:inline-flex; align-items:center; gap:8px;">
-                        <button class="pub-signin-btn" onclick="app.showRoleSelection()">Sign In</button>
+                        <button class="pub-signin-btn" onclick="app.showRoleSelection()">Campus Sign In</button>
+                        <button class="pub-signin-btn" style="background:transparent; border-color:#cbd5e1; color:#475569;" onclick="app.showRoleSelection()">Staff &amp; Admin</button>
                         <button class="pub-cta-btn" onclick="app.handleReportProblemClick()">Report a Problem</button>
                     </div>
                 </div>
@@ -380,7 +381,8 @@
             </div>
             <div class="role-sel-content">
                 <h1 class="role-sel-title">Welcome to PROBLEMINT</h1>
-                <p class="role-sel-sub">Choose how you belong to our institution to continue.</p>
+                <p class="role-sel-sub">14 demo accounts across 9 roles. Separate accounts may share a role.</p>
+
                 <div class="role-cards-grid" id="role-cards-grid">
                     <div class="role-card" onclick="app.selectRole('Student','🎓','student')">
                         <div class="role-card-emoji">🎓</div>
@@ -420,12 +422,12 @@
                     <div class="role-card role-card--admin" onclick="app.selectRole('Department Administrator','🏛️','dept-admin')">
                         <div class="role-card-emoji">🏛️</div>
                         <div class="role-card-title">Department Admin</div>
-                        <div class="role-card-desc">Manage department complaints</div>
+                        <div class="role-card-desc">5 accounts: Network, Mess, Maintenance, Security &amp; Lift</div>
                     </div>
-                    <div class="role-card role-card--org-admin" onclick="app.selectRole('College Administrator','⭐','org-admin')">
+                    <div class="role-card role-card--org-admin" onclick="app.selectRole('Institutional Administrator','⭐','org-admin')">
                         <div class="role-card-emoji">⭐</div>
-                        <div class="role-card-title">College Administrator</div>
-                        <div class="role-card-desc">Institution-wide oversight</div>
+                        <div class="role-card-title">Institutional Admin</div>
+                        <div class="role-card-desc">Platform & institution-wide oversight</div>
                     </div>
                 </div>
             </div>
@@ -470,62 +472,170 @@
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                         Choose a different role
                     </button>
-
                     <div id="selected-role-badge" class="selected-role-badge hidden">
-                        <span id="selected-role-emoji">🎓</span>
+                        <span id="selected-role-emoji">&#127891;</span>
                         <span id="selected-role-name">Student Sign In</span>
                     </div>
 
-                    <div class="auth-card-header">
-                        <h2 class="auth-card-title" id="login-title">Sign In</h2>
-                        <p class="auth-card-subtitle">Enter your institutional credentials to continue.</p>
+                    <!-- SIGN IN PANEL -->
+                    <div id="signin-panel">
+                        <div class="auth-card-header">
+                            <h2 class="auth-card-title" id="login-title">Sign In</h2>
+                            <p class="auth-card-subtitle">Enter your institutional credentials to continue.</p>
+                        </div>
+                        <form id="login-form" class="auth-form" onsubmit="return false;">
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="auth-email">Institutional Email</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    <input type="email" id="auth-email" class="auth-input" placeholder="you@problemint.org" autocomplete="email" required>
+                                </div>
+                                <div class="auth-field-error hidden" id="email-error">Please enter a valid email address.</div>
+                            </div>
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="auth-password">Password</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    <input type="password" id="auth-password" class="auth-input auth-input--password" placeholder="Enter your password" autocomplete="current-password" required>
+                                    <button type="button" class="auth-pw-toggle" id="pw-toggle-btn" aria-label="Toggle password visibility">
+                                        <svg id="pw-show-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        <svg id="pw-hide-icon" class="hidden" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+                                    </button>
+                                </div>
+                                <div class="auth-field-error hidden" id="password-error">Password is required.</div>
+                            </div>
+                            <div class="auth-capslock-warning hidden" id="capslock-warning">
+                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                Caps Lock is on
+                            </div>
+                            <div class="auth-forgot-row">
+                                <button type="button" class="auth-forgot-link" id="forgot-pw-btn" onclick="app.showForgotPassword()">Forgot password?</button>
+                            </div>
+                            <div class="auth-error-banner hidden" id="auth-error-banner">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span id="auth-error-text">Invalid email or password. Please try again.</span>
+                            </div>
+                            <div id="role-mismatch-notice" class="role-mismatch-notice hidden"></div>
+                            <button type="submit" class="auth-submit-btn" id="auth-submit-btn" onclick="app.handleLogin()">
+                                <span id="auth-btn-text">Sign In</span>
+                                <div class="auth-btn-spinner hidden" id="auth-btn-spinner">
+                                    <svg class="auth-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+                                    Signing in...
+                                </div>
+                            </button>
+                        </form>
+                        <div class="auth-divider"><span>or continue with</span></div>
+                        <button type="button" class="auth-google-btn" id="google-signin-btn" onclick="app.handleGoogleSignIn()">
+                            <svg class="auth-google-icon" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Choose a Demo Account</span>
+                        </button>
+                        <p class="auth-switch-text">Don't have an account? <button class="auth-switch-btn" id="show-register-btn" onclick="app.showRegister()">Create account</button></p>
+                        <p class="auth-footer-note">Use your institutional email and password. Your actual role is verified securely &mdash; selecting a different category above does not grant extra access.</p>
                     </div>
 
-                    <form id="login-form" class="auth-form" onsubmit="return false;">
-                        <div class="auth-field-group">
-                            <label class="auth-label" for="auth-email">Institutional Email</label>
-                            <div class="auth-input-wrapper">
-                                <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                                <input type="email" id="auth-email" class="auth-input" placeholder="you@college.edu" autocomplete="email" required>
+                    <!-- REGISTER PANEL -->
+                    <div id="register-panel" class="hidden">
+                        <div class="auth-card-header">
+                            <h2 class="auth-card-title">Create Account</h2>
+                            <p class="auth-card-subtitle">Join PROBLEMINT with your institutional details.</p>
+                        </div>
+                        <form id="register-form" class="auth-form" onsubmit="return false;">
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="reg-name">Full Name</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                    <input type="text" id="reg-name" class="auth-input" placeholder="Your full name" autocomplete="name" required>
+                                </div>
                             </div>
-                            <div class="auth-field-error hidden" id="email-error">Please enter a valid email address.</div>
-                        </div>
-
-                        <div class="auth-field-group">
-                            <label class="auth-label" for="auth-password">Password</label>
-                            <div class="auth-input-wrapper">
-                                <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                <input type="password" id="auth-password" class="auth-input auth-input--password" placeholder="Enter your password" autocomplete="current-password" required>
-                                <button type="button" class="auth-pw-toggle" id="pw-toggle-btn" aria-label="Toggle password visibility">
-                                    <svg id="pw-show-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                                    <svg id="pw-hide-icon" class="hidden" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
-                                </button>
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="reg-email">Institutional Email</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    <input type="email" id="reg-email" class="auth-input" placeholder="you@problemint.org" autocomplete="email" required>
+                                </div>
                             </div>
-                            <div class="auth-field-error hidden" id="password-error">Password is required.</div>
-                        </div>
-
-                        <div class="auth-capslock-warning hidden" id="capslock-warning">
-                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                            Caps Lock is on
-                        </div>
-
-                        <div class="auth-error-banner hidden" id="auth-error-banner">
-                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            <span id="auth-error-text">Invalid email or password. Please try again.</span>
-                        </div>
-
-                        <div id="role-mismatch-notice" class="role-mismatch-notice hidden"></div>
-
-                        <button type="submit" class="auth-submit-btn" id="auth-submit-btn" onclick="app.handleLogin()">
-                            <span id="auth-btn-text">Sign In</span>
-                            <div class="auth-btn-spinner hidden" id="auth-btn-spinner">
-                                <svg class="auth-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
-                                Signing in...
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="reg-department">Department <span style="color:#94a3b8;font-weight:400">(optional)</span></label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                                    <input type="text" id="reg-department" class="auth-input" placeholder="e.g. Computer Science, Hostel" autocomplete="off">
+                                </div>
                             </div>
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="reg-password">Password</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    <input type="password" id="reg-password" class="auth-input auth-input--password" placeholder="Min 8 chars, include a number" autocomplete="new-password" required>
+                                    <button type="button" class="auth-pw-toggle" id="reg-pw-toggle" aria-label="Toggle password" onclick="app.toggleRegPassword()">
+                                        <svg id="reg-pw-show" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        <svg id="reg-pw-hide" class="hidden" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="auth-error-banner hidden" id="reg-error-banner">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span id="reg-error-text">Registration failed. Please check your details.</span>
+                            </div>
+                            <button type="submit" class="auth-submit-btn" id="reg-submit-btn" onclick="app.handleRegister()">
+                                <span id="reg-btn-text">Create Account</span>
+                                <div class="auth-btn-spinner hidden" id="reg-btn-spinner">
+                                    <svg class="auth-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+                                    Creating account...
+                                </div>
+                            </button>
+                        </form>
+                        <div class="auth-divider"><span>or continue with</span></div>
+                        <button type="button" class="auth-google-btn" id="google-reg-btn" onclick="app.handleGoogleSignIn()">
+                            <svg class="auth-google-icon" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Choose a Demo Account</span>
                         </button>
-                    </form>
+                        <p class="auth-switch-text">Already have an account? <button class="auth-switch-btn" onclick="app.showSignIn()">Sign in</button></p>
+                    </div>
 
-                    <p class="auth-footer-note">Use your institutional email and password. Your actual role is verified securely — selecting a different category above does not grant extra access.</p>
+                    <!-- FORGOT PASSWORD PANEL -->
+                    <div id="forgot-panel" class="hidden">
+                        <div class="auth-card-header">
+                            <h2 class="auth-card-title">Reset Password</h2>
+                            <p class="auth-card-subtitle">Enter your email and we'll send reset instructions.</p>
+                        </div>
+                        <form id="forgot-form" class="auth-form" onsubmit="return false;">
+                            <div class="auth-field-group">
+                                <label class="auth-label" for="forgot-email">Institutional Email</label>
+                                <div class="auth-input-wrapper">
+                                    <svg class="auth-input-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    <input type="email" id="forgot-email" class="auth-input" placeholder="you@problemint.org" autocomplete="email">
+                                </div>
+                            </div>
+                            <div class="auth-error-banner hidden" id="forgot-banner">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <span id="forgot-banner-text">Please enter a valid email.</span>
+                            </div>
+                            <div class="auth-success-banner hidden" id="forgot-success">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span id="forgot-success-text">If your email is registered, you will receive reset instructions shortly.</span>
+                            </div>
+                            <button type="submit" class="auth-submit-btn" id="forgot-submit-btn" onclick="app.handleForgotPassword()">
+                                <span id="forgot-btn-text">Send Reset Instructions</span>
+                                <div class="auth-btn-spinner hidden" id="forgot-btn-spinner">
+                                    <svg class="auth-spin" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="3"/><path d="M12 2a10 10 0 0110 10" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+                                    Sending...
+                                </div>
+                            </button>
+                        </form>
+                        <div class="auth-divider"><span>or</span></div>
+                        <p class="auth-switch-text">Remembered your password? <button class="auth-switch-btn" onclick="app.showSignIn()">Sign in</button></p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -539,143 +649,157 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="app-sidebar">
             <div class="brand">
-                <div class="brand-logo-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 17L12 22L22 17" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M2 12L12 17L22 12" stroke="#4f46e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <div class="brand-logo-icon" style="background:#eff6ff; border-color:#bfdbfe;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
                 <div class="brand-text">
-                    <span class="brand-name">PROBLEMINT</span>
-                    <span class="brand-tagline">Problem Intelligence</span>
-                </div>
-            </div>
-
-            <!-- User Section in sidebar -->
-            <div class="sidebar-user" id="sidebar-user-section">
-                <div id="sidebar-user-avatar" class="sidebar-user-avatar">SU</div>
-                <div class="sidebar-user-info">
-                    <div id="sidebar-user-name" class="sidebar-user-name">Loading...</div>
-                    <div id="sidebar-user-role" class="sidebar-user-role">—</div>
+                    <span class="brand-name">Problemint</span>
+                    <span class="brand-tagline">AI Complaint Platform</span>
                 </div>
             </div>
 
             <nav class="nav-menu">
-                <a href="#" class="nav-item" onclick="app.showPublicHome(); history.replaceState(null, '', window.location.pathname); return false;" style="color:#818cf8; font-weight:600;">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
-                    <span>Public Website</span>
+                <a href="#home" class="nav-item active" data-view="home" id="nav-home">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    <span>Dashboard</span>
                 </a>
-                <a href="#home" class="nav-item" data-view="home">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    <span>Home</span>
-                </a>
-                <a href="#submit-problem" class="nav-item" data-view="submit-problem">
+                <a href="#submit-problem" class="nav-item" data-view="submit-problem" id="nav-submit-problem">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <span>Report a Problem</span>
                 </a>
-                <a href="#my-complaints" class="nav-item" data-view="my-complaints">
+                <a href="#my-complaints" class="nav-item" data-view="my-complaints" id="nav-my-complaints">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
-                    <span>My Problems</span>
+                    <span>My Complaints</span>
                 </a>
-                <a href="#ai-assistant" class="nav-item" data-view="ai-assistant" id="nav-ai-assistant">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    <span>AI Assistant</span>
+                <a href="#assigned-tasks" class="nav-item hidden" data-view="assigned-tasks" id="nav-assigned-tasks" style="display:none !important;">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2m-2-2H9a2 2 0 00-2 2v2h10V5a2 2 0 00-2-2h-2zm-4 9l2 2 4-4"/></svg>
+                    <span>My Assigned Tasks</span>
                 </a>
-                <!-- Admin-only items (shown via JS) -->
-                <a href="#dashboard" class="nav-item hidden" data-view="dashboard" id="nav-dashboard">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-                    <span>Workspace</span>
+                <a href="#settings" class="nav-item" data-view="settings" id="nav-settings">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <span>Digital Profile</span>
                 </a>
-                <a href="#incidents" class="nav-item hidden" data-view="incidents" id="nav-incidents">
+
+                <!-- Admin-only items (strictly hidden by default for users) -->
+                <a href="#dashboard" class="nav-item hidden" data-view="dashboard" id="nav-dashboard" style="display:none !important;">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <span>Dept Workspace</span>
+                </a>
+                <a href="#incidents" class="nav-item hidden" data-view="incidents" id="nav-incidents" style="display:none !important;">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     <span>Incidents</span>
                 </a>
-                <a href="#problem-intelligence" class="nav-item hidden" data-view="problem-intelligence" id="nav-problem-intelligence">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                    <span>Problem Intelligence</span>
+                <a href="#knowledge-base" class="nav-item hidden" data-view="knowledge-base" id="nav-knowledge-base" style="display:none !important;">
+                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5.5A2.5 2.5 0 016.5 3H20v16H6.5A2.5 2.5 0 014 16.5v-11zM8 7h8M8 11h8M8 15h5"/></svg>
+                    <span>Knowledge Base</span>
                 </a>
-                <a href="#emerging-problems" class="nav-item hidden" data-view="emerging-problems" id="nav-emerging-problems">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                    <span>Emerging Patterns</span>
-                </a>
-                <a href="#prevention-center" class="nav-item hidden" data-view="prevention-center" id="nav-prevention-center">
+                <a href="#prevention-center" class="nav-item hidden" data-view="prevention-center" id="nav-prevention-center" style="display:none !important;">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     <span>Prevention Center</span>
                 </a>
-                <a href="#analytics" class="nav-item hidden" data-view="analytics" id="nav-analytics">
+                <a href="#analytics" class="nav-item hidden" data-view="analytics" id="nav-analytics" style="display:none !important;">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                     <span>Analytics</span>
                 </a>
-                <a href="#admin-users" class="nav-item hidden" data-view="admin-users" id="nav-item-admin-users">
+                <a href="#admin-users" class="nav-item hidden" data-view="admin-users" id="nav-item-admin-users" style="display:none !important;">
                     <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                     <span>User Accounts</span>
                 </a>
-                <a href="#settings" class="nav-item" data-view="settings">
-                    <svg class="nav-icon" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span>Profile & Settings</span>
-                </a>
             </nav>
 
-            <div class="sidebar-footer">
-                <a href="#submit-problem" class="btn-primary-block">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-                    <span>Report a Problem</span>
-                </a>
-                <div class="footer-links">
-                    <a href="#ai-assistant">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        Help
-                    </a>
-                    <a href="#" onclick="app.logout(); return false;">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                        Logout
-                    </a>
+            <!-- Clean, Pinned Bottom Dock with Quick Sign Out -->
+            <div class="sidebar-user-dock">
+                <div class="sidebar-dock-profile">
+                    <div id="sidebar-user-avatar" class="sidebar-user-avatar">K</div>
+                    <div class="sidebar-user-info">
+                        <div id="sidebar-user-name" class="sidebar-user-name">KAVINESH M</div>
+                        <div id="sidebar-user-role" class="sidebar-user-role">Student</div>
+                    </div>
                 </div>
+                <button type="button" class="sidebar-dock-logout-btn" onclick="app.logout()" title="Sign Out">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                </button>
             </div>
         </aside>
 
         <!-- Main Content Wrapper -->
         <main class="main-wrapper">
-            <!-- Top Header -->
+            <!-- Top Header (Clean, Spacious, Sri Eshwar Reference Style) -->
             <header class="top-header">
                 <div class="header-left">
-                    <!-- Mobile hamburger -->
                     <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" onclick="app.toggleSidebar()" aria-label="Toggle menu">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
-                    <div class="search-box">
-                        <svg class="search-icon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        <input type="text" id="global-search" placeholder="Search problems, solutions...">
+                    <div class="header-greeting-block">
+                        <h2 class="header-greeting-title" id="top-header-greeting">Hello, KAVINESH M</h2>
+                        <p class="header-greeting-sub" id="top-header-sub">Welcome to Problemint Complaint Intelligence Platform</p>
                     </div>
                 </div>
 
                 <div class="header-right">
+                    <!-- Help circular button -->
+                    <button type="button" class="header-icon-circle" onclick="window.location.hash='#home'" title="Campus Help &amp; Knowledge Base">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </button>
+
+                    <!-- AI Assistant Button (NEXUS) -->
+                    <button class="btn-nexus-toggle" id="copilot-toggle-btn" title="Open NEXUS AI">
+                        <div class="nexus-btn-orb">
+                            <svg width="12" height="12" fill="none" stroke="#fff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <span>NEXUS AI</span>
+                    </button>
+
                     <!-- Notification Bell -->
-                    <div class="nav-action-item notification-wrapper" id="notification-btn">
+                    <div class="header-icon-circle notification-wrapper" id="notification-btn" title="Notifications">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9"/></svg>
-                        <span class="notification-badge" id="notif-badge">—</span>
+                        <span class="notification-badge" id="notif-badge">1</span>
                         <div class="notification-dropdown hidden" id="notif-dropdown">
                             <div class="dropdown-header">
-                                <h3>Notifications</h3>
+                                <h3>Recent Notifications</h3>
                                 <span class="mark-read">Mark all read</span>
                             </div>
                             <div class="dropdown-list" id="notif-list"></div>
                         </div>
                     </div>
 
-                    <!-- AI Co-pilot Toggle -->
-                    <button class="btn-copilot-toggle" id="copilot-toggle-btn">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        <span>AI Assistant</span>
-                    </button>
-
-                    <!-- User Identity -->
-                    <div class="user-identity-chip" id="user-identity-display">
-                        <div id="user-avatar-initials" class="user-avatar-initials">SU</div>
-                        <div class="user-identity-info">
-                            <span id="current-user-name" class="user-identity-name">Student User</span>
-                            <span id="current-user-role-badge" class="user-identity-role">User</span>
+                    <!-- User Avatar & Dropdown (Sleek Avatar + Chevron) -->
+                    <div class="header-user-wrapper" id="header-user-wrapper">
+                        <div class="header-user-avatar-btn" id="header-user-avatar-btn" onclick="app.toggleUserDropdown()">
+                            <div id="user-avatar-initials" class="user-avatar-initials">K</div>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                        <div class="header-user-dropdown hidden" id="header-user-dropdown">
+                            <div class="dropdown-user-header">
+                                <div class="dropdown-avatar" id="dropdown-user-avatar">K</div>
+                                <div class="dropdown-user-meta">
+                                    <div class="dropdown-name" id="dropdown-user-name">KAVINESH M</div>
+                                    <div class="dropdown-role" id="dropdown-user-role">Student &bull; Computer Science</div>
+                                    <div class="dropdown-email" id="dropdown-user-email">kavinesh.m2025cse@sece.ac.in</div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="#settings" class="dropdown-item" onclick="app.closeUserDropdown()">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                <span>Digital Profile &amp; Settings</span>
+                            </a>
+                            <a href="#my-complaints" class="dropdown-item" onclick="app.closeUserDropdown()">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                                <span>My Complaints &amp; Tracking</span>
+                            </a>
+                            <a href="#roles" class="dropdown-item" onclick="app.closeUserDropdown(); app.showRoleSelection();">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                                <span>Switch Campus Role</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button type="button" class="dropdown-item dropdown-logout-btn" onclick="app.logout()">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                <span>Sign Out</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -687,44 +811,87 @@
             </div>
         </main>
 
-        <!-- Right Side AI Co-pilot Drawer -->
-        <aside class="copilot-drawer hidden" id="copilot-drawer">
-            <div class="copilot-header">
-                <div class="copilot-title">
-                    <svg width="18" height="18" fill="none" stroke="#6366f1" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    <h3>PROBLEMINT Assistant</h3>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <button id="copilot-clear-btn" title="Clear chat" class="copilot-clear-btn">Clear</button>
-                    <button class="copilot-close" id="copilot-close-btn">&times;</button>
-                </div>
-            </div>
+        <!-- Unique Neural AI Nexus Drawer -->
+        <aside class="nexus-drawer hidden" id="copilot-drawer">
+            <!-- Animated background grid -->
+            <div class="nexus-bg-grid"></div>
 
-            <div class="copilot-content">
-                <div class="copilot-message-box">
-                    <p id="copilot-intro-text">I can help you track your complaints, understand your problem's status, or find self-service solutions. Ask me anything about your issues.</p>
-                    <div class="copilot-quick-actions" id="copilot-suggestions">
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Where is my complaint?')">Where is my complaint? →</button>
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('What complaints are pending?')">Pending complaints →</button>
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('Which department handles Wi-Fi problems?')">Who handles Wi-Fi? →</button>
-                        <button class="quick-action-btn" onclick="app.suggestCopilotQuery('How do I report a water supply issue?')">Report water issue →</button>
+            <!-- Header -->
+            <div class="nexus-header">
+                <div class="nexus-header-left">
+                    <div class="nexus-orb">
+                        <div class="nexus-orb-ring"></div>
+                        <div class="nexus-orb-ring nexus-orb-ring--2"></div>
+                        <svg width="14" height="14" fill="none" stroke="#fff" viewBox="0 0 24 24" style="position:relative;z-index:2;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div>
+                        <div class="nexus-title">NEXUS AI</div>
+                        <div class="nexus-subtitle">Campus Intelligence · Online</div>
                     </div>
                 </div>
-
-                <div class="copilot-chat-history" id="copilot-chat-history"></div>
+                <div class="nexus-header-actions">
+                    <button class="nexus-icon-btn" id="copilot-clear-btn" title="Clear conversation">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    </button>
+                    <button class="nexus-icon-btn nexus-close-btn" id="copilot-close-btn" title="Close">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="copilot-input-area">
-                <input type="text" id="copilot-input" placeholder="Ask about your complaints or get help...">
-                <button class="btn-copilot-send" id="copilot-send-btn">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </button>
+            <!-- Intro pane (hidden once chat starts) -->
+            <div class="nexus-intro" id="nexus-intro-pane">
+                <div class="nexus-brain-visual">
+                    <div class="nexus-pulse-ring"></div>
+                    <div class="nexus-pulse-ring nexus-pulse-ring--2"></div>
+                    <svg width="36" height="36" fill="none" stroke="url(#ng)" viewBox="0 0 24 24">
+                        <defs><linearGradient id="ng" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient></defs>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <p class="nexus-intro-text" id="copilot-intro-text">I'm NEXUS, your campus AI. I can track complaints, surface solutions, and give you real-time insights.</p>
+                <div class="nexus-chips" id="copilot-suggestions">
+                    <button class="nexus-chip" onclick="app.suggestCopilotQuery('Where is my complaint?')">📍 Track my complaint</button>
+                    <button class="nexus-chip" onclick="app.suggestCopilotQuery('What complaints are pending in my department?')">⏳ Pending complaints</button>
+                    <button class="nexus-chip" onclick="app.suggestCopilotQuery('Which department handles Wi-Fi problems?')">📡 Wi-Fi department</button>
+                    <button class="nexus-chip" onclick="app.suggestCopilotQuery('How do I report a water supply issue?')">💧 Report water issue</button>
+                </div>
+            </div>
+
+            <!-- Chat History -->
+            <div class="nexus-chat-history" id="copilot-chat-history"></div>
+
+            <!-- Input area -->
+            <div class="nexus-input-bar">
+                <div class="nexus-input-wrap">
+                    <div class="nexus-input-dot"></div>
+                    <input type="text" id="copilot-input" class="nexus-input" placeholder="Ask NEXUS anything..." autocomplete="off">
+                    <button class="nexus-send-btn" id="copilot-send-btn" title="Send">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                <div class="nexus-input-hint">Powered by PROBLEMINT Intelligence Engine</div>
             </div>
         </aside>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/api.js"></script>
-    <script src="js/app.js"></script>
+    <!-- Local demo account chooser -->
+    <div id="google-sso-modal" class="journey-modal-backdrop hidden">
+        <div class="google-sso-card">
+            <div class="google-sso-header">
+                <div class="demo-picker-mark">P</div>
+                <h2>Choose a Demo Account</h2>
+                <p>Select from the 14 seeded local accounts. Each selection uses that account's demo credentials.</p>
+            </div>
+            <div class="google-sso-list" id="demo-account-list"></div>
+            <div class="google-sso-footer">
+                <button type="button" class="google-sso-cancel-btn" onclick="app.closeGoogleModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts with Cache Busting -->
+    <script src="js/api.js?v=20261028_adminmetrics"></script>
+    <script src="js/app.js?v=20261028_sharedops"></script>
 </body>
 </html>

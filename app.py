@@ -2,9 +2,14 @@ import os
 import json
 import random
 import datetime
-from flask import Flask, jsonify, request, send_from_directory, session
-from database import get_db, init_db
+import uuid
+import mimetypes
+import urllib.request
+import urllib.parse
+from flask import Flask, jsonify, request, send_from_directory, session, redirect
+from database import get_db, init_db, ensure_notification_reads
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from services.categorization import categorizeComplaint
 from services.complaint_splitter import splitComplaint, analyzeMultiIssues
 from services.priority import detectPriority, detectLocation
@@ -12,7 +17,24 @@ from services.routing import routeComplaint
 from services.escalation import checkEscalation
 
 app = Flask(__name__, static_folder='.', static_url_path='')
-app.secret_key = os.environ["SECRET_KEY"]
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'smart_complaint_secret_key_antigravity')
+
+# Upload & File Storage Configuration
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max upload
+ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'gif', 'heic'}
+ASSIGNED_STAFF_TYPES = {
+    'staff', 'teaching staff', 'non-teaching staff', 'research staff',
+    'lab technician', 'maintenance worker', 'housekeeping worker'
+}
+OPERATIONAL_STAFF_TYPES = {'lab technician', 'maintenance worker', 'housekeeping worker'}
+
+# Google OAuth2 Credentials
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', '')
+GOOGLE_REDIRECT_URI = os.environ.get('GOOGLE_REDIRECT_URI', '')
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'config.json')
 
@@ -24,6 +46,46 @@ def load_config():
 
 def format_timestamp():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def get_session_user():
+    user_id = session.get('user_id')
+    if not user_id:
+        return None
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT id, name, email, password, role, user_type, roll_number, employee_id, designation, status, department
+        FROM users WHERE id = ?
+    """, (user_id,))
+    user = cursor.fetchone()
+    conn.close()
+
+    if not user or user['status'] == 'Inactive':
+        return None
+    return dict(user)
+
+
+def require_auth():
+    user = get_session_user()
+    if user is None:
+        return None
+    return user
+
+def complaint_scope_for_user(user, alias='c'):
+    if user['role'] == 'Organization Admin':
+        return '1 = 1', []
+    if user['role'] == 'Department Admin':
+        return f'({alias}.department = ? OR {alias}.assigned_person = ?)', [user['department'] or '', user['name']]
+    if (user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES:
+        return f'({alias}.user_id = ? OR {alias}.assigned_person = ?)', [user['id'], user['name']]
+    return f'{alias}.user_id = ?', [user['id']]
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
+
 
 # --- FRONTEND ROUTING ---
 
@@ -89,25 +151,21 @@ def api_check_auth():
                     'department': u['department']
                 }
             })
-    return jsonify({'authenticated': False}), 401
+    return jsonify({'authenticated': False, 'user': None}), 200
 
 @app.route('/api/me', methods=['GET'])
 def api_get_me():
     user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({'error': 'Not authenticated'}), 401
+
     conn = get_db()
     cursor = conn.cursor()
-    if user_id:
-        cursor.execute("""
-            SELECT id, name, email, role, user_type, roll_number, employee_id, designation, status, department
-            FROM users WHERE id = ?
-        """, (user_id,))
-        u = cursor.fetchone()
-    else:
-        cursor.execute("""
-            SELECT id, name, email, role, user_type, roll_number, employee_id, designation, status, department
-            FROM users WHERE email = 'student@college.edu'
-        """)
-        u = cursor.fetchone()
+    cursor.execute("""
+        SELECT id, name, email, role, user_type, roll_number, employee_id, designation, status, department
+        FROM users WHERE id = ?
+    """, (user_id,))
+    u = cursor.fetchone()
     conn.close()
 
     if u:
@@ -123,17 +181,18 @@ def api_get_me():
             'status': u['status'],
             'department': u['department']
         })
-    return jsonify({
-        'id': 1, 'name': 'Student User', 'role': 'User', 'user_type': 'Student',
-        'email': 'student@college.edu', 'department': 'Computer Science', 'status': 'Active'
-    })
+    return jsonify({'error': 'User not found'}), 404
 
 @app.route('/api/login', methods=['POST'])
 def api_login():
     data = request.json or {}
     user_id = data.get('userId') or data.get('user_id')
-    email = data.get('email')
+    email = (data.get('email') or '').strip().lower()
     password = data.get('password')
+    role_key = (data.get('roleKey') or data.get('role_key') or data.get('role') or '').strip().lower()
+
+    if not (email or user_id) or not password:
+        return jsonify({'error': 'Email and password are required.'}), 400
 
     conn = get_db()
     cursor = conn.cursor()
@@ -145,72 +204,580 @@ def api_login():
             FROM users WHERE id = ?
         """, (user_id,))
         u = cursor.fetchone()
-    elif email and password:
-        cursor.execute("""
-            SELECT id, name, email, password, role, user_type, roll_number, employee_id, designation, status, department
-            FROM users WHERE email = ?
-        """, (email,))
-        candidate = cursor.fetchone()
-        if candidate:
-            stored_pw = candidate['password']
-            if stored_pw == password or check_password_hash(stored_pw, password):
-                u = candidate
-    elif email:
-        cursor.execute("""
-            SELECT id, name, email, password, role, user_type, roll_number, employee_id, designation, status, department
-            FROM users WHERE email = ?
-        """, (email,))
-        u = cursor.fetchone()
     else:
         cursor.execute("""
             SELECT id, name, email, password, role, user_type, roll_number, employee_id, designation, status, department
-            FROM users WHERE role = 'User' LIMIT 1
-        """)
+            FROM users WHERE LOWER(email) = ? OR LOWER(email) = ? OR LOWER(roll_number) = ? OR LOWER(employee_id) = ?
+        """, (email, f"{email}@college.edu", email, email))
         u = cursor.fetchone()
 
-    if u:
-        if u['status'] == 'Inactive':
-            conn.close()
-            return jsonify({'error': 'This account has been deactivated. Please contact the administrator.'}), 403
-
-        now = format_timestamp()
-        cursor.execute("UPDATE users SET last_login_at = ? WHERE id = ?", (now, u['id']))
-        conn.commit()
+    if u and u['status'] == 'Inactive':
         conn.close()
+        return jsonify({'error': 'This account has been deactivated. Please contact the administrator.'}), 403
 
-        session['user_id'] = u['id']
-        session['user_name'] = u['name']
-        session['role'] = u['role']
-        session['department'] = u['department']
-        return jsonify({
-            'success': True,
-            'message': f"Logged in as {u['name']} ({u['role']})",
-            'user': {
-                'id': u['id'],
-                'name': u['name'],
-                'email': u['email'],
-                'role': u['role'],
-                'user_type': u['user_type'],
-                'roll_number': u['roll_number'],
-                'employee_id': u['employee_id'],
-                'designation': u['designation'],
-                'status': u['status'],
-                'department': u['department']
-            }
-        })
+    if not u or not (u['password'] == password or check_password_hash(u['password'], password)):
+        conn.close()
+        return jsonify({'error': 'Invalid email or password'}), 401
+
+    if role_key and role_key not in ('student', 'teaching', 'non-teaching', 'research', 'lab', 'maintenance', 'housekeeping', 'dept-admin', 'org-admin', 'user'):
+        # Accept legacy role hint only as metadata; it must never override the verified user record.
+        pass
+
+    now = format_timestamp()
+    cursor.execute("UPDATE users SET last_login_at = ? WHERE id = ?", (now, u['id']))
+    conn.commit()
     conn.close()
-    return jsonify({'error': 'Invalid email or password'}), 401
+
+    session['user_id'] = u['id']
+    session['user_name'] = u['name']
+    session['role'] = u['role']
+    session['department'] = u['department']
+    return jsonify({
+        'success': True,
+        'message': f"Logged in as {u['name']} ({u['role']})",
+        'user': {
+            'id': u['id'],
+            'name': u['name'],
+            'email': u['email'],
+            'role': u['role'],
+            'user_type': u['user_type'],
+            'roll_number': u['roll_number'],
+            'employee_id': u['employee_id'],
+            'designation': u['designation'],
+            'status': u['status'],
+            'department': u['department']
+        }
+    })
 
 @app.route('/api/logout', methods=['POST', 'GET'])
 def api_logout():
     session.clear()
     return jsonify({'success': True, 'message': 'Logged out successfully'})
 
+# --- ACCOUNT REGISTRATION & RECOVERY ---
+
+@app.route('/api/register', methods=['POST'])
+def api_register():
+    data = request.json or {}
+    name = (data.get('name') or data.get('fullName') or '').strip()
+    email = (data.get('email') or '').strip().lower()
+    password = (data.get('password') or '').strip()
+    user_type = (data.get('user_type') or data.get('userType') or 'Student').strip()
+    role = 'User'  # Standard user role
+    roll_number = (data.get('roll_number') or data.get('rollNumber') or '').strip() or None
+    employee_id = (data.get('employee_id') or data.get('employeeId') or '').strip() or None
+    designation = (data.get('designation') or user_type).strip()
+    department = (data.get('department') or 'General Campus').strip()
+
+    # Input validations with clear, friendly error messages
+    if not name or len(name) < 2:
+        return jsonify({'error': 'Please enter your full name (at least 2 characters).'}), 400
+    if not email or '@' not in email or '.' not in email:
+        return jsonify({'error': 'Please enter a valid institutional email address.'}), 400
+    if not password:
+        return jsonify({'error': 'Please enter a password.'}), 400
+    if len(password) < 8 or not any(c.isalpha() for c in password) or not any(c.isdigit() for c in password):
+        return jsonify({'error': 'Password requirement not met: Use at least 8 characters, including letters and numbers (e.g. College2026).'}), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+
+    # Prevent duplicate accounts
+    cursor.execute("SELECT id, name FROM users WHERE email = ?", (email,))
+    existing = cursor.fetchone()
+    if existing:
+        conn.close()
+        return jsonify({'error': f'An account with email {email} already exists. Please sign in instead.'}), 409
+
+    now = format_timestamp()
+    pw_hash = generate_password_hash(password)
+
+    cursor.execute('''
+    INSERT INTO users (
+        name, email, password, role, user_type, roll_number, employee_id,
+        designation, status, organization_id, department, created_at, last_login_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Active', 1, ?, ?, ?)
+    ''', (name, email, pw_hash, role, user_type, roll_number, employee_id, designation, department, now, now))
+    new_user_id = cursor.lastrowid
+
+    # Create default user settings
+    cursor.execute('''
+    INSERT INTO user_settings (user_id, full_name, notify_forwarding, notify_seen, notify_resolution, notify_escalation, ai_threshold, sla_window, updated_at)
+    VALUES (?, ?, 1, 1, 1, 1, 75, '24 Hours (Standard)', ?)
+    ''', (new_user_id, name, now))
+
+    conn.commit()
+    conn.close()
+
+    # Immediately log user in with session
+    session['user_id'] = new_user_id
+    session['user_name'] = name
+    session['role'] = role
+    session['department'] = department
+
+    return jsonify({
+        'success': True,
+        'message': f'Welcome to PROBLEMINT, {name}! Your account has been created successfully.',
+        'user': {
+            'id': new_user_id,
+            'name': name,
+            'email': email,
+            'role': role,
+            'user_type': user_type,
+            'roll_number': roll_number,
+            'employee_id': employee_id,
+            'designation': designation,
+            'status': 'Active',
+            'department': department
+        }
+    }), 201
+
+@app.route('/api/forgot-password', methods=['POST'])
+def api_forgot_password():
+    data = request.json or {}
+    email = (data.get('email') or '').strip().lower()
+    if not email:
+        return jsonify({'error': 'Please enter your institutional email address.'}), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, name FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+
+    if not user:
+        conn.close()
+        return jsonify({'error': f'No registered account was found with email {email}. Please check your spelling or create an account.'}), 404
+
+    # Generate 6-digit reset code (valid 15 minutes)
+    reset_code = f"{random.randint(100000, 999999)}"
+    now = datetime.datetime.now()
+    now_str = now.strftime("%Y-%m-%d %H:%M:%S")
+    expires_at = (now + datetime.timedelta(minutes=15)).strftime("%Y-%m-%d %H:%M:%S")
+
+    cursor.execute('''
+    INSERT INTO password_resets (email, reset_code, created_at, expires_at, used)
+    VALUES (?, ?, ?, ?, 0)
+    ''', (email, reset_code, now_str, expires_at))
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        'success': True,
+        'message': f'Password reset code generated. For this campus environment, your verification code is: {reset_code}',
+        'resetCode': reset_code,
+        'email': email
+    })
+
+@app.route('/api/reset-password', methods=['POST'])
+def api_reset_password():
+    data = request.json or {}
+    email = (data.get('email') or '').strip().lower()
+    reset_code = (data.get('resetCode') or data.get('code') or '').strip()
+    new_password = (data.get('newPassword') or data.get('password') or '').strip()
+
+    if not email or not reset_code or not new_password:
+        return jsonify({'error': 'Please fill out all fields: Email, Verification Code, and New Password.'}), 400
+
+    if len(new_password) < 8 or not any(c.isalpha() for c in new_password) or not any(c.isdigit() for c in new_password):
+        return jsonify({'error': 'Password requirement not met: Use at least 8 characters, including letters and numbers.'}), 400
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+    SELECT id, expires_at, used FROM password_resets
+    WHERE email = ? AND reset_code = ? AND used = 0
+    ORDER BY id DESC LIMIT 1
+    ''', (email, reset_code))
+    reset_req = cursor.fetchone()
+
+    if not reset_req:
+        conn.close()
+        return jsonify({'error': 'Invalid or already used verification code. Please request a new code.'}), 400
+
+    now_str = format_timestamp()
+    if now_str > reset_req['expires_at']:
+        conn.close()
+        return jsonify({'error': 'Verification code has expired (valid for 15 minutes). Please request a new code.'}), 400
+
+    pw_hash = generate_password_hash(new_password)
+    cursor.execute("UPDATE users SET password = ? WHERE email = ?", (pw_hash, email))
+    cursor.execute("UPDATE password_resets SET used = 1 WHERE id = ?", (reset_req['id'],))
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        'success': True,
+        'message': 'Password has been reset successfully! You can now log in with your new credentials.'
+    })
+
+# --- GOOGLE OAUTH AUTHENTICATION ---
+
+@app.route('/api/auth/google/config', methods=['GET'])
+def api_google_config():
+    is_configured = bool(GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET)
+    redirect_uri = GOOGLE_REDIRECT_URI or (request.host_url.rstrip('/') + '/api/auth/google/callback')
+    return jsonify({
+        'configured': is_configured,
+        'clientId': GOOGLE_CLIENT_ID if is_configured else None,
+        'redirectUri': redirect_uri,
+        'help': 'Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables for live Google OAuth production login.'
+    })
+
+@app.route('/api/auth/google/url', methods=['GET'])
+def api_google_auth_url():
+    if not GOOGLE_CLIENT_ID:
+        return jsonify({
+            'error': 'Google OAuth is not configured on this server. Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.',
+            'configured': False
+        }), 400
+
+    redirect_uri = GOOGLE_REDIRECT_URI or (request.host_url.rstrip('/') + '/api/auth/google/callback')
+    state = uuid.uuid4().hex
+    session['oauth_state'] = state
+
+    params = {
+        'client_id': GOOGLE_CLIENT_ID,
+        'redirect_uri': redirect_uri,
+        'response_type': 'code',
+        'scope': 'openid email profile',
+        'access_type': 'online',
+        'state': state,
+        'prompt': 'select_account'
+    }
+    auth_url = f"https://accounts.google.com/o/oauth2/v2/auth?{urllib.parse.urlencode(params)}"
+    return jsonify({'authUrl': auth_url, 'configured': True})
+
+@app.route('/api/auth/google/callback', methods=['GET'])
+def api_google_callback():
+    code = request.args.get('code')
+    error = request.args.get('error')
+
+    if error or not code:
+        return redirect('/#auth-error=google_auth_cancelled')
+
+    redirect_uri = GOOGLE_REDIRECT_URI or (request.host_url.rstrip('/') + '/api/auth/google/callback')
+
+    try:
+        token_data = urllib.parse.urlencode({
+            'code': code,
+            'client_id': GOOGLE_CLIENT_ID,
+            'client_secret': GOOGLE_CLIENT_SECRET,
+            'redirect_uri': redirect_uri,
+            'grant_type': 'authorization_code'
+        }).encode('utf-8')
+
+        token_req = urllib.request.Request(
+            'https://oauth2.googleapis.com/token',
+            data=token_data,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'}
+        )
+        with urllib.request.urlopen(token_req) as token_resp:
+            token_json = json.loads(token_resp.read().decode('utf-8'))
+            access_token = token_json.get('access_token')
+
+        user_req = urllib.request.Request(
+            'https://www.googleapis.com/oauth2/v2/userinfo',
+            headers={'Authorization': f'Bearer {access_token}'}
+        )
+        with urllib.request.urlopen(user_req) as user_resp:
+            profile = json.loads(user_resp.read().decode('utf-8'))
+
+        email = profile.get('email')
+        name = profile.get('name') or profile.get('given_name') or 'Google User'
+        google_id = profile.get('id')
+        picture = profile.get('picture')
+
+        if not email:
+            return redirect('/#auth-error=no_email_provided')
+
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ? OR google_id = ?", (email, google_id))
+        user = cursor.fetchone()
+        now = format_timestamp()
+
+        if user:
+            cursor.execute("UPDATE users SET google_id = COALESCE(google_id, ?), avatar_url = COALESCE(?, avatar_url), last_login_at = ? WHERE id = ?", (google_id, picture, now, user['id']))
+            user_id = user['id']
+            user_name = user['name']
+            user_role = user['role']
+            user_dept = user['department']
+        else:
+            cursor.execute('''
+            INSERT INTO users (name, email, password, role, user_type, designation, status, organization_id, department, google_id, avatar_url, created_at, last_login_at)
+            VALUES (?, ?, ?, 'User', 'Student', 'Student (Google Verified)', 'Active', 1, 'General Campus', ?, ?, ?, ?)
+            ''', (name, email, generate_password_hash(uuid.uuid4().hex), google_id, picture, now, now))
+            user_id = cursor.lastrowid
+            user_name = name
+            user_role = 'User'
+            user_dept = 'General Campus'
+
+            cursor.execute('''
+            INSERT INTO user_settings (user_id, full_name, notify_forwarding, notify_seen, notify_resolution, notify_escalation, ai_threshold, sla_window, updated_at)
+            VALUES (?, ?, 1, 1, 1, 1, 75, '24 Hours (Standard)', ?)
+            ''', (user_id, name, now))
+
+        conn.commit()
+        conn.close()
+
+        session['user_id'] = user_id
+        session['user_name'] = user_name
+        session['role'] = user_role
+        session['department'] = user_dept
+
+        return redirect('/#home')
+
+    except Exception as e:
+        return redirect(f'/#auth-error={urllib.parse.quote(str(e))}')
+
+@app.route('/api/auth/google/verify', methods=['POST'])
+def api_google_verify():
+    data = request.json or {}
+    credential = data.get('credential')
+    if not credential:
+        return jsonify({'error': 'Google credential token is required'}), 400
+
+    try:
+        req = urllib.request.Request(f"https://oauth2.googleapis.com/tokeninfo?id_token={credential}")
+        with urllib.request.urlopen(req) as resp:
+            profile = json.loads(resp.read().decode('utf-8'))
+
+        email = profile.get('email')
+        name = profile.get('name') or profile.get('given_name') or 'Google User'
+        google_id = profile.get('sub')
+        picture = profile.get('picture')
+
+        if not email:
+            return jsonify({'error': 'Email not verified by Google'}), 400
+
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ? OR google_id = ?", (email, google_id))
+        user = cursor.fetchone()
+        now = format_timestamp()
+
+        if user:
+            cursor.execute("UPDATE users SET google_id = COALESCE(google_id, ?), avatar_url = COALESCE(?, avatar_url), last_login_at = ? WHERE id = ?", (google_id, picture, now, user['id']))
+            user_id = user['id']
+            user_name = user['name']
+            user_role = user['role']
+            user_dept = user['department']
+        else:
+            cursor.execute('''
+            INSERT INTO users (name, email, password, role, user_type, designation, status, organization_id, department, google_id, avatar_url, created_at, last_login_at)
+            VALUES (?, ?, ?, 'User', 'Student', 'Student (Google Verified)', 'Active', 1, 'General Campus', ?, ?, ?, ?)
+            ''', (name, email, generate_password_hash(uuid.uuid4().hex), google_id, picture, now, now))
+            user_id = cursor.lastrowid
+            user_name = name
+            user_role = 'User'
+            user_dept = 'General Campus'
+
+            cursor.execute('''
+            INSERT INTO user_settings (user_id, full_name, notify_forwarding, notify_seen, notify_resolution, notify_escalation, ai_threshold, sla_window, updated_at)
+            VALUES (?, ?, 1, 1, 1, 1, 75, '24 Hours (Standard)', ?)
+            ''', (user_id, name, now))
+
+        conn.commit()
+        conn.close()
+
+        session['user_id'] = user_id
+        session['user_name'] = user_name
+        session['role'] = user_role
+        session['department'] = user_dept
+
+        return jsonify({
+            'success': True,
+            'message': f'Signed in as {user_name} via Google',
+            'user': {
+                'id': user_id,
+                'name': user_name,
+                'email': email,
+                'role': user_role,
+                'user_type': 'Student',
+                'department': user_dept,
+                'avatar_url': picture
+            }
+        })
+    except Exception as e:
+        return jsonify({'error': f'Google token verification error: {str(e)}'}), 400
+
+@app.route('/api/auth/google/demo', methods=['POST'])
+def api_google_demo():
+    """Allows reliable demonstration of Google OAuth sign-in flow for campus demonstration when live credentials are not set."""
+    data = request.json or {}
+    email = (data.get('email') or 'kavin.campus@gmail.com').strip().lower()
+    name = (data.get('name') or 'Kavin M (Google)').strip()
+    avatar = data.get('picture') or ''
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    now = format_timestamp()
+
+    if user:
+        cursor.execute("UPDATE users SET last_login_at = ? WHERE id = ?", (now, user['id']))
+        user_id = user['id']
+        user_name = user['name']
+        user_role = user['role']
+        user_dept = user['department']
+    else:
+        cursor.execute('''
+        INSERT INTO users (name, email, password, role, user_type, designation, status, organization_id, department, google_id, avatar_url, created_at, last_login_at)
+        VALUES (?, ?, ?, 'User', 'Student', 'Student (Google Verified)', 'Active', 1, 'Computer Science', 'google_demo_101', ?, ?, ?)
+        ''', (name, email, generate_password_hash('google_demo_pass'), avatar, now, now))
+        user_id = cursor.lastrowid
+        user_name = name
+        user_role = 'User'
+        user_dept = 'Computer Science'
+
+        cursor.execute('''
+        INSERT INTO user_settings (user_id, full_name, notify_forwarding, notify_seen, notify_resolution, notify_escalation, ai_threshold, sla_window, updated_at)
+        VALUES (?, ?, 1, 1, 1, 1, 75, '24 Hours (Standard)', ?)
+        ''', (user_id, name, now))
+
+    conn.commit()
+    conn.close()
+
+    session['user_id'] = user_id
+    session['user_name'] = user_name
+    session['role'] = user_role
+    session['department'] = user_dept
+
+    return jsonify({
+        'success': True,
+        'message': f'Signed in as {user_name} via Google Account',
+        'user': {
+            'id': user_id,
+            'name': user_name,
+            'email': email,
+            'role': user_role,
+            'user_type': 'Student',
+            'department': user_dept,
+            'avatar_url': avatar
+        }
+    })
+
+# --- PHOTO EVIDENCE & FILE STORAGE ---
+
+@app.route('/api/upload', methods=['POST'])
+def api_upload_files():
+    """Securely uploads photo evidence with MIME type, size, and extension validation."""
+    if require_auth() is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
+    uploaded_files = []
+
+    # 1. Handle multipart form data files
+    files_list = []
+    if 'photos' in request.files:
+        files_list.extend(request.files.getlist('photos'))
+    if 'photo' in request.files:
+        files_list.append(request.files.get('photo'))
+    if 'file' in request.files:
+        files_list.extend(request.files.getlist('file'))
+
+    for file in files_list:
+        if file and file.filename:
+            orig_fn = secure_filename(file.filename)
+            if not allowed_file(orig_fn):
+                return jsonify({'error': f"File '{orig_fn}' is not an accepted image format. Allowed formats: PNG, JPG, JPEG, WEBP, GIF, HEIC."}), 400
+
+            unique_prefix = uuid.uuid4().hex[:12]
+            stored_fn = f"{unique_prefix}_{orig_fn}"
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], stored_fn)
+
+            file.save(file_path)
+            file_size = os.path.getsize(file_path)
+            mime_type = mimetypes.guess_type(file_path)[0] or 'image/jpeg'
+
+            uploaded_files.append({
+                'stored_filename': stored_fn,
+                'original_filename': orig_fn,
+                'file_size': file_size,
+                'mime_type': mime_type,
+                'url': f"/uploads/{stored_fn}"
+            })
+
+    # 2. Also handle base64 image payload if JSON passed (e.g. from camera canvas)
+    if not uploaded_files and request.is_json:
+        data = request.json or {}
+        base64_images = data.get('images') or ([data.get('image')] if data.get('image') else [])
+        for idx, b64_str in enumerate(base64_images):
+            if b64_str and ',' in b64_str:
+                header, encoded = b64_str.split(',', 1)
+                ext = 'png'
+                if 'jpeg' in header or 'jpg' in header: ext = 'jpg'
+                elif 'webp' in header: ext = 'webp'
+                import base64
+                raw_bytes = base64.b64decode(encoded)
+                stored_fn = f"{uuid.uuid4().hex[:12]}_camera_photo_{idx+1}.{ext}"
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], stored_fn)
+                with open(file_path, 'wb') as f:
+                    f.write(raw_bytes)
+                file_size = len(raw_bytes)
+                uploaded_files.append({
+                    'stored_filename': stored_fn,
+                    'original_filename': f"camera_capture_{idx+1}.{ext}",
+                    'file_size': file_size,
+                    'mime_type': f"image/{ext}",
+                    'url': f"/uploads/{stored_fn}"
+                })
+
+    if not uploaded_files:
+        return jsonify({'error': 'No files were uploaded. Please choose or capture an image.'}), 400
+
+    return jsonify({
+        'success': True,
+        'message': f'Successfully uploaded {len(uploaded_files)} file(s).',
+        'files': uploaded_files
+    })
+
+@app.route('/uploads/<path:filename>')
+def serve_upload(filename):
+    """Serve evidence only to the complaint owner or an authorized assignee/admin."""
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT c.user_id, c.department, c.assigned_person
+        FROM complaint_attachments a
+        JOIN complaints c ON c.id = a.complaint_id
+        WHERE a.stored_filename = ?
+    ''', (filename,))
+    attachment = cursor.fetchone()
+    conn.close()
+    if not attachment:
+        return jsonify({'error': 'Evidence not found'}), 404
+
+    user_id = curr_user['id']
+    role = curr_user['role']
+    can_view = role == 'Organization Admin'
+    if role == 'Department Admin':
+        can_view = attachment['department'] == curr_user['department'] or attachment['assigned_person'] == curr_user['name']
+    elif role == 'User':
+        can_view = attachment['user_id'] == user_id or (
+            (curr_user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES
+            and attachment['assigned_person'] == curr_user['name']
+        )
+    if not can_view:
+        return jsonify({'error': 'You are not authorized to view this evidence.'}), 403
+
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
 # --- SETTINGS & PREFERENCES PERSISTENCE ---
 
 @app.route('/api/settings', methods=['GET', 'POST'])
 def api_settings():
-    session_user_id = session.get('user_id') or 1
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
+    session_user_id = curr_user['id']
     conn = get_db()
     cursor = conn.cursor()
 
@@ -565,10 +1132,14 @@ def api_admin_bulk_import():
 
 @app.route('/api/dashboard/stats', methods=['GET'])
 def api_dashboard_stats():
+    session_user = require_auth()
+    if session_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     conn = get_db()
     cursor = conn.cursor()
 
-    session_user_id = session.get('user_id') or 1
+    session_user_id = session_user['id']
     cursor.execute("""
         SELECT id, role, user_type, department, name, roll_number, employee_id, designation
         FROM users WHERE id = ?
@@ -772,6 +1343,84 @@ def api_dashboard_stats():
         'needsAttention': needs_attention
     })
 
+@app.route('/api/analytics', methods=['GET'])
+def api_analytics():
+    user = require_auth()
+    if user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+    if user['role'] != 'Organization Admin':
+        return jsonify({'error': 'Institutional administrator access required.'}), 403
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT COUNT(*) AS total,
+               SUM(CASE WHEN status NOT IN ('Resolved', 'Closed') THEN 1 ELSE 0 END) AS active,
+               SUM(CASE WHEN status IN ('Resolved', 'Closed') THEN 1 ELSE 0 END) AS resolved,
+               SUM(CASE WHEN user_verified = 1 THEN 1 ELSE 0 END) AS verified
+        FROM complaints
+    ''')
+    complaint_counts = cursor.fetchone()
+    resolved_count = complaint_counts['resolved'] or 0
+    verified_count = complaint_counts['verified'] or 0
+    verification_rate = round(verified_count * 100 / resolved_count, 1) if resolved_count else None
+
+    cursor.execute('''
+        SELECT AVG(resolution_time_hours)
+        FROM resolutions
+        WHERE success = 1 AND resolution_time_hours IS NOT NULL AND resolution_time_hours >= 0
+    ''')
+    avg_resolution_time = cursor.fetchone()[0]
+
+    cursor.execute('''
+        SELECT COUNT(*) FROM incidents
+        WHERE LOWER(severity) = 'critical' AND LOWER(status) NOT IN ('resolved', 'closed')
+    ''')
+    open_critical_incidents = cursor.fetchone()[0]
+
+    cursor.execute('''
+        SELECT department, COUNT(*) AS total,
+               SUM(CASE WHEN status NOT IN ('Resolved', 'Closed') THEN 1 ELSE 0 END) AS active
+        FROM complaints
+        GROUP BY department
+        ORDER BY total DESC, department ASC
+    ''')
+    department_workload = [
+        {'department': row['department'], 'total': row['total'], 'active': row['active'] or 0}
+        for row in cursor.fetchall()
+    ]
+
+    cursor.execute('''
+        SELECT category, COUNT(*) AS total
+        FROM complaints
+        GROUP BY category
+        ORDER BY total DESC, category ASC
+    ''')
+    category_counts = [{'category': row['category'], 'total': row['total']} for row in cursor.fetchall()]
+
+    cursor.execute('''
+        SELECT date(created_at) AS report_date, COUNT(*) AS total
+        FROM complaints
+        WHERE date(created_at) >= date('now', '-6 days')
+        GROUP BY date(created_at)
+        ORDER BY report_date ASC
+    ''')
+    daily_volume = [{'date': row['report_date'], 'total': row['total']} for row in cursor.fetchall()]
+    conn.close()
+
+    return jsonify({
+        'totalComplaints': complaint_counts['total'] or 0,
+        'activeComplaints': complaint_counts['active'] or 0,
+        'resolvedComplaints': resolved_count,
+        'verifiedComplaints': verified_count,
+        'resolutionVerificationRate': f'{verification_rate}%' if verification_rate is not None else None,
+        'avgResolutionTimeHours': round(avg_resolution_time, 1) if avg_resolution_time is not None else None,
+        'openCriticalIncidents': open_critical_incidents,
+        'departmentWorkload': department_workload,
+        'categoryCounts': category_counts,
+        'dailyVolume': daily_volume
+    })
+
 # --- COMPLAINTS & PRE-SUBMISSION INTELLIGENCE ---
 
 @app.route('/api/complaints/analyze', methods=['POST'])
@@ -900,7 +1549,11 @@ def api_pre_troubleshoot():
 
 @app.route('/api/complaints/self-service-resolved', methods=['POST'])
 def api_self_service_resolved():
-    session_user_id = session.get('user_id') or 1
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
+    session_user_id = curr_user['id']
     data = request.json or {}
     problem_type = data.get('problemType', 'General Self-Help')
     location = data.get('location', 'Campus')
@@ -1014,27 +1667,63 @@ def api_find_similar():
 
 @app.route('/api/complaints', methods=['GET', 'POST'])
 def api_complaints():
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     conn = get_db()
     cursor = conn.cursor()
 
     if request.method == 'POST':
         data = request.json or {}
         confirmed_issues = data.get('confirmedIssues')
-        text = data.get('complaintText') or data.get('description', '')
+        text = (data.get('complaintText') or data.get('description') or '').strip()
+        attachments = data.get('attachments') or data.get('photos') or []
+        user_cat = data.get('category')
+        user_loc = data.get('location')
+        user_prio = data.get('priority') or data.get('severity')
 
-        # Session user
-        session_user_id = session.get('user_id') or 1
+        session_user_id = curr_user['id']
         cursor.execute("SELECT id, name FROM users WHERE id = ?", (session_user_id,))
         u = cursor.fetchone()
-        user_id = u['id'] if u else 1
-        user_name = u['name'] if u else 'Student User'
+        if not u:
+            conn.close()
+            return jsonify({'error': 'Authentication required'}), 401
+        user_id = u['id']
+        user_name = u['name']
 
         now = format_timestamp()
-        base_num = random.randint(100, 999)
-        original_id = f"CMP{base_num}"
+        current_year = datetime.datetime.now().year
+        base_num = random.randint(1000, 9999)
+        original_id = f"CMP-{current_year}-{base_num}"
         letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 
         created_tickets = []
+
+        def save_ticket_attachments(ticket_id, att_list):
+            for att in att_list:
+                if isinstance(att, dict):
+                    s_fn = att.get('stored_filename') or att.get('storedFilename') or att.get('filename') or att.get('name')
+                    o_fn = att.get('original_filename') or att.get('originalFilename') or s_fn or 'photo_evidence.jpg'
+                    f_sz = att.get('file_size') or att.get('fileSize') or 0
+                    m_tp = att.get('mime_type') or att.get('mimeType') or 'image/jpeg'
+                else:
+                    s_fn = str(att)
+                    o_fn = s_fn
+                    f_sz = 0
+                    m_tp = 'image/jpeg'
+                if s_fn:
+                    f_path = os.path.join(app.config['UPLOAD_FOLDER'], s_fn)
+                    cursor.execute('''
+                    INSERT INTO complaint_attachments (complaint_id, original_filename, stored_filename, file_path, file_size, mime_type, uploaded_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (ticket_id, o_fn, s_fn, f_path, f_sz, m_tp, now))
+
+            if att_list:
+                cursor.execute('''
+                INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
+                VALUES (?, 'Evidence Attached', ?, ?, ?)
+                ''', (ticket_id, f"Photographic evidence attached ({len(att_list)} photo(s))", user_name, now))
 
         if confirmed_issues and isinstance(confirmed_issues, list) and len(confirmed_issues) > 0:
             num_issues = len(confirmed_issues)
@@ -1052,7 +1741,6 @@ def api_complaints():
                 person = issue.get('assignedPerson') or route['assigned_person']
                 status = "Forwarded"
 
-                # Calculate SLA deadline based on priority
                 prio_hours = 24
                 if prio == 'Critical': prio_hours = 1
                 elif prio == 'High': prio_hours = 6
@@ -1061,10 +1749,11 @@ def api_complaints():
                 deadline_dt = datetime.datetime.now() + datetime.timedelta(hours=prio_hours)
                 deadline_str = deadline_dt.strftime("%Y-%m-%d %H:%M:%S")
 
-                # Link to existing incident if category & location match
                 cursor.execute("SELECT incident_id FROM incidents WHERE category = ? AND location = ? LIMIT 1", (cat, loc))
                 inc_match = cursor.fetchone()
                 linked_inc_id = inc_match['incident_id'] if inc_match else None
+
+                has_ev = 1 if (attachments and len(attachments) > 0) else 0
 
                 cursor.execute('''
                 INSERT INTO complaints (
@@ -1072,21 +1761,22 @@ def api_complaints():
                     department, assigned_person, location, priority, status, seen,
                     assigned_at, acknowledgement_deadline, escalated, incident_id,
                     source, has_evidence, evidence_provenance, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, 'Multi-Issue Ticket', ?, ?, ?, ?, ?, 0, ?, ?, 0, ?, 'Web', 0, 'User Submission', ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, 'Multi-Issue Ticket', ?, ?, ?, ?, ?, 0, ?, ?, 0, ?, 'Web', ?, 'User Submission', ?, ?)
                 ''', (
                     ticket_id, original_id, user_id, desc, cat, dept, person,
-                    loc, prio, status, now, deadline_str, linked_inc_id, now, now
+                    loc, prio, status, now, deadline_str, linked_inc_id, has_ev, now, now
                 ))
 
-                # Timeline entries
+                save_ticket_attachments(ticket_id, attachments)
+
                 cursor.execute('''
                 INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
-                VALUES (?, 'Submitted', 'Complaint registered via multi-issue portal', ?, ?)
+                VALUES (?, 'Submitted', 'Complaint registered via campus portal', ?, ?)
                 ''', (ticket_id, user_name, now))
 
                 cursor.execute('''
                 INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
-                VALUES (?, 'AI Categorized', ?, 'AI Multi-Issue Engine', ?)
+                VALUES (?, 'AI Categorized', ?, 'AI Engine', ?)
                 ''', (ticket_id, f"Split Issue #{i+1} | Category: {cat} | Priority: {prio} | SLA Target: {prio_hours}h", now))
 
                 cursor.execute('''
@@ -1105,17 +1795,93 @@ def api_complaints():
                     'assignedPerson': person,
                     'status': status,
                     'acknowledgementDeadline': deadline_str,
-                    'incidentId': linked_inc_id
+                    'incidentId': linked_inc_id,
+                    'hasEvidence': bool(has_ev)
                 })
+
+        elif user_cat and text:
+            # Guided submission flow with explicit category and location
+            ticket_id = f"{original_id}"
+            cat = user_cat
+            loc = user_loc or detectLocation(text) or 'Campus'
+            prio = user_prio or detectPriority(text) or 'Medium'
+            route = routeComplaint(cat)
+            dept = route['department']
+            person = route['assigned_person']
+            status = "Forwarded"
+
+            prio_hours = 24
+            if prio == 'Critical': prio_hours = 1
+            elif prio == 'High': prio_hours = 6
+            elif prio == 'Low': prio_hours = 48
+
+            deadline_dt = datetime.datetime.now() + datetime.timedelta(hours=prio_hours)
+            deadline_str = deadline_dt.strftime("%Y-%m-%d %H:%M:%S")
+
+            cursor.execute("SELECT incident_id FROM incidents WHERE category = ? AND location = ? LIMIT 1", (cat, loc))
+            inc_match = cursor.fetchone()
+            linked_inc_id = inc_match['incident_id'] if inc_match else None
+            has_ev = 1 if (attachments and len(attachments) > 0) else 0
+
+            cursor.execute('''
+            INSERT INTO complaints (
+                id, original_complaint_id, user_id, description, category, subcategory,
+                department, assigned_person, location, priority, status, seen,
+                assigned_at, acknowledgement_deadline, escalated, incident_id,
+                source, has_evidence, evidence_provenance, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, 'Guided Ticket', ?, ?, ?, ?, ?, 0, ?, ?, 0, ?, 'Web', ?, 'User Submission', ?, ?)
+            ''', (
+                ticket_id, original_id, user_id, text, cat, dept, person,
+                loc, prio, status, now, deadline_str, linked_inc_id, has_ev, now, now
+            ))
+
+            save_ticket_attachments(ticket_id, attachments)
+
+            cursor.execute('''
+            INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
+            VALUES (?, 'Submitted', 'Problem reported via guided submission form', ?, ?)
+            ''', (ticket_id, user_name, now))
+
+            cursor.execute('''
+            INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
+            VALUES (?, 'Forwarded', ?, 'Routing Engine', ?)
+            ''', (ticket_id, f"Routed to {dept} ({person}) | SLA: {prio_hours}h", now))
+
+            created_tickets.append({
+                'complaintId': ticket_id,
+                'originalId': original_id,
+                'complaintText': text,
+                'category': cat,
+                'location': loc,
+                'severity': prio,
+                'department': dept,
+                'assignedPerson': person,
+                'status': status,
+                'acknowledgementDeadline': deadline_str,
+                'incidentId': linked_inc_id,
+                'hasEvidence': bool(has_ev)
+            })
+
         else:
             if not text:
                 conn.close()
                 return jsonify({'error': 'Description is required'}), 400
 
-            analysis = analyzeMultiIssues(text)
-            num_issues = analysis['num_issues']
+            try:
+                analysis = analyzeMultiIssues(text)
+                issues_list = analysis['issues']
+            except Exception:
+                issues_list = [{
+                    'description': text,
+                    'category': categorizeComplaint(text),
+                    'location': detectLocation(text) or 'Campus',
+                    'severity': detectPriority(text) or 'Medium',
+                    'department': 'General Administration',
+                    'assigned_person': 'Campus Administrator'
+                }]
 
-            for i, issue in enumerate(analysis['issues']):
+            num_issues = len(issues_list)
+            for i, issue in enumerate(issues_list):
                 ticket_id = f"{original_id}-{letters[i]}" if num_issues > 1 else f"{original_id}"
                 desc = issue['description']
                 cat = issue['category']
@@ -1136,6 +1902,7 @@ def api_complaints():
                 cursor.execute("SELECT incident_id FROM incidents WHERE category = ? AND location = ? LIMIT 1", (cat, loc))
                 inc_match = cursor.fetchone()
                 linked_inc_id = inc_match['incident_id'] if inc_match else None
+                has_ev = 1 if (attachments and len(attachments) > 0) else 0
 
                 cursor.execute('''
                 INSERT INTO complaints (
@@ -1143,11 +1910,13 @@ def api_complaints():
                     department, assigned_person, location, priority, status, seen,
                     assigned_at, acknowledgement_deadline, escalated, incident_id,
                     source, has_evidence, evidence_provenance, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, 'Multi-Issue Ticket', ?, ?, ?, ?, ?, 0, ?, ?, 0, ?, 'Web', 0, 'User Submission', ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, 'Ticket', ?, ?, ?, ?, ?, 0, ?, ?, 0, ?, 'Web', ?, 'User Submission', ?, ?)
                 ''', (
                     ticket_id, original_id, user_id, desc, cat, dept, person,
-                    loc, prio, status, now, deadline_str, linked_inc_id, now, now
+                    loc, prio, status, now, deadline_str, linked_inc_id, has_ev, now, now
                 ))
+
+                save_ticket_attachments(ticket_id, attachments)
 
                 cursor.execute('''
                 INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
@@ -1175,7 +1944,8 @@ def api_complaints():
                     'assignedPerson': person,
                     'status': status,
                     'acknowledgementDeadline': deadline_str,
-                    'incidentId': linked_inc_id
+                    'incidentId': linked_inc_id,
+                    'hasEvidence': bool(has_ev)
                 })
 
         conn.commit()
@@ -1190,8 +1960,8 @@ def api_complaints():
         })
 
     # GET complaints: filter by role and query params
-    session_user_id = session.get('user_id') or 1
-    cursor.execute("SELECT role, department, name FROM users WHERE id = ?", (session_user_id,))
+    session_user_id = curr_user['id']
+    cursor.execute("SELECT role, user_type, department, name FROM users WHERE id = ?", (session_user_id,))
     u = cursor.fetchone()
     role = u['role'] if u else 'User'
     user_dept = u['department'] if u else ''
@@ -1207,6 +1977,9 @@ def api_complaints():
     if role == 'Department Admin':
         query_parts.append("(c.department = ? OR c.assigned_person = ?)")
         params.extend([user_dept, user_name])
+    elif role == 'User' and (u['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES:
+        query_parts.append("(c.user_id = ? OR c.assigned_person = ?)")
+        params.extend([session_user_id, user_name])
     elif role == 'User':
         query_parts.append("c.user_id = ?")
         params.append(session_user_id)
@@ -1226,10 +1999,14 @@ def api_complaints():
     sql = f"SELECT c.*, u.name as user_name FROM complaints c JOIN users u ON c.user_id = u.id {where_clause} ORDER BY c.created_at DESC"
     cursor.execute(sql, params)
     rows = cursor.fetchall()
-    conn.close()
 
     complaints_list = []
     for r in rows:
+        # Check for first attachment thumbnail
+        cursor.execute("SELECT stored_filename FROM complaint_attachments WHERE complaint_id = ? LIMIT 1", (r['id'],))
+        att_row = cursor.fetchone()
+        thumb_url = f"/uploads/{att_row['stored_filename']}" if att_row else None
+
         complaints_list.append({
             'complaintId': r['id'],
             'originalId': r['original_complaint_id'],
@@ -1252,30 +2029,50 @@ def api_complaints():
             'escalationReason': r['escalation_reason'],
             'department': r['department'],
             'assignedPerson': r['assigned_person'],
+            'userName': r['user_name'],
             'userVerified': r['status'] == 'Closed',
+            'hasEvidence': bool(r['has_evidence'] or thumb_url),
+            'evidenceThumbnail': thumb_url,
             'createdAt': r['created_at'],
             'incidentId': r['incident_id'] or r['original_complaint_id'],
             'evidenceProvenance': r['evidence_provenance'] or 'User Submission'
         })
 
+    conn.close()
     return jsonify(complaints_list)
 
 @app.route('/api/complaints/<complaint_id>', methods=['GET'])
 def api_get_complaint_detail(complaint_id):
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT c.*, u.name as user_name FROM complaints c JOIN users u ON c.user_id = u.id WHERE c.id = ?", (complaint_id,))
+    cursor.execute("""
+        SELECT c.*, u.name as user_name, u.email as user_email, u.user_type, u.role as user_role, u.department as user_dept
+        FROM complaints c
+        JOIN users u ON c.user_id = u.id
+        WHERE c.id = ?
+    """, (complaint_id,))
     r = cursor.fetchone()
 
     if not r:
         conn.close()
         return jsonify({'error': 'Complaint not found'}), 404
 
+    curr_role = curr_user['role']
+    session_user_id = curr_user['id']
+
+    can_view_assigned = (curr_user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES
+    if curr_role == 'User' and r['user_id'] != session_user_id and not (can_view_assigned and r['assigned_person'] == curr_user['name']):
+        conn.close()
+        return jsonify({'error': 'You are not authorized to view this complaint.'}), 403
+    if curr_role == 'Department Admin' and r['department'] != curr_user['department'] and r['assigned_person'] != curr_user['name']:
+        conn.close()
+        return jsonify({'error': 'You are not authorized to view complaints outside your department scope.'}), 403
+
     now = format_timestamp()
-    session_user_id = session.get('user_id')
-    cursor.execute("SELECT role, name FROM users WHERE id = ?", (session_user_id,))
-    curr_user = cursor.fetchone()
-    curr_role = curr_user['role'] if curr_user else 'User'
 
     # If viewed by a department or org admin for the first time, record seen telemetry
     if not r['seen'] and curr_role in ['Department Admin', 'Organization Admin']:
@@ -1294,7 +2091,23 @@ def api_get_complaint_detail(complaint_id):
 
     cursor.execute("SELECT * FROM complaint_timeline WHERE complaint_id = ? ORDER BY id ASC", (complaint_id,))
     timeline_rows = cursor.fetchall()
+
+    # Fetch attached photographic evidence
+    cursor.execute("SELECT * FROM complaint_attachments WHERE complaint_id = ? ORDER BY id ASC", (complaint_id,))
+    att_rows = cursor.fetchall()
     conn.close()
+
+    attachments = []
+    for a in att_rows:
+        attachments.append({
+            'id': a['id'],
+            'originalFilename': a['original_filename'],
+            'storedFilename': a['stored_filename'],
+            'url': f"/uploads/{a['stored_filename']}",
+            'fileSize': a['file_size'],
+            'mimeType': a['mime_type'],
+            'uploadedAt': a['uploaded_at']
+        })
 
     timeline = []
     for t in timeline_rows:
@@ -1324,27 +2137,38 @@ def api_get_complaint_detail(complaint_id):
         'acknowledgementDeadline': r['acknowledgement_deadline'],
         'department': r['department'],
         'assignedPerson': r['assigned_person'],
+        'userName': r['user_name'],
+        'userEmail': r['user_email'] if r['user_id'] == session_user_id or curr_role in ('Department Admin', 'Organization Admin') else None,
+        'userType': r['user_type'],
         'resolutionNote': r['resolution_note'],
         'escalated': bool(r['escalated']),
         'escalationLevel': r['escalation_level'],
         'escalationReason': r['escalation_reason'],
         'incidentId': r['incident_id'] or r['original_complaint_id'],
         'evidenceProvenance': r['evidence_provenance'] or 'User Submission',
+        'hasEvidence': bool(r['has_evidence'] or len(attachments) > 0),
+        'attachments': attachments,
         'timeline': timeline
     })
+
 
 # --- COMPLAINT ACKNOWLEDGEMENT & ESCALATION DAEMON ---
 
 @app.route('/api/complaints/<complaint_id>/acknowledge', methods=['POST'])
 def api_acknowledge_complaint(complaint_id):
-    session_user_id = session.get('user_id')
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+    session_user_id = curr_user['id']
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT role, name, department FROM users WHERE id = ?", (session_user_id,))
+    cursor.execute("SELECT role, user_type, name, department FROM users WHERE id = ?", (session_user_id,))
     u = cursor.fetchone()
-    if not u or u['role'] not in ['Department Admin', 'Organization Admin']:
+    worker_type = u['user_type'] if u else ''
+    is_assigned_worker = (worker_type or '').strip().lower() in OPERATIONAL_STAFF_TYPES
+    if not u or (u['role'] not in ['Department Admin', 'Organization Admin'] and not is_assigned_worker):
         conn.close()
-        return jsonify({'error': 'Only Department or Organization Admins can formally acknowledge complaints.'}), 403
+        return jsonify({'error': 'You do not have permission to acknowledge assigned work.'}), 403
 
     now = format_timestamp()
     admin_name = u['name']
@@ -1354,6 +2178,13 @@ def api_acknowledge_complaint(complaint_id):
     if not c:
         conn.close()
         return jsonify({'error': 'Complaint not found'}), 404
+
+    if is_assigned_worker and c['assigned_person'] != u['name']:
+        conn.close()
+        return jsonify({'error': 'You can only acknowledge complaints assigned to you.'}), 403
+    if u['role'] == 'Department Admin' and c['department'] != u['department'] and c['assigned_person'] != u['name']:
+        conn.close()
+        return jsonify({'error': 'You can only acknowledge complaints within your department.'}), 403
 
     cursor.execute('''
     UPDATE complaints
@@ -1376,6 +2207,75 @@ def api_acknowledge_complaint(complaint_id):
         'message': f"Ticket {complaint_id} acknowledged by {admin_name}. Status changed to 'In Progress'.",
         'acknowledgedAt': now,
         'acknowledgedBy': admin_name
+    })
+
+@app.route('/api/complaints/<complaint_id>/update-status', methods=['POST'])
+def api_update_complaint_status(complaint_id):
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+    session_user_id = curr_user['id']
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT role, user_type, name, department FROM users WHERE id = ?", (session_user_id,))
+    u = cursor.fetchone()
+    worker_type = u['user_type'] if u else ''
+    is_assigned_worker = (worker_type or '').strip().lower() in OPERATIONAL_STAFF_TYPES
+    if not u or (u['role'] not in ['Department Admin', 'Organization Admin'] and not is_assigned_worker):
+        conn.close()
+        return jsonify({'error': 'You do not have permission to update complaint status.'}), 403
+
+    cursor.execute("SELECT * FROM complaints WHERE id = ?", (complaint_id,))
+    c = cursor.fetchone()
+    if not c:
+        conn.close()
+        return jsonify({'error': 'Complaint not found'}), 404
+
+    # Enforce role boundaries: Department Admin can only update complaints within their department
+    if u['role'] == 'Department Admin' and c['department'] != u['department'] and c['assigned_person'] != u['name']:
+        conn.close()
+        return jsonify({'error': f"You only have permission to update tickets for '{u['department']}', not '{c['department']}'."}), 403
+
+    if is_assigned_worker and c['assigned_person'] != u['name']:
+        conn.close()
+        return jsonify({'error': 'You can only update complaints assigned to you.'}), 403
+
+    data = request.json or {}
+    new_status = data.get('status', 'In Progress')
+    note = (data.get('note') or data.get('resolutionNote') or '').strip()
+    allowed_statuses = {'In Progress', 'Resolved'} if is_assigned_worker else {'Forwarded', 'In Progress', 'Resolved', 'Closed'}
+    if new_status not in allowed_statuses:
+        conn.close()
+        return jsonify({'error': 'That status transition is not permitted.'}), 400
+    if new_status == 'Resolved' and not note:
+        conn.close()
+        return jsonify({'error': 'Add a brief resolution note before marking work completed.'}), 400
+    now = format_timestamp()
+    admin_name = u['name']
+
+    resolution_note = note if new_status == 'Resolved' else (c['resolution_note'] or (note if note else None))
+
+    cursor.execute('''
+    UPDATE complaints
+    SET status = ?, resolution_note = ?, updated_at = ?,
+        seen = 1, seen_at = COALESCE(seen_at, ?), seen_by = COALESCE(seen_by, ?)
+    WHERE id = ?
+    ''', (new_status, resolution_note, now, now, admin_name, complaint_id))
+
+    timeline_desc = note if note else f"Status updated to '{new_status}' by {admin_name}"
+    cursor.execute('''
+    INSERT INTO complaint_timeline (complaint_id, status, description, updated_by, timestamp)
+    VALUES (?, ?, ?, ?, ?)
+    ''', (complaint_id, new_status, timeline_desc, admin_name, now))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        'success': True,
+        'message': f"Ticket {complaint_id} status updated to '{new_status}'.",
+        'status': new_status,
+        'updatedAt': now
     })
 
 @app.route('/api/admin/escalation-check', methods=['GET', 'POST'])
@@ -1663,6 +2563,10 @@ def api_resolutions():
 
 @app.route('/api/verification', methods=['POST'])
 def api_verification():
+    user = require_auth()
+    if user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     data = request.json or {}
     complaint_id = data.get('complaintId')
     status = data.get('verificationStatus', 'Yes') # 'Yes', 'No', 'Partial'
@@ -1670,6 +2574,15 @@ def api_verification():
 
     conn = get_db()
     cursor = conn.cursor()
+    cursor.execute('SELECT user_id FROM complaints WHERE id = ?', (complaint_id,))
+    complaint = cursor.fetchone()
+    if not complaint:
+        conn.close()
+        return jsonify({'error': 'Complaint not found.'}), 404
+    if complaint['user_id'] != user['id']:
+        conn.close()
+        return jsonify({'error': 'Only the complaint submitter can verify its resolution.'}), 403
+
     now = format_timestamp()
 
     if status in ['Yes', 'Confirmed', 'Solved']:
@@ -1746,9 +2659,18 @@ def api_knowledge():
 
 @app.route('/api/prevention', methods=['GET'])
 def api_prevention():
+    user = require_auth()
+    if user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+    if user['role'] not in ('Department Admin', 'Organization Admin'):
+        return jsonify({'error': 'Administrator access required.'}), 403
+
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM prevention_recommendations ORDER BY recommendation_id ASC")
+    if user['role'] == 'Organization Admin':
+        cursor.execute("SELECT * FROM prevention_recommendations ORDER BY recommendation_id ASC")
+    else:
+        cursor.execute("SELECT * FROM prevention_recommendations WHERE responsible_department = ? ORDER BY recommendation_id ASC", (user['department'] or '',))
     rows = cursor.fetchall()
     conn.close()
 
@@ -1776,14 +2698,31 @@ def api_prevention():
 
 @app.route('/api/prevention/<rec_id>/action', methods=['POST'])
 def api_prevention_action(rec_id):
+    user = require_auth()
+    if user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+    if user['role'] not in ('Department Admin', 'Organization Admin'):
+        return jsonify({'error': 'Administrator access required.'}), 403
+
     data = request.json or {}
     new_status = data.get('status', 'Approved') # 'Approved', 'Under Review', 'Rejected', 'Completed'
     decision_note = data.get('decisionNote', '')
-    reviewer = session.get('user_name', 'Department Admin')
+    if new_status not in ('Approved', 'Under Review', 'Rejected', 'Completed'):
+        return jsonify({'error': 'Invalid recommendation status.'}), 400
+    reviewer = user['name']
     now = format_timestamp()
 
     conn = get_db()
     cursor = conn.cursor()
+    cursor.execute("SELECT responsible_department FROM prevention_recommendations WHERE recommendation_id = ?", (rec_id,))
+    recommendation = cursor.fetchone()
+    if not recommendation:
+        conn.close()
+        return jsonify({'error': 'Recommendation not found.'}), 404
+    if user['role'] == 'Department Admin' and recommendation['responsible_department'] != user['department']:
+        conn.close()
+        return jsonify({'error': 'You can only manage recommendations for your department.'}), 403
+
     cursor.execute('''
     UPDATE prevention_recommendations
     SET status = ?, decision_note = ?, reviewed_by = ?, reviewed_at = ?
@@ -1803,53 +2742,136 @@ def api_prevention_action(rec_id):
 @app.route('/api/copilot', methods=['POST'])
 @app.route('/api/copilot/ask', methods=['POST'])
 def api_copilot():
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     data = request.json or {}
     query = data.get('query', '').strip().lower()
 
-    session_user_id = session.get('user_id') or 1
+    session_user_id = curr_user['id']
     conn = get_db()
     cursor = conn.cursor()
 
-    cursor.execute("SELECT role, department, name FROM users WHERE id = ?", (session_user_id,))
-    u = cursor.fetchone()
-    role = u['role'] if u else 'User'
-    user_dept = u['department'] if u else ''
-    user_name = u['name'] if u else ''
+    role = curr_user['role']
+    user_dept = curr_user['department'] or ''
+    user_name = curr_user['name']
 
     resp = ""
     suggested_actions = []
 
-    # 1. Department workload
-    if any(k in query for k in ['most unresolved', 'department workload', 'which department', 'department has the most', 'most complaints']):
-        cursor.execute("SELECT department, COUNT(*) as total, SUM(CASE WHEN status NOT IN ('Resolved', 'Closed') THEN 1 ELSE 0 END) as active FROM complaints GROUP BY department ORDER BY active DESC")
+    # 0. Empty or whitespace query
+    if not query:
+        conn.close()
+        return jsonify({
+            'response': f"Hello {user_name or 'there'}! I am your **PROBLEMINT Campus Intelligence Assistant**. How can I help you today? You can ask me to track your complaints, find out which department handles an issue, or check campus maintenance updates.",
+            'answer': f"Hello {user_name or 'there'}! I am your **PROBLEMINT Campus Intelligence Assistant**. How can I help you today? You can ask me to track your complaints, find out which department handles an issue, or check campus maintenance updates.",
+            'suggestedActions': [
+                {'label': 'Report a Problem', 'link': '#submit-problem'},
+                {'label': 'Track My Complaints', 'link': '#my-complaints'}
+            ]
+        })
+
+    # 1. Greetings & Introductions
+    if query in ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what can you do', 'help', 'good morning', 'good afternoon', 'good evening']:
+        resp = (f"Hello **{user_name or 'there'}**! I am your **PROBLEMINT Campus Intelligence Assistant**.\n\n"
+                f"I can help you:\n"
+                f"- **Report a campus issue** with automatic department routing\n"
+                f"- **Track your submitted complaints** and check expected response times\n"
+                f"- **Find out who handles what** (e.g. Wi-Fi, electricity, plumbing, hostel food)\n"
+                f"- **Explain next steps** and how resolution verification works\n\n"
+                f"What would you like assistance with?")
+        suggested_actions.append({'label': 'Report a Problem', 'link': '#submit-problem'})
+        suggested_actions.append({'label': 'Track My Complaints', 'link': '#my-complaints'})
+
+    # 2. How to report / Guided workflow help
+    elif any(k in query for k in ['how to report', 'help me report', 'how do i report', 'submit a complaint', 'report a problem', 'submit ticket', 'file a complaint']):
+        resp = ("Reporting a problem is quick and straightforward:\n\n"
+                "1. **Open the form**: Click **'Report a Problem'** in the navigation bar.\n"
+                "2. **Select Category**: Tap the closest category (Wi-Fi, Water, Electricity, Restroom, etc.) or choose *Not sure* for AI auto-detection.\n"
+                "3. **Choose Location**: Select your campus building (Block A, B, C, Hostel, Library) and specify room/floor.\n"
+                "4. **Attach Photo**: Tap **Take Photo** or upload pictures from your device.\n"
+                "5. **Submit**: Our routing engine immediately assigns your ticket to the authorized department with an SLA target.")
+        suggested_actions.append({'label': 'Open Report Form', 'link': '#submit-problem'})
+        suggested_actions.append({'label': 'View My Complaints', 'link': '#my-complaints'})
+
+    # 3. Who handles what? / Department lookup
+    elif any(k in query for k in ['who handles', 'which department handles', 'who is in charge of', 'who fixes', 'who takes care of', 'responsible for']):
+        cat_map = {
+            'wifi': ('Internet/Wi-Fi', 'Network Administration', 'Network Admin'),
+            'wi-fi': ('Internet/Wi-Fi', 'Network Administration', 'Network Admin'),
+            'internet': ('Internet/Wi-Fi', 'Network Administration', 'Network Admin'),
+            'network': ('Internet/Wi-Fi', 'Network Administration', 'Network Admin'),
+            'water': ('Water Supply', 'Water & Maintenance Dept', 'Maintenance Admin'),
+            'plumb': ('Water Supply', 'Water & Maintenance Dept', 'Maintenance Admin'),
+            'leak': ('Water Supply', 'Water & Maintenance Dept', 'Maintenance Admin'),
+            'electric': ('Electricity', 'Electrical Maintenance', 'Chief Electrician'),
+            'power': ('Electricity', 'Electrical Maintenance', 'Chief Electrician'),
+            'light': ('Electricity', 'Electrical Maintenance', 'Chief Electrician'),
+            'fan': ('Electricity', 'Electrical Maintenance', 'Chief Electrician'),
+            'lift': ('Lift/Elevator', 'Lift Maintenance Dept', 'Lift Maintenance Officer'),
+            'elevator': ('Lift/Elevator', 'Lift Maintenance Dept', 'Lift Maintenance Officer'),
+            'food': ('Hostel Food/Mess', 'Mess / Food Administration', 'Mess Manager'),
+            'mess': ('Hostel Food/Mess', 'Mess / Food Administration', 'Mess Manager'),
+            'hostel': ('Hostel Food/Mess', 'Mess / Food Administration', 'Mess Manager'),
+            'clean': ('Sanitization/Cleanliness', 'Housekeeping Dept', 'Housekeeping Supervisor'),
+            'garbage': ('Sanitization/Cleanliness', 'Housekeeping Dept', 'Housekeeping Supervisor'),
+            'restroom': ('Restrooms', 'Housekeeping Dept', 'Housekeeping Supervisor'),
+            'washroom': ('Restrooms', 'Housekeeping Dept', 'Housekeeping Supervisor'),
+            'toilet': ('Restrooms', 'Housekeeping Dept', 'Housekeeping Supervisor'),
+            'security': ('Security', 'Security & Parking', 'Security Officer'),
+            'parking': ('Security', 'Security & Parking', 'Security Officer'),
+            'classroom': ('Classroom Facilities', 'Academic Infrastructure', 'Facility Coordinator'),
+            'projector': ('Classroom Facilities', 'Academic Infrastructure', 'Facility Coordinator'),
+            'lab': ('Laboratory', 'Lab Administration', 'Lab Administrator')
+        }
+        matched = None
+        for key, val in cat_map.items():
+            if key in query:
+                matched = val
+                break
+        if matched:
+            resp = f"**{matched[0]}** issues on campus are handled directly by the **{matched[1]}**, assigned to **{matched[2]}**."
+            suggested_actions.append({'label': f"Report {matched[0]} Issue", 'link': '#submit-problem'})
+        else:
+            resp = ("Campus issues are routed to specialized teams:\n"
+                    "- **Network Administration**: Wi-Fi, Internet, LAN\n"
+                    "- **Water & Maintenance**: Plumbing, water coolers, taps\n"
+                    "- **Electrical Maintenance**: Power supply, lights, fans\n"
+                    "- **Housekeeping**: Sanitization, restrooms, dustbins\n"
+                    "- **Lift Maintenance**: Elevators and passenger lifts\n"
+                    "- **Mess / Food Admin**: Dining halls, mess food\n"
+                    "- **Security**: Campus gates, vehicle parking")
+            suggested_actions.append({'label': 'Report a Problem', 'link': '#submit-problem'})
+    # 4. Department workload
+    elif any(k in query for k in ['most unresolved', 'department workload', 'which department', 'department has the most', 'most complaints']):
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
+        cursor.execute(f"SELECT c.department, COUNT(*) as total, SUM(CASE WHEN c.status NOT IN ('Resolved', 'Closed') THEN 1 ELSE 0 END) as active FROM complaints c WHERE {scope_sql} GROUP BY c.department ORDER BY active DESC", scope_params)
         depts = cursor.fetchall()
         top = depts[0] if depts else None
         if top:
-            resp = f"**{top['department']}** currently carries the highest workload with **{top['active']} unresolved complaints** out of {top['total']} total reported."
-            suggested_actions.append({'label': 'View Incidents', 'link': '#incidents'})
+            scope_label = 'the institution' if role == 'Organization Admin' else 'your authorized scope'
+            resp = f"Within {scope_label}, **{top['department']}** has the highest workload with **{top['active']} unresolved complaints** out of {top['total']} total reported."
+            suggested_actions.append({'label': 'View Complaints', 'link': '#my-complaints'})
         else:
             resp = "No department complaints are currently logged."
 
     # 2. Pending / Unresolved complaints
     elif any(k in query for k in ['pending', 'unresolved', 'active complaints', 'how many complaints']):
-        if role == 'Department Admin':
-            cursor.execute("SELECT COUNT(*) as cnt FROM complaints WHERE (department = ? OR assigned_person = ?) AND status NOT IN ('Resolved', 'Closed')", (user_dept, user_name))
-            cnt = cursor.fetchone()['cnt']
-            resp = f"There are currently **{cnt} unresolved complaints** in the **{user_dept}** queue awaiting departmental action."
-            suggested_actions.append({'label': 'View Department Queue', 'link': '#my-complaints'})
-        elif role == 'Organization Admin':
-            cursor.execute("SELECT COUNT(*) as cnt FROM complaints WHERE status NOT IN ('Resolved', 'Closed')")
-            cnt = cursor.fetchone()['cnt']
-            cursor.execute("SELECT department, COUNT(*) as cnt FROM complaints WHERE status NOT IN ('Resolved', 'Closed') GROUP BY department ORDER BY cnt DESC LIMIT 3")
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
+        cursor.execute(f"SELECT COUNT(*) as cnt FROM complaints c WHERE {scope_sql} AND c.status NOT IN ('Resolved', 'Closed')", scope_params)
+        cnt = cursor.fetchone()['cnt']
+        if role == 'Organization Admin':
+            cursor.execute(f"SELECT c.department, COUNT(*) as cnt FROM complaints c WHERE {scope_sql} AND c.status NOT IN ('Resolved', 'Closed') GROUP BY c.department ORDER BY cnt DESC LIMIT 3", scope_params)
             breakdown = cursor.fetchall()
-            b_str = ", ".join([f"**{b['department']}** ({b['cnt']})" for b in breakdown])
+            b_str = ', '.join([f"**{b['department']}** ({b['cnt']})" for b in breakdown]) or 'no active department queues'
             resp = f"Across the institution, there are **{cnt} active complaints**. Top department queues: {b_str}."
             suggested_actions.append({'label': 'View All Complaints', 'link': '#my-complaints'})
-            suggested_actions.append({'label': 'Inspect Incidents', 'link': '#incidents'})
+        elif role == 'Department Admin':
+            resp = f"There are currently **{cnt} unresolved complaints** in your authorized departmental scope."
+            suggested_actions.append({'label': 'View Department Queue', 'link': '#my-complaints'})
         else:
-            cursor.execute("SELECT COUNT(*) as cnt FROM complaints WHERE user_id = ? AND status NOT IN ('Resolved', 'Closed')", (session_user_id,))
-            cnt = cursor.fetchone()['cnt']
-            resp = f"You have **{cnt} active complaint(s)** currently in progress with the assigned campus departments."
+            resp = f"You have **{cnt} active complaint(s)** submitted by you or assigned to you."
             suggested_actions.append({'label': 'Track My Complaints', 'link': '#my-complaints'})
 
     # 3. Specific complaint query (CMP...)
@@ -1860,8 +2882,15 @@ def api_copilot():
             cursor.execute("SELECT c.*, u.name as user_name FROM complaints c JOIN users u ON c.user_id = u.id WHERE c.id LIKE ? OR c.original_complaint_id LIKE ?", (f"%{target_cmp}%", f"%{target_cmp}%"))
             c_row = cursor.fetchone()
             if c_row:
-                # Permission check
-                if role == 'User' and c_row['user_id'] != session_user_id:
+                # Ticket details stay within the same owner/assignee/department scope as the complaint API.
+                can_access = c_row['user_id'] == session_user_id
+                if role == 'Organization Admin':
+                    can_access = True
+                elif role == 'Department Admin':
+                    can_access = c_row['department'] == user_dept or c_row['assigned_person'] == user_name
+                elif role == 'User' and (curr_user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES:
+                    can_access = can_access or c_row['assigned_person'] == user_name
+                if not can_access:
                     resp = f"Complaint **{target_cmp}** exists, but detailed ticket descriptions are private to the submitting user and assigned department."
                 else:
                     seen_status = f"Seen by {c_row['seen_by']} at {c_row['seen_at']}" if c_row['seen'] else "Not yet opened by admin"
@@ -1880,9 +2909,16 @@ def api_copilot():
     # 4. Recurring network/water/electrical/lift problems
     elif any(k in query for k in ['network', 'wifi', 'wi-fi', 'water', 'electricity', 'lift', 'elevator', 'recurring']):
         topic = "Network" if any(w in query for w in ['network', 'wifi', 'wi-fi']) else ("Water" if 'water' in query else ("Lift" if 'lift' in query else "Electricity"))
-        cursor.execute("SELECT COUNT(*) as cnt FROM complaints WHERE category LIKE ?", (f"%{topic}%",))
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
+        cursor.execute(f"SELECT COUNT(*) as cnt FROM complaints c WHERE {scope_sql} AND c.category LIKE ?", [*scope_params, f"%{topic}%"])
         c_cnt = cursor.fetchone()['cnt']
-        cursor.execute("SELECT incident_id, title, location, severity, root_cause_confidence, possible_root_cause FROM incidents WHERE category LIKE ? LIMIT 1", (f"%{topic}%",))
+        cursor.execute(f"""
+            SELECT i.incident_id, i.title, i.location, i.severity, i.root_cause_confidence, i.possible_root_cause
+            FROM incidents i
+            WHERE i.category LIKE ? AND EXISTS (
+                SELECT 1 FROM complaints c WHERE c.incident_id = i.incident_id AND {scope_sql}
+            ) LIMIT 1
+        """, [f"%{topic}%", *scope_params])
         inc = cursor.fetchone()
 
         if inc:
@@ -1898,7 +2934,14 @@ def api_copilot():
 
     # 5. Longest unresolved incidents
     elif any(k in query for k in ['longest', 'oldest', 'unresolved the longest']):
-        cursor.execute("SELECT incident_id, title, location, first_reported_at, complaint_count FROM incidents WHERE status != 'Resolved' ORDER BY first_reported_at ASC LIMIT 2")
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
+        cursor.execute(f"""
+            SELECT i.incident_id, i.title, i.location, i.first_reported_at, i.complaint_count
+            FROM incidents i
+            WHERE i.status != 'Resolved' AND EXISTS (
+                SELECT 1 FROM complaints c WHERE c.incident_id = i.incident_id AND {scope_sql}
+            ) ORDER BY i.first_reported_at ASC LIMIT 2
+        """, scope_params)
         oldest = cursor.fetchall()
         if oldest:
             lines = [f"- **{o['incident_id']}** ({o['title']}): Reported on {o['first_reported_at']} ({o['complaint_count']} linked reports)" for o in oldest]
@@ -1909,15 +2952,21 @@ def api_copilot():
 
     # 6. Prevention & recommendations
     elif any(k in query for k in ['recommendation', 'prevent', 'prevention', 'suggested action']):
-        cursor.execute("SELECT recommendation_id, problem, recommendation, responsible_department, priority FROM prevention_recommendations WHERE status = 'Approved' LIMIT 2")
-        recs = cursor.fetchall()
+        if role == 'Organization Admin':
+            cursor.execute("SELECT recommendation_id, problem, recommendation, responsible_department, priority FROM prevention_recommendations WHERE status = 'Approved' LIMIT 2")
+            recs = cursor.fetchall()
+        elif role == 'Department Admin':
+            cursor.execute("SELECT recommendation_id, problem, recommendation, responsible_department, priority FROM prevention_recommendations WHERE status = 'Approved' AND responsible_department = ? LIMIT 2", (user_dept,))
+            recs = cursor.fetchall()
+        else:
+            recs = []
         if recs:
             lines = [f"- **{r['recommendation_id']}** ({r['responsible_department']}): {r['recommendation']} *(Problem: {r['problem']})*" for r in recs]
             resp = "Key active prevention recommendations:\n" + "\n".join(lines)
             suggested_actions.append({'label': 'View Prevention Center', 'link': '#prevention-center'})
             suggested_actions.append({'label': 'AI Assistant', 'link': '#ai-assistant'})
         else:
-            resp = "No active prevention recommendations require review at this moment."
+            resp = "No prevention recommendations are available in your authorized scope yet."
 
     # 7. My submitted complaints
     elif any(k in query for k in ['my complaint', 'my tickets', 'what have i submitted', 'what complaints have i']):
@@ -1933,12 +2982,13 @@ def api_copilot():
 
     # 8. Immediate attention / Escalated / SLA Breaches
     elif any(k in query for k in ['immediate attention', 'critical', 'escalat', 'sla', 'breach', 'overdue', 'unacknowledged']):
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
         cursor.execute('''
-            SELECT id, category, location, priority, department, assigned_person, acknowledgement_deadline
-            FROM complaints
-            WHERE priority = 'Critical' OR escalated = 1 OR (acknowledged_at IS NULL AND status NOT IN ('Resolved', 'Closed'))
-            ORDER BY priority DESC, created_at ASC LIMIT 4
-        ''')
+            SELECT c.id, c.category, c.location, c.priority, c.department, c.assigned_person, c.acknowledgement_deadline
+            FROM complaints c
+            WHERE ({}) AND (c.priority = 'Critical' OR c.escalated = 1 OR (c.acknowledged_at IS NULL AND c.status NOT IN ('Resolved', 'Closed')))
+            ORDER BY c.priority DESC, c.created_at ASC LIMIT 4
+        '''.format(scope_sql), scope_params)
         urgent = cursor.fetchall()
         if urgent:
             lines = [f"- **{u_item['id']}** ({u_item['category']}): {u_item['location']} [Dept: {u_item['department']} | Priority: {u_item['priority']}]" for u_item in urgent]
@@ -1949,9 +2999,15 @@ def api_copilot():
 
     # 9. Self-Service & Prevention Impact
     elif any(k in query for k in ['self-service', 'self service', 'saved', 'prevented', 'self help']):
-        cursor.execute("SELECT COUNT(*) as total FROM self_service_resolutions")
+        if role == 'Organization Admin':
+            cursor.execute("SELECT COUNT(*) as total FROM self_service_resolutions")
+        else:
+            cursor.execute("SELECT COUNT(*) as total FROM self_service_resolutions WHERE user_id = ?", (session_user_id,))
         total_ss = cursor.fetchone()['total']
-        cursor.execute("SELECT problem_type, COUNT(*) as cnt FROM self_service_resolutions GROUP BY problem_type ORDER BY cnt DESC LIMIT 3")
+        if role == 'Organization Admin':
+            cursor.execute("SELECT problem_type, COUNT(*) as cnt FROM self_service_resolutions GROUP BY problem_type ORDER BY cnt DESC LIMIT 3")
+        else:
+            cursor.execute("SELECT problem_type, COUNT(*) as cnt FROM self_service_resolutions WHERE user_id = ? GROUP BY problem_type ORDER BY cnt DESC LIMIT 3", (session_user_id,))
         top_ss = cursor.fetchall()
         top_str = ", ".join([f"**{t['problem_type']}** ({t['cnt']})" for t in top_ss]) if top_ss else "general infrastructure"
         resp = (f"🌱 **Institutional Self-Service Telemetry**:\n"
@@ -1963,11 +3019,12 @@ def api_copilot():
 
     # Default overview
     else:
-        cursor.execute("SELECT COUNT(*) as total FROM complaints")
+        scope_sql, scope_params = complaint_scope_for_user(curr_user)
+        cursor.execute(f"SELECT COUNT(*) as total FROM complaints c WHERE {scope_sql}", scope_params)
         total = cursor.fetchone()['total']
-        cursor.execute("SELECT COUNT(*) as active FROM complaints WHERE status NOT IN ('Resolved', 'Closed')")
+        cursor.execute(f"SELECT COUNT(*) as active FROM complaints c WHERE {scope_sql} AND c.status NOT IN ('Resolved', 'Closed')", scope_params)
         active = cursor.fetchone()['active']
-        cursor.execute("SELECT COUNT(*) as inc_cnt FROM incidents")
+        cursor.execute(f"SELECT COUNT(DISTINCT c.incident_id) as inc_cnt FROM complaints c WHERE {scope_sql} AND c.incident_id IS NOT NULL", scope_params)
         inc_cnt = cursor.fetchone()['inc_cnt']
         resp = (f"**PROBLEMINT Intelligence Core**: Tracking **{total} total complaints** across **{inc_cnt} incidents**.\n"
                 f"Currently, **{active} complaints** are actively undergoing department resolution.\n\n"
@@ -1992,29 +3049,111 @@ def api_copilot():
 
 @app.route('/api/notifications', methods=['GET'])
 def api_notifications():
-    session_user_id = session.get('user_id') or 1
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
     conn = get_db()
+    ensure_notification_reads(conn)
     cursor = conn.cursor()
 
-    cursor.execute('''
-    SELECT ct.*, c.category, c.location
-    FROM complaint_timeline ct
-    JOIN complaints c ON ct.complaint_id = c.id
-    ORDER BY ct.id DESC LIMIT 8
-    ''')
+    role = curr_user['role']
+    user_dept = curr_user['department'] or ''
+    user_id = curr_user['id']
+
+    if role == 'Organization Admin':
+        scope_sql = ''
+        scope_params = []
+    elif role == 'Department Admin':
+        scope_sql = 'WHERE c.department = ? OR c.assigned_person = ?'
+        scope_params = [user_dept, curr_user['name']]
+    elif (curr_user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES:
+        scope_sql = 'WHERE c.user_id = ? OR c.assigned_person = ?'
+        scope_params = [user_id, curr_user['name']]
+    else:
+        scope_sql = 'WHERE c.user_id = ?'
+        scope_params = [user_id]
+
+    cursor.execute(f'''
+        SELECT ct.id, ct.complaint_id, ct.status, ct.description, ct.timestamp,
+               c.location, nr.timeline_id AS read_timeline_id
+        FROM complaint_timeline ct
+        JOIN complaints c ON ct.complaint_id = c.id
+        LEFT JOIN notification_reads nr
+          ON nr.timeline_id = ct.id AND nr.user_id = ?
+        {scope_sql}
+        ORDER BY ct.id DESC LIMIT 10
+    ''', [user_id, *scope_params])
+
     rows = cursor.fetchall()
     conn.close()
 
     notifs = []
     for r in rows:
         notifs.append({
+            'id': r['id'],
+            'complaintId': r['complaint_id'],
             'title': f"{r['complaint_id']} — {r['status']}",
-            'message': f"{r['description']} ({r['location']})",
+            'message': f"{r['description']} ({r['location']})" if r['location'] else r['description'],
             'timestamp': r['timestamp'],
-            'link': '#my-complaints'
+            'link': '#my-complaints',
+            'unread': r['read_timeline_id'] is None
         })
 
     return jsonify(notifs)
+
+@app.route('/api/notifications/read', methods=['POST'])
+def api_mark_notifications_read():
+    curr_user = require_auth()
+    if curr_user is None:
+        return jsonify({'error': 'Authentication required'}), 401
+
+    data = request.json or {}
+    timeline_ids = data.get('ids')
+    if timeline_ids is not None and (not isinstance(timeline_ids, list) or any(not isinstance(item, int) for item in timeline_ids)):
+        return jsonify({'error': 'Notification ids must be a list of integers.'}), 400
+
+    role = curr_user['role']
+    user_id = curr_user['id']
+    conn = get_db()
+    ensure_notification_reads(conn)
+    cursor = conn.cursor()
+
+    scope_sql = ''
+    scope_params = []
+    if role == 'Department Admin':
+        scope_sql = 'AND (c.department = ? OR c.assigned_person = ?)'
+        scope_params = [curr_user['department'] or '', curr_user['name']]
+    elif role != 'Organization Admin':
+        if (curr_user['user_type'] or '').strip().lower() in ASSIGNED_STAFF_TYPES:
+            scope_sql = 'AND (c.user_id = ? OR c.assigned_person = ?)'
+            scope_params = [user_id, curr_user['name']]
+        else:
+            scope_sql = 'AND c.user_id = ?'
+            scope_params = [user_id]
+
+    id_sql = ''
+    if timeline_ids:
+        id_sql = f"AND ct.id IN ({','.join('?' for _ in timeline_ids)})"
+    elif timeline_ids == []:
+        conn.close()
+        return jsonify({'success': True, 'updated': 0})
+
+    cursor.execute(f'''
+        SELECT ct.id
+        FROM complaint_timeline ct
+        JOIN complaints c ON ct.complaint_id = c.id
+        WHERE 1 = 1 {scope_sql} {id_sql}
+    ''', [*scope_params, *(timeline_ids or [])])
+    visible_ids = [row['id'] for row in cursor.fetchall()]
+    now = format_timestamp()
+    cursor.executemany('''
+        INSERT OR IGNORE INTO notification_reads (user_id, timeline_id, read_at)
+        VALUES (?, ?, ?)
+    ''', [(user_id, timeline_id, now) for timeline_id in visible_ids])
+    conn.commit()
+    conn.close()
+    return jsonify({'success': True, 'updated': len(visible_ids)})
 
 if __name__ == '__main__':
     init_db()

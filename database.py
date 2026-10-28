@@ -18,6 +18,18 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+def ensure_notification_reads(conn):
+    conn.execute('''
+    CREATE TABLE IF NOT EXISTS notification_reads (
+        user_id INTEGER NOT NULL,
+        timeline_id INTEGER NOT NULL,
+        read_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, timeline_id),
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (timeline_id) REFERENCES complaint_timeline (id)
+    )
+    ''')
+
 def init_db():
     conn = get_db()
     cursor = conn.cursor()
@@ -158,6 +170,17 @@ def init_db():
     ''')
 
     cursor.execute('''
+    CREATE TABLE IF NOT EXISTS notification_reads (
+        user_id INTEGER NOT NULL,
+        timeline_id INTEGER NOT NULL,
+        read_at TEXT NOT NULL,
+        PRIMARY KEY (user_id, timeline_id),
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (timeline_id) REFERENCES complaint_timeline (id)
+    );
+    ''')
+
+    cursor.execute('''
     CREATE TABLE IF NOT EXISTS resolutions (
         resolution_id TEXT PRIMARY KEY,
         incident_id TEXT NOT NULL,
@@ -223,5 +246,70 @@ def init_db():
     );
     ''')
 
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS complaint_attachments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        complaint_id TEXT NOT NULL,
+        original_filename TEXT NOT NULL,
+        stored_filename TEXT NOT NULL,
+        file_path TEXT NOT NULL,
+        file_size INTEGER NOT NULL,
+        mime_type TEXT NOT NULL,
+        uploaded_at TEXT NOT NULL,
+        FOREIGN KEY (complaint_id) REFERENCES complaints (id)
+    );
+    ''')
+
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS password_resets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL,
+        reset_code TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        used INTEGER DEFAULT 0
+    );
+    ''')
+
+    # Apply non-destructive schema migrations and performance indexes
+    apply_migrations(conn)
+
     conn.commit()
     conn.close()
+
+def apply_migrations(conn):
+    cursor = conn.cursor()
+
+    # 1. Add google_id and avatar_url to users if missing
+    cursor.execute("PRAGMA table_info(users)")
+    user_columns = [col['name'] for col in cursor.fetchall()]
+    if 'google_id' not in user_columns:
+        try:
+            cursor.execute("ALTER TABLE users ADD COLUMN google_id TEXT")
+        except Exception:
+            pass
+    if 'avatar_url' not in user_columns:
+        try:
+            cursor.execute("ALTER TABLE users ADD COLUMN avatar_url TEXT")
+        except Exception:
+            pass
+
+    # 2. Performance Indexes
+    try:
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_complaints_user_id ON complaints(user_id)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_complaints_dept ON complaints(department)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_complaints_status ON complaints(status)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_complaints_created ON complaints(created_at)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_attachments_cmp ON complaint_attachments(complaint_id)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)")
+    except Exception:
+        pass
+
+    # 3. Replace generic student label with authentic user profile name
+    try:
+        cursor.execute("UPDATE users SET name = 'Kavin M' WHERE email = 'student@college.edu' AND name = 'Student User'")
+    except Exception:
+        pass
+
+    conn.commit()
+
